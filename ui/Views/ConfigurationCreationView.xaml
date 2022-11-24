@@ -1,0 +1,43 @@
+﻿<Window x:Class="ClimateControlSystemNamespace.ConfigurationCreationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClimateControlSystemNamespace"
+        xmlns:components="clr-namespace:ClimateControlSystem.Components"
+        xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ConfigurationCreation"
+        d:DataContext="{d:DesignInstance Type=viewmodels:ConfigurationCreationViewModel}"
+        mc:Ignorable="d"
+        Title="CreateConfiguration" Height="675" Width="1200"
+        x:Name="root">
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <components:RoomConfiguration
+                Grid.Column="0"
+                DataContext="{Binding RoomViewModel}" />
+            <components:DeviceConfiguration
+                Grid.Column="1"
+                DataContext="{Binding DeviceViewModel}" />
+        </Grid>
+
+        <Button
+            Grid.Row="1"
+            Content="Add room" Style="{StaticResource ButtonStyle}"
+            Command="{Binding AddRoomCommand}" />
+        <Button
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            Content="Finish" Style="{StaticResource ButtonStyle}"
+            Command="{Binding CreateConfigurationCommand}" />
+    </Grid>
+</Window>

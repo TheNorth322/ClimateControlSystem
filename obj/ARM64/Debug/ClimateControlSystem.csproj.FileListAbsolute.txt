@@ -1,0 +1,17 @@
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ClimateControlSystem.csproj.AssemblyReference.cache
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ClimateControlSystem.csproj.SuggestedBindingRedirects.cache
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\resources\BaseStyles.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\Components\Details.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\Components\DeviceConfiguration.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\Components\Listing.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\Components\RoomConfiguration.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\ClimateControlSystemView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\ConditionerDetailsView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\ConfigurationPathView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\ConfigurationCreationView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\LogInView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\RoomDetailsView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ui\Views\App.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ClimateControlSystem_MarkupCompile.cache
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\ARM64\Debug\ClimateControlSystem_MarkupCompile.lref

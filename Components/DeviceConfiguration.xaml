@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="ClimateControlSystem.Components.DeviceConfiguration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ClimateControlSystemNamespace"
+             xmlns:components="clr-namespace:ClimateControlSystem.Components"
+             xmlns:viewmodel="clr-namespace:ClimateControlSystem.ui.ViewModel.ConfigurationCreation"
+             d:DataContext="{d:DesignInstance Type=viewmodel:DeviceConfigurationViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             FontSize="16">
+    <Grid Margin="40 20 40 10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Content="Device characteristics"
+            Style="{StaticResource HeadingLabelStyle}" />
+        <Label
+            Grid.Row="1"
+            Content="Humidifire"
+            Style="{StaticResource HeadingLabelStyle}" />
+
+        <Label
+            Grid.Row="2"
+            Content="Water Consumption"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <components:PlaceholderTextBox
+            Grid.Row="2"
+            Margin="20 0 0 0"
+            Placeholder="Enter some number..."
+            x:Name="WaterConsumptionTextBox"
+            Style="{StaticResource PlaceholderTextBoxStyle}"
+            DataContext="{Binding HumidifierWaterConsumption}" />
+
+        <Label
+            Grid.Row="3"
+            Content="Device Mode"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <!--Maybe change SelectedValue to SelectedValuePath-->
+        <RadioButton Grid.Row="3"
+                     GroupName="HumidifierRadioButtons"
+                     HorizontalAlignment="Right"
+                     Margin="0 10 60 0"
+                     Content="On"
+                     IsChecked="{Binding HumidifierStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
+            ConverterParameter={x:Static local:DeviceMode.On}}" />
+        <RadioButton Grid.Row="3" GroupName="HumidifierRadioButtons" HorizontalAlignment="Right" Margin="0 10 0 0"
+                     Content="Off"
+                     IsChecked="{Binding HumidifierStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
+            ConverterParameter={x:Static local:DeviceMode.Off}}" />
+
+        <Label
+            Grid.Row="4"
+            Content="Purificator"
+            Style="{StaticResource HeadingLabelStyle}" />
+        <Label
+            Grid.Row="5"
+            Content="AirFlow"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <components:PlaceholderTextBox
+            Grid.Row="5"
+            Placeholder="Enter some number..."
+            x:Name="PurificatorAirFlowTextBox"
+            Style="{StaticResource PlaceholderTextBoxStyle}"
+            DataContext="{Binding PurificatorAirFlow}" />
+
+        <Label
+            Grid.Row="6"
+            Content="Device Mode"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <RadioButton
+            Grid.Row="6"
+            GroupName="PurificatorRadioButtons"
+            HorizontalAlignment="Right"
+            Margin="0 10 60 0"
+            Content="On"
+            IsChecked="{Binding PurificatorStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
+            ConverterParameter={x:Static local:DeviceMode.On}}" />
+        <RadioButton
+            Grid.Row="6"
+            GroupName="PurificatorRadioButtons"
+            IsChecked="{Binding PurificatorStatus, Converter={StaticResource RadioButtonCheckedConverter},
+            ConverterParameter={x:Static local:DeviceMode.Off}}"
+            HorizontalAlignment="Right"
+            Margin="0 10 0 0"
+            Content="Off" />
+
+        <Label
+            Grid.Row="7"
+            Content="Conditioner"
+            Style="{StaticResource HeadingLabelStyle}" />
+
+        <Label
+            Grid.Row="8"
+            Content="Air Flow"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <components:PlaceholderTextBox
+            Grid.Row="8"
+            Placeholder="Enter some number..."
+            x:Name="ConditionerAirFlowTextBox"
+            Style="{StaticResource PlaceholderTextBoxStyle}"
+            DataContext="{Binding ConditionerAirFlow}" />
+
+        <Label
+            Grid.Row="9"
+            Content="Conditioner Temperature"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <components:PlaceholderTextBox
+            Grid.Row="9"
+            Placeholder="Enter some number..."
+            x:Name="ConditionerTemperatureTextBox"
+            Style="{StaticResource PlaceholderTextBoxStyle}"
+            DataContext="{Binding ConditionerTemperature}" />
+
+        <Label
+            Grid.Row="10"
+            Content="Conditioner Mode"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <ComboBox Grid.Row="10" x:Name="ConditionerModeComboBox"
+                  Style="{StaticResource ComboBoxStyle}"
+                  SelectedValue="{Binding ConditionerMode, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type local:ConditionerMode}}"
+                  ItemsSource="{Binding Source={local:EnumToItemsSource {x:Type local:ConditionerMode}}}" />
+
+        <Label
+            Grid.Row="11"
+            Content="Device Mode"
+            Style="{StaticResource DescriptionLabelStyle}" />
+        <RadioButton Grid.Row="11" GroupName="ConditionerRadioButtons" HorizontalAlignment="Right" Margin="0 10 60 0"
+                     Content="On"
+                     IsChecked="{Binding ConditionerStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
+            ConverterParameter={x:Static local:DeviceMode.On}}" />
+        <RadioButton Grid.Row="11" GroupName="ConditionerRadioButtons" HorizontalAlignment="Right" Margin="0 10 0 0"
+                     Content="Off"
+                     IsChecked="{Binding ConditionerStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
+            ConverterParameter={x:Static local:DeviceMode.Off}}" />
+
+    </Grid>
+</UserControl>

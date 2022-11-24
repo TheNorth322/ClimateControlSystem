@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rooms>
+  <room name="Kitchen">
+    <area>20</area>
+    <ceilingHeight>2.5</ceilingHeight>
+    <lightLevel>AverageIllumination</lightLevel>
+    <temperature>22.3</temperature>
+    <humidity>40</humidity>
+    <carbonDioxideLevel>400</carbonDioxideLevel>
+  </room>
+  <room name="Washing room">
+    <area>10</area>
+    <ceilingHeight>2.5</ceilingHeight>
+    <lightLevel>LowIllumination</lightLevel>
+    <temperature>23</temperature>
+    <humidity>70</humidity>
+    <carbonDioxideLevel>500</carbonDioxideLevel>
+  </room>
+  <room name="Bedroom">
+    <area>15</area>
+    <ceilingHeight>2.5</ceilingHeight>
+    <lightLevel>LowIllumination</lightLevel>
+    <temperature>20</temperature>
+    <humidity>60</humidity>
+    <carbonDioxideLevel>450</carbonDioxideLevel>
+  </room>
+</rooms>
+

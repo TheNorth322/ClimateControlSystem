@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="ClimateControlSystem.Components.Details"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ClimateControlSystem.Components"
+             xmlns:viewmodel="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
+             xmlns:views="clr-namespace:ClimateControlSystem.ui.Views"
+
+             d:DataContext="{d:DesignInstance Type=viewmodel:RoomDetailsViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!--UserControl.Resources>
+        <DataTemplate x:Name="RoomViewTemplate" DataType="{x:Type viewmodel:RoomDetailsViewModel}">
+            <views:RoomDetailsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="ConditionerViewTemplate" DataType="{x:Type viewmodel:ConditionerDetailsViewModel}">
+            <views:ConditionerDetailsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="HumidifierViewTemplate" DataType="{x:Type viewmodel:HumidifierDetailsViewModel}">
+            <views:HumidifierDetailsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="PurificatorViewTemplate" DataType="{x:Type viewmodel:PurificatorDetailsViewModel}">
+            <views:PurificatorDetailsView DataContext="{Binding}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="0 20 0 0">
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="20">
+    `       <ContentControl Content="{Binding}"></ContentControl>
+        </Border>
+    </Grid>-->
+
+    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="0 20 0 0">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" FontSize="32" Text="{Binding Name}" />
+
+            <Grid Grid.Row="1" Margin="0 20 0 0 ">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        Text="Temperature" />
+
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource PlaceholderTextBoxStyle}"
+                        Text="{Binding Temperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Margin="20 20 0 0" />
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Humidity" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        HorizontalAlignment="Left"
+                        Margin="20 20 0 0"
+                        Style="{StaticResource PlaceholderTextBoxStyle}"
+                        Text="{Binding Humidity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Carbon Dioxide" />
+                    <TextBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        HorizontalAlignment="Left"
+                        Margin="20 20 0 0"
+                        Style="{StaticResource PlaceholderTextBoxStyle}"
+                        Text="{Binding CarbonDioxideLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Light Level" />
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        HorizontalAlignment="Left"
+                        Margin="20 20 0 0"
+                        Style="{StaticResource PlaceholderTextBoxStyle}"
+                        DataContext="{Binding LightLevel}" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
