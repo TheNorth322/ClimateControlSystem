@@ -16,8 +16,5 @@ namespace ClimateControlSystemNamespace
             AirFlow = _airFlow;
             ExpectedCarbonDioxideLevel = _expectedCarbonDioxideLevel;
         }
-
-        // Methods
-        
     }
 }

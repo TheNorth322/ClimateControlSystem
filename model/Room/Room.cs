@@ -15,6 +15,13 @@ namespace ClimateControlSystemNamespace
         public HumiditySensor HumiditySensor { get; }
         public TemperatureSensor TemperatureSensor { get; }
         public CarbonDioxideSensor CarbonDioxideSensor { get; }
+        
+        /*Setters may be unnecessary, the idea behind this is that
+         Devices can become broken and they will need to be replaced
+         LightLevel can change from time to time e.g. 
+         10:00-12:00 AverageIllumination
+         12:00-17:00 HighIllumination
+         17:00-10:00 LowIllumination*/
         public LightLevel LightLevel { get; set; }
         public Conditioner Conditioner { get; set; }
         public Humidifier Humidifier { get; set; }
