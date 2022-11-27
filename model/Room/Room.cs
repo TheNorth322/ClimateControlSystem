@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace ClimateControlSystemNamespace
 {
@@ -9,12 +10,12 @@ namespace ClimateControlSystemNamespace
     public class Room
     {
         // Properties
-        public string Name { get; }
-        public double Area { get; }
-        public double CeilingHeight { get; }
-        public HumiditySensor HumiditySensor { get; }
-        public TemperatureSensor TemperatureSensor { get; }
-        public CarbonDioxideSensor CarbonDioxideSensor { get; }
+        public string Name { get; set; }
+        public double Area { get; set;  }
+        public double CeilingHeight { get; set; }
+        public HumiditySensor HumiditySensor { get; set; }
+        public TemperatureSensor TemperatureSensor { get; set; }
+        public CarbonDioxideSensor CarbonDioxideSensor { get; set; }
         
         /*Setters may be unnecessary, the idea behind this is that
          Devices can become broken and they will need to be replaced

@@ -21,8 +21,16 @@ namespace ClimateControlSystem.ui.Views
     /// </summary>
     public partial class ClimateControlSystemView : Window
     {
+        private readonly ClimateControlSystemStore _climateControlSystemStore;
         public ClimateControlSystemView()
         {
+            InitializeComponent();
+        }
+
+        public ClimateControlSystemView(ClimateControlSystemStore climateControlSystemStore)
+        {
+            DataContext = 
+            _climateControlSystemStore = climateControlSystemStore;
             InitializeComponent();
         }
     }

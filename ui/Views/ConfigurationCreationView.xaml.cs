@@ -22,12 +22,6 @@ namespace ClimateControlSystemNamespace
     /// <summary>
     /// Логика взаимодействия для CreateConfigurationWindow.xaml
     /// </summary>
-    
-    public class DeviceModeParse
-    {
-        public string Value { get; set; }
-        public bool TypeValue { get; set; }
-    }
     public class EnumToItemsSource : MarkupExtension
     {
         private readonly Type _type;
@@ -39,50 +33,48 @@ namespace ClimateControlSystemNamespace
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return _type.GetMembers().SelectMany(member => member.GetCustomAttributes(typeof(DescriptionAttribute), true).Cast<DescriptionAttribute>()).Select(x => x.Description).ToList();
+            return _type.GetMembers().SelectMany(member => member
+                .GetCustomAttributes(typeof(DescriptionAttribute), true)
+                .Cast<DescriptionAttribute>()).Select(x => x.Description).ToList();
         }
     }
+
     public class EnumConverter : IValueConverter
     {
-         
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)
         {
             if (value == null) return "";
-            int i = 0;
             foreach (var one in Enum.GetValues(parameter as Type))
             {
                 if (value.Equals(one))
-                    // Think about better realization of getting description
-                    return Enum.GetName(targetType, i);
-                i++;
+                    return EnumExtensionMethods.GetEnumDescription((Enum) one);
             }
+
             return "";
         }
 
         public object ConvertBack(object value, Type targetType,
             object parameter, CultureInfo culture)
-        {     
+        {
             if (value == null) return null;
-            int i = 0;
             foreach (var one in Enum.GetValues(parameter as Type))
             {
-                if (value.ToString() == Enum.GetName(targetType, i))
+                if (value.ToString() == EnumExtensionMethods.GetEnumDescription((Enum) one))
                 {
                     return one;
                 }
             }
+
             return null;
         }
     }
- 
+
     public partial class ConfigurationCreationView : Window
     {
         public ConfigurationCreationView()
         {
             InitializeComponent();
-            DeviceModeParse DeviceModeParser = new DeviceModeParse();
-            this.DataContext = DeviceModeParser;
         }
     }
 }

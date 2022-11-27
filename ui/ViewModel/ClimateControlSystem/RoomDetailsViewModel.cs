@@ -7,50 +7,15 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     {
         private readonly SelectedRoomStore _selectedRoomStore;
         public Room SelectedRoom => _selectedRoomStore.SelectedRoom;
-        
         public string Name => SelectedRoom?.Name ?? "Unknown";
-        private string temperature;
-        public string Temperature
-        {
-            get { return temperature; }
-            set
-            {
-                temperature = value;
-                OnPropertyChange();    
-            }
-        }
-
-        private string humidity; 
-        public string Humidity
-        {
-            get { return humidity; }
-            set
-            {
-                humidity = value;
-                OnPropertyChange();    
-            }
-        }
-
-        private string carbonDioxideLevel; 
-        public string CarbonDioxideLevel
-        {
-            get { return carbonDioxideLevel; }
-            set
-            {
-                carbonDioxideLevel = value;
-                OnPropertyChange();    
-            }
-        }
-        public string LightLevel => SelectedRoom?.LightLevel.ToString();
+        public string Temperature => SelectedRoom?.TemperatureSensor.Temperature.ToString() ?? "Unknown";
+        public string Humidity => SelectedRoom?.HumiditySensor.Humidity.ToString() ?? "Unknown";
+        public string CarbonDioxideLevel => SelectedRoom?.CarbonDioxideSensor.CarbonDioxide.ToString() ?? "Unknown";
+        public string LightLevel => EnumExtensionMethods.GetEnumDescription(SelectedRoom?.LightLevel) ?? "Unknown";
         
         public RoomDetailsViewModel(SelectedRoomStore selectedRoomStore)
         {
             _selectedRoomStore = selectedRoomStore;
-            
-            Temperature = SelectedRoom?.TemperatureSensor.Temperature.ToString() ?? "Unknown";
-            Humidity = SelectedRoom?.HumiditySensor.Humidity.ToString() ?? "Unknown";
-            CarbonDioxideLevel = SelectedRoom?.CarbonDioxideSensor.CarbonDioxide.ToString() ?? "Unknown";
-            
             _selectedRoomStore.SelectedRoomChanged += SelectedRoomStore_SelectedRoomChanged;
         }
 

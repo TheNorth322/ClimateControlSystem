@@ -18,8 +18,12 @@ namespace ClimateControlSystemNamespace
         public bool isOn { get; set; }
         // Properties
         
-
+        
         // Contructors
+        public ClimateControlSystemDevice()
+        {
+            isOn = true;
+        }
         public ClimateControlSystemDevice(bool _isOn)
         {
             isOn = _isOn;

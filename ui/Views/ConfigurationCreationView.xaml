@@ -8,8 +8,7 @@
         xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ConfigurationCreation"
         d:DataContext="{d:DesignInstance Type=viewmodels:ConfigurationCreationViewModel}"
         mc:Ignorable="d"
-        Title="CreateConfiguration" Height="675" Width="1200"
-        x:Name="root">
+        Title="CreateConfiguration" Height="675" Width="1200">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>

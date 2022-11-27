@@ -5,6 +5,12 @@
     <Application.Resources>
         <local:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter"/>
         <local:EnumConverter x:Key="EnumConverter"/>
+        <Style TargetType="TextBox" x:Key="DetailsTextBoxStyle">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Padding" Value="15 5 "></Setter>
+            <Setter Property="MinWidth" Value="160"></Setter>
+        </Style>
         <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Top"/>

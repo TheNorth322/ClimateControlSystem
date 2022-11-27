@@ -23,7 +23,7 @@ namespace ClimateControlSystem.ui.ViewModel
 
         public bool CanExecute(object parameter)
         {
-            return this._canExecute == null || this._canExecute(parameter);
+            return this._canExecute == null ? true : this._canExecute(parameter);
         }
 
         public void Execute(object parameter)

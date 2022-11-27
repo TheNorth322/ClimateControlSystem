@@ -3,53 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClimateControlSystemNamespace" 
+
+        xmlns:local="clr-namespace:ClimateControlSystemNamespace"
         xmlns:path="clr-namespace:ClimateControlSystem.ui.ViewModel.EnterConfigurationPath"
         xmlns:components="clr-namespace:ClimateControlSystem.Components"
-        d:DataContext="{d:DesignInstance Type=path:ConfigurationPathViewModel}"
+        xmlns:views="clr-namespace:ClimateControlSystem.ui.ViewModel.EnterConfigurationPath"
+        d:DataContext="{d:DesignInstance Type=views:ConfigurationPathViewModel}"
         mc:Ignorable="d"
         Title="ConfigurationPath" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
+
+        <Label
+            Grid.Row="0"
+            x:Name="ConfigurationLabel"
+            Style="{StaticResource HeadingLabelStyle}"
+            Content="Enter configuration path"
+            VerticalAlignment="Center" />
         
-        <Label 
-            Grid.Row="0" 
-            x:Name="ConfigurationLabel" 
-            Style="{StaticResource HeadingLabelStyle}" 
-            Content="Enter configuration path" 
-            VerticalAlignment="Center"/>
-        <!--components:PlaceholderTextBox 
-            Grid.Row="1" 
-            x:Name="ConfigurationPathTextBox" 
+        <components:PlaceholderTextBox
             Style="{StaticResource PlaceholderTextBoxStyle}" 
-            DataContext="{Binding ConfigurationPath}"
-            Placeholder="Enter path ..."
-            MinHeight="45" 
-            MinWidth="350" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center"/>-->
-        
+            Grid.Row="1" 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Placeholder="Enter path..."
+            MinWidth="450"
+            Text="{Binding ConfigurationPath, UpdateSourceTrigger=PropertyChanged}"/>
+
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button 
-                Grid.Column="0" 
-                x:Name="OpenConfigurationButton" 
-                Content="Load Configuration" 
+            <Button
+                Grid.Column="0"
+                x:Name="OpenConfigurationButton"
+                Content="Load Configuration"
                 Style="{StaticResource ButtonStyle}"
-                Command="{Binding LoadConfiguration}"/>
-            <Button 
-                Grid.Column="1" 
-                x:Name="CreateConfigurationButton" 
-                Content="Create Configuration" 
+                Command="{Binding LoadConfiguration}" />
+            <Button
+                Grid.Column="1"
+                x:Name="CreateConfigurationButton"
+                Content="Create Configuration"
                 Style="{StaticResource ButtonStyle}"
-                Command="{Binding CreateConfiguration}"/>
+                Command="{Binding CreateConfiguration}" />
         </Grid>
     </Grid>
 </Window>

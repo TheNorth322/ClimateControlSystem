@@ -32,13 +32,13 @@
             <TextBox 
                 Grid.Column="1" 
                 Margin="0 0 20 0" 
-                x:Name="DateTextBox" 
-                Text="Time"
+                x:Name="DateTextBox"
+                Text="{Binding CurrentTime}"
                 Style="{StaticResource DateTimeTextBoxStyle}"/>
             <TextBox 
                 Grid.Column="2" 
                 x:Name="TimeTextBox" 
-                Text="Date" 
+                Text="{Binding CurrentDate}" 
                 Style="{StaticResource DateTimeTextBoxStyle}"/>
         </Grid>
         

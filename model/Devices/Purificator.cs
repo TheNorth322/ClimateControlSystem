@@ -8,7 +8,7 @@ namespace ClimateControlSystemNamespace
         public double ExpectedCarbonDioxideLevel { get; set; }
         
         public double AirFlow { get; }
-        
+        public Purificator() {} 
         // Constructors
         public Purificator(bool _isOn, double _airFlow, double _expectedCarbonDioxideLevel) 
             : base(_isOn) 

@@ -17,6 +17,8 @@ namespace ClimateControlSystemNamespace
 
         public double WorkingTemperature { get; set; }
         
+        public Conditioner() {}
+        
         // Contructors
         public Conditioner(bool _isOn, double _airFlow, ConditionerMode _conditionerMode, double _workingTemperature)
             : base(_isOn) 
