@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,18 +37,7 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
             {
                 WindowService.CreateWindow createWindow = delegate()
                 {
-                    ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
-                    ClimateControlSystemView view = new ClimateControlSystemView
-                    {
-                        DataContext = new ClimateControlSystemViewModel(new SelectedRoomStore(),
-                            serializer.Deserialize(ConfigurationPath))
-                    };
-                    view.Show();
-                    Close?.Invoke();
-                };
-
-                return _createConfiguration ?? (_createConfiguration = new RelayCommand(
-                    _object =>
+                    try
                     {
                         ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
                         ClimateControlSystemView view = new ClimateControlSystemView
@@ -57,7 +47,15 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
                         };
                         view.Show();
                         Close?.Invoke();
-                    },
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox_Show(null, e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                };
+
+                return _loadConfiguration ?? (_loadConfiguration = new RelayCommand(
+                    _object => createWindow(),
                     _object => this.ValidateConfigurationPath()
                 ));
             }

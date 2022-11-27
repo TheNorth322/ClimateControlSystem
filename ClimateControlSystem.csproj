@@ -164,6 +164,7 @@
     <Compile Include="ui\ViewModel\ConfigurationCreation\ConfigurationCreationViewModel.cs" />
     <Compile Include="ui\ViewModel\EnterConfigurationPath\ConfigurationPathViewModel.cs" />
     <Compile Include="ui\ViewModel\LogIn\LogInViewModel.cs" />
+    <Compile Include="ui\ViewModel\MessageBoxEventArgs.cs" />
     <Compile Include="ui\ViewModel\RelayCommand.cs" />
     <Compile Include="ui\ViewModel\ViewModelBase.cs" />
     <Compile Include="ui\Views\ConditionerDetailsView.xaml.cs">

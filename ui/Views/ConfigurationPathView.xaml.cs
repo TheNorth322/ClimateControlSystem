@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ClimateControlSystem.Domain;
+using ClimateControlSystem.ui.ViewModel;
+using ClimateControlSystem.ui.ViewModel.EnterConfigurationPath;
 
 namespace ClimateControlSystemNamespace
 {
@@ -23,9 +25,16 @@ namespace ClimateControlSystemNamespace
         public ConfigurationPathView()
         {
             InitializeComponent();
+            DataContext = new ConfigurationPathViewModel();
             Loaded += ConfigurationPathView_Loaded;
+            (this.DataContext as ConfigurationPathViewModel).MessageBoxRequest +=
+                new EventHandler<MessageBoxEventArgs>(ViewMessageBoxRequest);
         }
 
+        void ViewMessageBoxRequest(object sender, MessageBoxEventArgs e)
+        {
+            e.Show();
+        }
         private void ConfigurationPathView_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is ICloseWindows vm)
