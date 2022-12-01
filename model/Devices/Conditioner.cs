@@ -9,9 +9,7 @@ namespace ClimateControlSystemNamespace
     public class Conditioner : ClimateControlSystemDevice
     {
         // Properties
-        public bool IsOn { get; set; }
-        
-        public double AirFlow { get; }
+        public double AirFlow { get; set; }
         
         public ConditionerMode ConditionerMode { get; set; }
 

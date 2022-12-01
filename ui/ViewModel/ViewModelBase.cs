@@ -12,18 +12,15 @@ namespace ClimateControlSystem.ui.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<MessageBoxEventArgs> MessageBoxRequest;
+
         protected void MessageBox_Show(Action<MessageBoxResult> resultAction, string messageBoxText,
             string caption = "", MessageBoxButton button = MessageBoxButton.OK,
             MessageBoxImage icon = MessageBoxImage.None,
             MessageBoxResult defaultResult = MessageBoxResult.None, MessageBoxOptions options = MessageBoxOptions.None)
         {
-            // !=
-            if (MessageBoxRequest != null)
-            {
-                MessageBoxRequest(this,
-                    new MessageBoxEventArgs(resultAction, messageBoxText, caption, button, icon, defaultResult,
-                        options));
-            }
+            MessageBoxRequest?.Invoke(this,
+                new MessageBoxEventArgs(resultAction, messageBoxText, caption,
+                    button, icon, defaultResult, options));
         }
 
         protected virtual void OnPropertyChange(string propertyName = null)

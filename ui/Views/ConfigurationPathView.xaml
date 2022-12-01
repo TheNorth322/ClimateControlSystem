@@ -30,9 +30,9 @@
             Grid.Row="1" 
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Placeholder="Enter path..."
             MinWidth="450"
-            Text="{Binding ConfigurationPath, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding ConfigurationPath, UpdateSourceTrigger=PropertyChanged}"
+            />
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -44,13 +44,13 @@
                 x:Name="OpenConfigurationButton"
                 Content="Load Configuration"
                 Style="{StaticResource ButtonStyle}"
-                Command="{Binding LoadConfiguration}" />
+                Command="{Binding LoadConfigurationCommand}" />
             <Button
                 Grid.Column="1"
                 x:Name="CreateConfigurationButton"
                 Content="Create Configuration"
                 Style="{StaticResource ButtonStyle}"
-                Command="{Binding CreateConfiguration}" />
+                Command="{Binding CreateConfigurationCommand}" />
         </Grid>
     </Grid>
 </Window>

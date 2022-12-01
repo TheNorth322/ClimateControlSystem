@@ -14,10 +14,9 @@ namespace ClimateControlSystemNamespace
     [XmlInclude(typeof(Purificator))]
     public abstract class ClimateControlSystemDevice
     {
-        // Fields
-        public bool isOn { get; set; }
         // Properties
         
+        public bool isOn { get; set; }
         
         // Contructors
         public ClimateControlSystemDevice()

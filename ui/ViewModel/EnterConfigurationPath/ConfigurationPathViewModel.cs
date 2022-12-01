@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using ClimateControlSystem.Domain;
 using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
+using ClimateControlSystem.ui.ViewModel.ConfigurationCreation;
 using ClimateControlSystem.ui.Views;
 using ClimateControlSystemNamespace;
 
@@ -31,31 +32,12 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
 
         private RelayCommand _loadConfiguration;
 
-        public RelayCommand LoadConfiguration
+        public RelayCommand LoadConfigurationCommand
         {
             get
             {
-                WindowService.CreateWindow createWindow = delegate()
-                {
-                    try
-                    {
-                        ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
-                        ClimateControlSystemView view = new ClimateControlSystemView
-                        {
-                            DataContext = new ClimateControlSystemViewModel(new SelectedRoomStore(),
-                                serializer.Deserialize(ConfigurationPath))
-                        };
-                        view.Show();
-                        Close?.Invoke();
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox_Show(null, e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                };
-
                 return _loadConfiguration ?? (_loadConfiguration = new RelayCommand(
-                    _object => createWindow(),
+                    _object => LoadConfiguration(),
                     _object => this.ValidateConfigurationPath()
                 ));
             }
@@ -63,21 +45,43 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
 
         private RelayCommand _createConfiguration;
 
-        public RelayCommand CreateConfiguration
+        public RelayCommand CreateConfigurationCommand
         {
             get
             {
-                WindowService.CreateWindow createWindow = delegate()
-                {
-                    ConfigurationCreationView view = new ConfigurationCreationView();
-                    view.Show();
-                    Close?.Invoke();
-                };
-
                 return _createConfiguration ?? (_createConfiguration = new RelayCommand(
-                    _object => createWindow(),
+                    _object => CreateConfiguration(),
                     _object => true
                 ));
+            }
+        }
+
+        public void CreateConfiguration()
+        {
+            ConfigurationCreationView view = new ConfigurationCreationView
+            {
+                DataContext = new ConfigurationCreationViewModel()
+            };
+            view.Show();
+            Close?.Invoke();
+        }
+
+        public void LoadConfiguration()
+        {
+            try
+            {
+                ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
+                ClimateControlSystemView view = new ClimateControlSystemView
+                {
+                    DataContext = new ClimateControlSystemViewModel(new SelectedRoomStore(),
+                        serializer.Deserialize(ConfigurationPath))
+                };
+                view.Show();
+                Close?.Invoke();
+            }
+            catch (Exception e)
+            {
+                MessageBox_Show(null, e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

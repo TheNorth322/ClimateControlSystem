@@ -8,7 +8,7 @@ namespace ClimateControlSystemNamespace
         // Properties
         public double ExpectedHumidityLevel { get; set; }
         
-        public double WaterConsumption { get; }
+        public double WaterConsumption { get; set; }
         
         public Humidifier() {}
         // Constructors

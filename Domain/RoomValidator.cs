@@ -11,15 +11,6 @@ namespace ClimateControlSystem.Domain
 
         public bool Validate(Room room)
         {
-            /*if (room == null ||
-                room.Area <= 0 ||
-                room.CeilingHeight <= 0 ||
-                String.IsNullOrWhiteSpace(room.Name) ||
-                room.HumiditySensor.Humidity <= 0 ||
-                room.CarbonDioxideSensor.CarbonDioxide <= 0)
-                return false;
-            return true;*/
-            
             if (room == null)
                 throw new ArgumentNullException("Room can't be null!");
             if (room.Area <= 0)

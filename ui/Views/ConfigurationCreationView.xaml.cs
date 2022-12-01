@@ -16,6 +16,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ClimateControlSystem.Domain;
 
 namespace ClimateControlSystemNamespace
 {
@@ -75,6 +76,17 @@ namespace ClimateControlSystemNamespace
         public ConfigurationCreationView()
         {
             InitializeComponent();
+            Loaded += ConfigurationCreationView_Loaded;
+        }
+        private void ConfigurationCreationView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindows vm)
+            {
+                vm.Close += () =>
+                {
+                    this.Close();
+                };
+            }
         }
     }
 }

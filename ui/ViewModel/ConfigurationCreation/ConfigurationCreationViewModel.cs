@@ -10,11 +10,12 @@ using System.Security.Policy;
 using System.Windows;
 using System.Windows.Input;
 using ClimateControlSystem.Domain;
+using ClimateControlSystem.ui.ViewModel.EnterConfigurationPath;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 {
-    public class ConfigurationCreationViewModel : ViewModelBase
+    public class ConfigurationCreationViewModel : ViewModelBase, ICloseWindows
     {
         // Validators as fields may be unnecessary
         public ClimateControlSystemValidator ClimateControlSystemValidator { get; }
@@ -22,6 +23,18 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         public ClimateControlSystemSerializer ClimateControlSystemSerializer { get; }
         public ClimateControlSystemNamespace.ClimateControlSystem ClimateControlSystem { get; }
         public Room Room { get; set; }
+        private string _path;
+
+        public string Path
+        {
+            get { return _path; }
+            set
+            {
+                _path = value;
+                OnPropertyChange(nameof(Path));
+            }
+        }
+
         public RoomConfigurationViewModel RoomViewModel { get; }
         public DeviceConfigurationViewModel DeviceViewModel { get; }
 
@@ -38,6 +51,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 ));
             }
         }
+
         public RelayCommand CreateConfigurationCommand
         {
             get
@@ -48,9 +62,18 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 ));
             }
         }
+
         public bool ValidateRoom()
         {
-           Room = new Room(
+            // TODO
+            return true;
+        }
+
+        public void AddRoom()
+        {
+            try
+            {
+                Room = new Room(
                     RoomViewModel.Name,
                     RoomViewModel.Area,
                     RoomViewModel.Height,
@@ -64,35 +87,38 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                     new HumiditySensor(RoomViewModel.Humidity),
                     new CarbonDioxideSensor(RoomViewModel.CarbonDioxideLevel));
 
-           try
-           {
-               RoomValidator.Validate(Room);
-               return true;
-           }
-           catch (Exception e)
-           {
-               MessageBox.Show(e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
-               return false;
-           }  
+                RoomValidator.Validate(Room);
+                ClimateControlSystem.Rooms.Add(Room);
+            }
+            catch (Exception e)
+            {
+                MessageBox_Show(null, e.Message, "Error occured!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-        public void AddRoom()
-        {
-            ClimateControlSystem.Rooms.Add(Room);
-        }
+
         public bool ValidateClimateControlSystem()
         {
-           try
-           {
-               ClimateControlSystemValidator.Validate(ClimateControlSystem);
-               return true;
-           }
-           catch (Exception e)
-           {
-               MessageBox.Show(e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
-               return false;
-           }  
+            return (!String.IsNullOrWhiteSpace(Path));
         }
-        public void CreateConfiguration() => ClimateControlSystemSerializer.Serialize(ClimateControlSystem);
+
+        public void CreateConfiguration()
+        {
+            try
+            {
+                ClimateControlSystemValidator.Validate(ClimateControlSystem);
+                ClimateControlSystemSerializer.Serialize(ClimateControlSystem, Path);
+                ConfigurationPathView view = new ConfigurationPathView
+                {
+                    DataContext = new ConfigurationPathViewModel()
+                };
+                view.Show();
+                Close?.Invoke();
+            }
+            catch (Exception e)
+            {
+                MessageBox_Show(null, e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         public ConfigurationCreationViewModel()
         {
@@ -100,6 +126,10 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             ClimateControlSystemSerializer = new ClimateControlSystemSerializer();
             DeviceViewModel = new DeviceConfigurationViewModel();
             RoomViewModel = new RoomConfigurationViewModel();
+            ClimateControlSystemValidator = new ClimateControlSystemValidator();
+            RoomValidator = new RoomValidator();
         }
+
+        public Action Close { get; set; }
     }
 }

@@ -10,12 +10,18 @@ namespace ClimateControlSystem.Components
         
         public PlaceholderTextBox()
         {
-            Placeholder = this.Placeholder;
+            this.Text = Placeholder;
         }
-       private void OnLostFocusTextBox(object sender, RoutedEventArgs e)
+
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            if (textBox.Text != "") return;
+            textBox.Text = Placeholder;
+        }
+        private void OnLostFocusTextBox(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (!String.IsNullOrWhiteSpace(textBox.Text)) return;
             textBox.Text = Placeholder;
         }
         private void OnGotFocusTextBox(object sender, RoutedEventArgs e)
@@ -24,18 +30,11 @@ namespace ClimateControlSystem.Components
             if (textBox.Text != Placeholder) return;
             textBox.Text = "";
         }
-        private void PastingEventHandler(object sender, DataObjectEventArgs e)
-        {
-            // Prevent/disable paste
-            e.CancelCommand();
-        } 
+         
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            DataObject.AddCopyingHandler(this, PastingEventHandler);
-            DataObject.AddPastingHandler(this, PastingEventHandler);
             this.CaretIndex = this.Text.Length;
-            this.Text = Placeholder;
             this.LostFocus += OnLostFocusTextBox;
             this.GotFocus += OnGotFocusTextBox;
         }    

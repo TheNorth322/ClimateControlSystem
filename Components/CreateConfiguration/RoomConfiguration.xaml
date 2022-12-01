@@ -35,14 +35,14 @@
             x:Name="NameTextBox"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Placeholder="Enter room name..."
-            DataContext="{Binding Name}" />
+            Text="{Binding Name}" />
         
         <components:PlaceholderTextBox
             Grid.Row="2"
             x:Name="AreaTextBox"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Placeholder="Enter some number..."
-            DataContext="{Binding Area}" />
+            Text="{Binding Area}" />
 
         <Label
             Grid.Row="2"
@@ -55,7 +55,7 @@
             x:Name="HeightTextBox"
             Placeholder="Enter some number..."
             Style="{StaticResource PlaceholderTextBoxStyle}"
-            DataContext="{Binding Height}" />
+            Text="{Binding Height}" />
         <Label
             Grid.Row="3"
             x:Name="HeightLabel"
@@ -67,7 +67,7 @@
             Placeholder="Enter some number..."
             x:Name="HumidityTextBox"
             Style="{StaticResource PlaceholderTextBoxStyle}"
-            DataContext="{Binding Humidity}" />
+            Text="{Binding Humidity}" />
 
         <Label
             Grid.Row="4"
@@ -80,7 +80,7 @@
             x:Name="TemperatureTextBox"
             Placeholder="Enter some number..."
             Style="{StaticResource PlaceholderTextBoxStyle}"
-            DataContext="{Binding Temperature}" />
+            Text="{Binding Temperature}" />
         <Label
             Grid.Row="5"
             x:Name="TemperatureLabel"
@@ -92,7 +92,7 @@
             Placeholder="Enter some number..."
             x:Name="CarbonDioxideTextBox"
             Style="{StaticResource PlaceholderTextBoxStyle}"
-            DataContext="{Binding CarbonDioxideLevel}" />
+            Text="{Binding CarbonDioxideLevel}" />
         <Label
             Grid.Row="6"
             x:Name="CarbonDioxideLabel"
