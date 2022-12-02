@@ -6,109 +6,326 @@
              xmlns:local="clr-namespace:ClimateControlSystem.Components"
              xmlns:viewmodel="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
              xmlns:views="clr-namespace:ClimateControlSystem.ui.Views"
+             xmlns:climateControlSystemNamespace="clr-namespace:ClimateControlSystemNamespace"
 
              d:DataContext="{d:DesignInstance Type=viewmodel:RoomDetailsViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <!--UserControl.Resources>
-        <DataTemplate x:Name="RoomViewTemplate" DataType="{x:Type viewmodel:RoomDetailsViewModel}">
-            <views:RoomDetailsView DataContext="{Binding}"/>
-        </DataTemplate>
-        <DataTemplate x:Name="ConditionerViewTemplate" DataType="{x:Type viewmodel:ConditionerDetailsViewModel}">
-            <views:ConditionerDetailsView DataContext="{Binding}"/>
-        </DataTemplate>
-        <DataTemplate x:Name="HumidifierViewTemplate" DataType="{x:Type viewmodel:HumidifierDetailsViewModel}">
-            <views:HumidifierDetailsView DataContext="{Binding}"/>
-        </DataTemplate>
-        <DataTemplate x:Name="PurificatorViewTemplate" DataType="{x:Type viewmodel:PurificatorDetailsViewModel}">
-            <views:PurificatorDetailsView DataContext="{Binding}"/>
-        </DataTemplate>
-    </UserControl.Resources>
-    <Grid Margin="0 20 0 0">
-        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="20">
-    `       <ContentControl Content="{Binding}"></ContentControl>
-        </Border>
-    </Grid>-->
-
+             d:DesignHeight="800" d:DesignWidth="1000">
     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="0 20 0 0">
         <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" FontSize="32" Text="{Binding Name}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1" Margin="0 10 0 0 ">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontSize="32" Text="Room" />
 
-                    <TextBlock
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        VerticalAlignment="Center"
-                        Text="Temperature" />
+                <Grid Grid.Row="1" Margin="0 10 0 0 ">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                    <TextBox
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        Style="{StaticResource DetailsTextBoxStyle}"
-                        Text="{Binding Temperature, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="20 10 0 0" />
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Text="Temperature" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        Text="Humidity" />
-                    <TextBox
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        HorizontalAlignment="Left"
-                        Margin="20 10 0 0"
-                        Style="{StaticResource DetailsTextBoxStyle}"
-                        Text="{Binding Humidity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        Text="Carbon Dioxide" />
-                    <TextBox
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        HorizontalAlignment="Left"
-                        Margin="20 10 0 0"
-                        
-                        Style="{StaticResource DetailsTextBoxStyle}"
-                        Text="{Binding CarbonDioxideLevel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        Text="Light Level" />
-                    <TextBox
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        HorizontalAlignment="Left"
-                        Margin="20 10 0 0"
-                        
-                        Style="{StaticResource DetailsTextBoxStyle}"
-                        Text="{Binding LightLevel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding Temperature, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="20 10 0 0" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Humidity" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding Humidity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Carbon Dioxide" />
+                        <TextBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding CarbonDioxideLevel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Light Level" />
+                        <TextBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding LightLevel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" FontSize="32" Text="Conditioner" />
+
+                <Grid Grid.Row="1" Margin="0 10 0 0 ">
+                    <Grid Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Text="Working temperature" />
+
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding WorkingTemperature, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="20 10 0 0" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Air flow" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding ConditionerAirFlow, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Conditioner mode" />
+
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="ConditionerModeComboBox"
+                                 Style="{StaticResource DetailsTextBoxStyle}"
+                                 Padding="15 5"
+                                 IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+                                 Text="{Binding ConditionerMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Is on?" />
+                        <TextBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding ConditionerStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" FontSize="32" Text="Humidifier" />
+
+                <Grid Grid.Row="1" Margin="0 10 0 0 ">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Text="Water consumption" />
+
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding WaterConsumption, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="20 10 0 0" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Expected humidity" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding ExpectedHumidity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Is on?" />
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 IsReadOnly="True"
+                                 HorizontalAlignment="Left"
+                                 Margin="20 10 0 0"
+                                 Style="{StaticResource DetailsTextBoxStyle}"
+                                 Text="{Binding HumidifierStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" FontSize="32" Text="Purificator" />
+
+                <Grid Grid.Row="1" Margin="0 10 0 0 ">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Text="Air flow" />
+
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding PurificatorAirFlow, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="20 10 0 0" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Expected carbon dioxide" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Margin="20 10 0 0"
+                            Style="{StaticResource DetailsTextBoxStyle}"
+                            Text="{Binding ExpectedCarbonDioxide, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Is on?" />
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 IsReadOnly="True"
+                                 HorizontalAlignment="Left"
+                                 Margin="20 10 0 0"
+                                 Style="{StaticResource DetailsTextBoxStyle}"
+                                 Text="{Binding PurificatorStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

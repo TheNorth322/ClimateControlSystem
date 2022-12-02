@@ -25,8 +25,8 @@ namespace ClimateControlSystemNamespace
         public ConfigurationPathView()
         {
             InitializeComponent();
-            DataContext = new ConfigurationPathViewModel();
             Loaded += ConfigurationPathView_Loaded;
+            this.DataContext = new ConfigurationPathViewModel();
             (this.DataContext as ConfigurationPathViewModel).MessageBoxRequest +=
                 new EventHandler<MessageBoxEventArgs>(ViewMessageBoxRequest);
         }

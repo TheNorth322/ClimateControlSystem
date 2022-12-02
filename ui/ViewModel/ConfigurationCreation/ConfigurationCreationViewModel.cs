@@ -35,6 +35,17 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             }
         }
 
+        private string _passCode;
+
+        public string PassCode
+        {
+            get { return _passCode; }
+            set
+            {
+                _passCode = value;
+                OnPropertyChange(nameof(PassCode));
+            }
+        }
         public RoomConfigurationViewModel RoomViewModel { get; }
         public DeviceConfigurationViewModel DeviceViewModel { get; }
 
@@ -105,6 +116,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
+                PasswordHash hash = new PasswordHash(PassCode);
+                ClimateControlSystem.PassCode = hash.ToArray();
                 ClimateControlSystemValidator.Validate(ClimateControlSystem);
                 ClimateControlSystemSerializer.Serialize(ClimateControlSystem, Path);
                 ConfigurationPathView view = new ConfigurationPathView

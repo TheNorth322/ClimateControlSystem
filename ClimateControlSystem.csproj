@@ -137,6 +137,8 @@
     <Compile Include="Domain\ClimateControlSystemValidator.cs" />
     <Compile Include="Domain\ConfigurationPathValidator.cs" />
     <Compile Include="Domain\ICloseWindows.cs" />
+    <Compile Include="Domain\PassCodeVerifier.cs" />
+    <Compile Include="Domain\PasswordHash.cs" />
     <Compile Include="Domain\RoomValidator.cs" />
     <Compile Include="model\Devices\ClimateControlSystemDevice.cs" />
     <Compile Include="model\Devices\Conditioner.cs" />
@@ -144,7 +146,6 @@
     <Compile Include="model\Devices\Humidifier.cs" />
     <Compile Include="model\Devices\Purificator.cs" />
     <Compile Include="model\EnumExtensionMethods.cs" />
-    <Compile Include="model\Room\HeatSourceObject.cs" />
     <Compile Include="model\Room\LightLevel.cs" />
     <Compile Include="model\Room\Room.cs" />
     <Compile Include="model\Sensors\CarbonDioxideSensor.cs" />

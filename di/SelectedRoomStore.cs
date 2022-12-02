@@ -16,10 +16,6 @@ namespace ClimateControlSystemNamespace
             }
         }
 
-        /*public SelectedRoomStore(Room selectedRoom)
-        {
-            SelectedRoom = selectedRoom;
-        }*/
         public event Action SelectedRoomChanged;
     }
 }

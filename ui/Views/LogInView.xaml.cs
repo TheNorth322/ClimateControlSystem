@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClimateControlSystem.Domain;
+using ClimateControlSystem.ui.ViewModel;
+using ClimateControlSystem.ui.ViewModel.LogIn;
 
 namespace ClimateControlSystemNamespace
 {
@@ -20,9 +23,27 @@ namespace ClimateControlSystemNamespace
     /// </summary>
     public partial class LogInView : Window
     {
-        public LogInView()
+        public LogInView(ClimateControlSystem _climateControlSystem)
         {
             InitializeComponent();
+            Loaded += ViewLoaded;
+            this.DataContext = new LogInViewModel(_climateControlSystem); 
+            (this.DataContext as LogInViewModel).MessageBoxRequest +=
+                new EventHandler<MessageBoxEventArgs>(ViewMessageBoxRequest);
+        }
+        void ViewMessageBoxRequest(object sender, MessageBoxEventArgs e)
+        {
+            e.Show();
+        }
+        private void ViewLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindows vm)
+            {
+                vm.Close += () =>
+                {
+                    this.Close();
+                };
+            }
         }
     }
 }

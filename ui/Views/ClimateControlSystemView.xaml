@@ -10,7 +10,7 @@
         xmlns:viewmodel="clr-namespace:ClimateControlSystem.ui.ViewModel"
         d:DataContext="{d:DesignInstance Type=system:ClimateControlSystemViewModel}"
         mc:Ignorable="d"
-        Title="ClimateControlSystemView" Height="450" Width="800">
+        Title="ClimateControlSystemView" Height="700" Width="1200">
     <Grid Margin="20 0 20 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

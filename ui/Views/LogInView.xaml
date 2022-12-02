@@ -20,26 +20,24 @@
                x:Name="PasscodeLabel" 
                Style="{StaticResource HeadingLabelStyle}" 
                Content="Enter Passcode" 
-               FontSize="32px" 
+               FontSize="26px" 
                VerticalAlignment="Center"/>
         
-        <!--components:PlaceholderTextBox
+        <TextBox
             Grid.Row="1" 
             x:Name="PasscodeTextBox"
-            Placeholder="Enter passcode..." 
+            MinWidth="500"
             Style="{StaticResource PlaceholderTextBoxStyle}" 
-            DataContext="{Binding PassCode}" 
+            Text="{Binding PassCode, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Center" 
-            HorizontalAlignment="Center"-->
+            HorizontalAlignment="Center"/>
         
         <Button 
             Grid.Row="2" 
             x:Name="LogInButton" 
             Style="{StaticResource ButtonStyle}"
             Command="{Binding LogInCommand}"
-            Content="Log in" 
-            VerticalAlignment="Center" 
-            FontSize="16"/>
+            Content="Log in"/>
 
     </Grid>
 </Window>

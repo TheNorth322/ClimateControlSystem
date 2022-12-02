@@ -9,7 +9,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:ConfigurationCreationViewModel}"
         mc:Ignorable="d"
         FontSize="14"
-        Title="CreateConfiguration" Height="675" Width="1200">
+        Title="CreateConfiguration" Height="900" Width="1200">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -31,21 +31,35 @@
         </Grid>
         <Grid Grid.Row="1" Margin="40 0 40 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0"
                    Content="Path"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center" />
+                   VerticalAlignment="Top" />
             <components:PlaceholderTextBox
                 Grid.Column="0"
                 MinWidth="500"
                 Placeholder="Enter path for configuration..."
+                Margin="80 0 0 0"
                 Text="{Binding Path}"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 Style="{StaticResource PlaceholderTextBoxStyle}" />
+            
+            <Label Grid.Column="0"
+                   Content="PassCode"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom" />
+            <components:PlaceholderTextBox
+                Grid.Column="0"
+                MinWidth="500"
+                Placeholder="Enter path for configuration..."
+                Text="{Binding PassCode}"
+                VerticalAlignment="Bottom"
+                Style="{StaticResource PlaceholderTextBoxStyle}" />
+            
             <Button
                 Grid.Column="1"
                 Content="Add room"

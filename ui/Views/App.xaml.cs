@@ -25,10 +25,7 @@ namespace ClimateControlSystemNamespace
         
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new ConfigurationPathView()
-            {
-                DataContext = new ConfigurationPathViewModel()
-            };
+            MainWindow = new ConfigurationPathView();
             MainWindow.Show();
             base.OnStartup(e);
         }

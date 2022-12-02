@@ -11,6 +11,7 @@ using System.Windows.Input;
 using ClimateControlSystem.Domain;
 using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
 using ClimateControlSystem.ui.ViewModel.ConfigurationCreation;
+using ClimateControlSystem.ui.ViewModel.LogIn;
 using ClimateControlSystem.ui.Views;
 using ClimateControlSystemNamespace;
 
@@ -56,7 +57,7 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
             }
         }
 
-        public void CreateConfiguration()
+        private void CreateConfiguration()
         {
             ConfigurationCreationView view = new ConfigurationCreationView
             {
@@ -66,16 +67,12 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
             Close?.Invoke();
         }
 
-        public void LoadConfiguration()
+        private void LoadConfiguration()
         {
             try
             {
                 ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
-                ClimateControlSystemView view = new ClimateControlSystemView
-                {
-                    DataContext = new ClimateControlSystemViewModel(new SelectedRoomStore(),
-                        serializer.Deserialize(ConfigurationPath))
-                };
+                LogInView view = new LogInView(serializer.Deserialize(ConfigurationPath));
                 view.Show();
                 Close?.Invoke();
             }

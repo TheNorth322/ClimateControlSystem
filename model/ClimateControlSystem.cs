@@ -9,6 +9,7 @@ namespace ClimateControlSystemNamespace
     {
         // Properties 
         public List<Room> Rooms { get; }
+        public byte[] PassCode { get; set; }
         // Constructors
         public ClimateControlSystem()
         {

@@ -28,7 +28,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 
         public ListingViewModel(SelectedRoomStore selectedRoomStore, ClimateControlSystemNamespace.ClimateControlSystem _system)
         {
-            _selectedRoomStore = new SelectedRoomStore();
+            _selectedRoomStore = selectedRoomStore;
             _roomListingItemViewModels = new ObservableCollection<RoomListingItemViewModel>();
             
             foreach (Room _room in _system.Rooms)
