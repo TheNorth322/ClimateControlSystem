@@ -1,27 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ClimateControlSystem.Domain;
+using ClimateControlSystem.ui.ViewModel;
+using ClimateControlSystem.ui.ViewModel.ConfigurationCreation;
 
 namespace ClimateControlSystemNamespace
 {
     /// <summary>
-    /// Логика взаимодействия для CreateConfigurationWindow.xaml
+    ///     Логика взаимодействия для CreateConfigurationWindow.xaml
     /// </summary>
     public class EnumToItemsSource : MarkupExtension
     {
@@ -47,10 +38,8 @@ namespace ClimateControlSystemNamespace
         {
             if (value == null) return "";
             foreach (var one in Enum.GetValues(parameter as Type))
-            {
                 if (value.Equals(one))
-                    return EnumExtensionMethods.GetEnumDescription((Enum) one);
-            }
+                    return ((Enum)one).GetEnumDescription();
 
             return "";
         }
@@ -60,12 +49,8 @@ namespace ClimateControlSystemNamespace
         {
             if (value == null) return null;
             foreach (var one in Enum.GetValues(parameter as Type))
-            {
-                if (value.ToString() == EnumExtensionMethods.GetEnumDescription((Enum) one))
-                {
+                if (value.ToString() == ((Enum)one).GetEnumDescription())
                     return one;
-                }
-            }
 
             return null;
         }
@@ -76,17 +61,21 @@ namespace ClimateControlSystemNamespace
         public ConfigurationCreationView()
         {
             InitializeComponent();
+            DataContext = new ConfigurationCreationViewModel();
+            (DataContext as ConfigurationCreationViewModel).MessageBoxRequest +=
+                ViewMessageBoxRequest;
             Loaded += ConfigurationCreationView_Loaded;
         }
+
         private void ConfigurationCreationView_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is ICloseWindows vm)
-            {
-                vm.Close += () =>
-                {
-                    this.Close();
-                };
-            }
+                vm.Close += () => { Close(); };
+        }
+
+        private void ViewMessageBoxRequest(object sender, MessageBoxEventArgs e)
+        {
+            e.Show();
         }
     }
 }

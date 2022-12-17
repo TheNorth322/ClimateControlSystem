@@ -3,13 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClimateControlSystemNamespace"
         xmlns:components="clr-namespace:ClimateControlSystem.Components"
         xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ConfigurationCreation"
         d:DataContext="{d:DesignInstance Type=viewmodels:ConfigurationCreationViewModel}"
         mc:Ignorable="d"
         FontSize="14"
-        Title="CreateConfiguration" Height="900" Width="1200">
+        Title="CreateConfiguration" MinHeight="900" MinWidth="1200">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -31,8 +30,8 @@
         </Grid>
         <Grid Grid.Row="1" Margin="40 0 40 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0"
@@ -45,9 +44,8 @@
                 Placeholder="Enter path for configuration..."
                 Margin="80 0 0 0"
                 Text="{Binding Path}"
-                VerticalAlignment="Top"
                 Style="{StaticResource PlaceholderTextBoxStyle}" />
-            
+
             <Label Grid.Column="0"
                    Content="PassCode"
                    HorizontalAlignment="Left"
@@ -59,7 +57,7 @@
                 Text="{Binding PassCode}"
                 VerticalAlignment="Bottom"
                 Style="{StaticResource PlaceholderTextBoxStyle}" />
-            
+
             <Button
                 Grid.Column="1"
                 Content="Add room"

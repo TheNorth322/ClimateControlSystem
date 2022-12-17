@@ -4,17 +4,30 @@ namespace ClimateControlSystemNamespace
 {
     public class ClimateControlSystemStore
     {
+        private static ClimateControlSystemStore instance;
         private ClimateControlSystem _climateControlSystem;
+
+        private ClimateControlSystemStore()
+        {
+        }
 
         public ClimateControlSystem ClimateControlSystem
         {
-            get { return _climateControlSystem; }
+            get => _climateControlSystem;
             set
             {
                 _climateControlSystem = value;
-                SelectedClimateControlSystemChanged?.Invoke();
+                ClimateControlSystemChanged?.Invoke();
             }
         }
-        public event Action SelectedClimateControlSystemChanged;    
+
+        public static ClimateControlSystemStore getInstance()
+        {
+            if (instance == null)
+                instance = new ClimateControlSystemStore();
+            return instance;
+        }
+
+        public event Action ClimateControlSystemChanged;
     }
 }

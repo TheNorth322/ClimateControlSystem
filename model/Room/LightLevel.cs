@@ -7,6 +7,5 @@ namespace ClimateControlSystemNamespace
         [Description("Low Illumination")] LowIllumination = 30,
         [Description("Average Illumination")] AverageIllumination = 35,
         [Description("High Illumination")] HighIllumination = 40
-    };
-
+    }
 }

@@ -1,30 +1,31 @@
 using System;
+using System.IO;
+using System.Xml.Serialization;
+
 namespace ClimateControlSystemNamespace
 {
     public class ClimateControlSystemSerializer
     {
-        public ClimateControlSystemSerializer() {}
-            
-        
         public void Serialize(ClimateControlSystem system, string path)
         {
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(ClimateControlSystem));
-            string Path = $@"{path}{System.DateTime.Now.ToString("MM-dd")}.xml";
-            System.IO.FileStream configurationFile = System.IO.File.Create(Path);
+            var writer = new XmlSerializer(typeof(ClimateControlSystem));
+            var Path = $@"{path}{DateTime.Now.ToString("MM-dd")}.xml";
+            var configurationFile = File.Create(Path);
 
             writer.Serialize(configurationFile, system);
-            configurationFile.Close(); 
+            configurationFile.Close();
         }
 
         public ClimateControlSystem Deserialize(string path)
-        { 
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(ClimateControlSystem));
-            System.IO.StreamReader configurationFile = new System.IO.StreamReader(path);
+        {
+            var reader = new XmlSerializer(typeof(ClimateControlSystem));
+            var configurationFile = new StreamReader(path);
 
-            ClimateControlSystem climateControlSystem = (ClimateControlSystem) reader.Deserialize(configurationFile);
-            
+            var climateControlSystem = (ClimateControlSystem)reader.Deserialize(configurationFile);
+
             if (climateControlSystem == null)
-                throw new ApplicationException("Unable to create climate control system object! Maybe configuration file is empty?");
+                throw new ApplicationException(
+                    "Unable to create climate control system object! Maybe configuration file is empty?");
 
             configurationFile.Close();
             return climateControlSystem;

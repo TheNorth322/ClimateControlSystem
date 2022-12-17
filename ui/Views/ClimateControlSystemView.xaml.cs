@@ -1,27 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
+﻿using System.Windows;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ClimateControlSystemView.xaml
+    ///     Логика взаимодействия для ClimateControlSystemView.xaml
     /// </summary>
     public partial class ClimateControlSystemView : Window
     {
         private readonly ClimateControlSystemStore _climateControlSystemStore;
+
         public ClimateControlSystemView()
         {
             InitializeComponent();
@@ -29,7 +17,6 @@ namespace ClimateControlSystem.ui.Views
 
         public ClimateControlSystemView(ClimateControlSystemStore climateControlSystemStore)
         {
-            DataContext = 
             _climateControlSystemStore = climateControlSystemStore;
             InitializeComponent();
         }

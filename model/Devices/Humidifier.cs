@@ -1,16 +1,14 @@
 using System;
+
 namespace ClimateControlSystemNamespace
 {
-    
     [Serializable]
     public class Humidifier : ClimateControlSystemDevice
     {
-        // Properties
-        public double ExpectedHumidityLevel { get; set; }
-        
-        public double WaterConsumption { get; set; }
-        
-        public Humidifier() {}
+        public Humidifier()
+        {
+        }
+
         // Constructors
         public Humidifier(bool _isOn, double _waterConsumption, double _expectedHumidityLevel)
             : base(_isOn)
@@ -19,8 +17,12 @@ namespace ClimateControlSystemNamespace
             ExpectedHumidityLevel = _expectedHumidityLevel;
         }
 
+        // Properties
+        public double ExpectedHumidityLevel { get; set; }
+
+        public double WaterConsumption { get; set; }
+
         // Methods
         // return waterConsumption per minute in Room humidity is going to be recalculated 
-        
     }
 }

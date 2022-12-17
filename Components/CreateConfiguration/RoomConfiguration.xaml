@@ -26,9 +26,9 @@
                Grid.Column="0"
                Content="Room Characteristics"
                Style="{StaticResource HeadingLabelStyle}" />
-        <Label 
-            Grid.Row="1" 
-            Content="Name" 
+        <Label
+            Grid.Row="1"
+            Content="Name"
             Style="{StaticResource DescriptionLabelStyle}" />
         <components:PlaceholderTextBox
             Grid.Row="1"
@@ -36,7 +36,7 @@
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Placeholder="Enter room name..."
             Text="{Binding Name}" />
-        
+
         <components:PlaceholderTextBox
             Grid.Row="2"
             x:Name="AreaTextBox"

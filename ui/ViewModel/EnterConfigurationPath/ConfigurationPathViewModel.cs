@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using ClimateControlSystem.Domain;
-using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
-using ClimateControlSystem.ui.ViewModel.ConfigurationCreation;
-using ClimateControlSystem.ui.ViewModel.LogIn;
-using ClimateControlSystem.ui.Views;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
@@ -21,9 +9,13 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
     {
         private string _configurationPath;
 
+        private RelayCommand _createConfiguration;
+
+        private RelayCommand _loadConfiguration;
+
         public string ConfigurationPath
         {
-            get { return _configurationPath; }
+            get => _configurationPath;
             set
             {
                 _configurationPath = value;
@@ -31,20 +23,16 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
             }
         }
 
-        private RelayCommand _loadConfiguration;
-
         public RelayCommand LoadConfigurationCommand
         {
             get
             {
                 return _loadConfiguration ?? (_loadConfiguration = new RelayCommand(
                     _object => LoadConfiguration(),
-                    _object => this.ValidateConfigurationPath()
+                    _object => ValidateConfigurationPath()
                 ));
             }
         }
-
-        private RelayCommand _createConfiguration;
 
         public RelayCommand CreateConfigurationCommand
         {
@@ -57,12 +45,11 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
             }
         }
 
+        public Action Close { get; set; }
+
         private void CreateConfiguration()
         {
-            ConfigurationCreationView view = new ConfigurationCreationView
-            {
-                DataContext = new ConfigurationCreationViewModel()
-            };
+            var view = new ConfigurationCreationView();
             view.Show();
             Close?.Invoke();
         }
@@ -71,8 +58,10 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
         {
             try
             {
-                ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
-                LogInView view = new LogInView(serializer.Deserialize(ConfigurationPath));
+                var serializer = new ClimateControlSystemSerializer();
+                ClimateControlSystemStore.getInstance().ClimateControlSystem =
+                    serializer.Deserialize(ConfigurationPath);
+                var view = new LogInView();
                 view.Show();
                 Close?.Invoke();
             }
@@ -84,9 +73,7 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
 
         public bool ValidateConfigurationPath()
         {
-            return !String.IsNullOrEmpty(ConfigurationPath);
+            return !string.IsNullOrEmpty(ConfigurationPath);
         }
-
-        public Action Close { get; set; }
     }
 }

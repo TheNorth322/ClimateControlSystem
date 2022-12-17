@@ -1,12 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace ClimateControlSystem.Domain
 {
     public class ConfigurationPathValidator
     {
-        public ConfigurationPathValidator() {}
-
         public bool Validate(string _path)
         {
             if (File.Exists(_path))

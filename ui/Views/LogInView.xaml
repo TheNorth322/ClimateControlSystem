@@ -3,41 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClimateControlSystemNamespace"
-        xmlns:components="clr-namespace:ClimateControlSystem.Components"
         xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.LogIn"
         d:DataContext="{d:DesignInstance Type=viewmodels:LogInViewModel}"
         mc:Ignorable="d"
         Title="User verification" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="0" 
-               x:Name="PasscodeLabel" 
-               Style="{StaticResource HeadingLabelStyle}" 
-               Content="Enter Passcode" 
-               FontSize="26px" 
-               VerticalAlignment="Center"/>
-        
+
+        <Label Grid.Row="0"
+               x:Name="PasscodeLabel"
+               Style="{StaticResource HeadingLabelStyle}"
+               Content="Enter Passcode"
+               FontSize="26px"
+               VerticalAlignment="Center" />
+
         <TextBox
-            Grid.Row="1" 
+            Grid.Row="1"
             x:Name="PasscodeTextBox"
             MinWidth="500"
-            Style="{StaticResource PlaceholderTextBoxStyle}" 
-            Text="{Binding PassCode, UpdateSourceTrigger=PropertyChanged}" 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center"/>
-        
-        <Button 
-            Grid.Row="2" 
-            x:Name="LogInButton" 
+            Style="{StaticResource PlaceholderTextBoxStyle}"
+            Text="{Binding PassCode, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" />
+
+        <Button
+            Grid.Row="2"
+            x:Name="LogInButton"
             Style="{StaticResource ButtonStyle}"
             Command="{Binding LogInCommand}"
-            Content="Log in"/>
+            Content="Log in" />
 
     </Grid>
 </Window>

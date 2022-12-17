@@ -2,11 +2,9 @@
 
 namespace ClimateControlSystemNamespace
 {
-    public enum ConditionerMode 
+    public enum ConditionerMode
     {
-        [Description("Cooling")]
-        Cooling,
-        [Description("Heating")]
-        Heating 
-    };
+        [Description("Cooling")] Cooling,
+        [Description("Heating")] Heating
+    }
 }

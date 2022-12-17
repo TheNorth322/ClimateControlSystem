@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ClimateControlSystem.Components"
              xmlns:viewmodel="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
              d:DataContext="{d:DesignInstance Type=viewmodel:ListingViewModel}"
              mc:Ignorable="d"
@@ -36,10 +35,10 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Name}" />
-                                    <Menu Grid.Column="1" HorizontalAlignment="Right">
+                                    <Menu Grid.Column="1" HorizontalAlignment="Right" ItemsSource="{Binding aMenuItems}">
                                         <Menu.ItemContainerStyle>
                                             <Style TargetType="MenuItem">
-                                                <Setter Property="Padding" Value="20 5"></Setter>
+                                                <Setter Property="Padding" Value="20 5" />
                                             </Style>
                                         </Menu.ItemContainerStyle>
                                         <MenuItem Header="_Details">

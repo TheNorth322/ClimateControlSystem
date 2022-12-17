@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows;
 
@@ -12,6 +8,7 @@ namespace ClimateControlSystem.ui.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<MessageBoxEventArgs> MessageBoxRequest;
+        public event EventHandler CloseEvent;
 
         protected void MessageBox_Show(Action<MessageBoxResult> resultAction, string messageBoxText,
             string caption = "", MessageBoxButton button = MessageBoxButton.OK,

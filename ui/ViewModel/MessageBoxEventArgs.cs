@@ -5,6 +5,15 @@ namespace ClimateControlSystem.ui.ViewModel
 {
     public class MessageBoxEventArgs : EventArgs
     {
+        private readonly MessageBoxButton button;
+        private readonly string caption;
+        private readonly MessageBoxResult defaultResult;
+        private readonly MessageBoxImage icon;
+        private readonly string messageBoxText;
+        private readonly MessageBoxOptions options;
+
+        private readonly Action<MessageBoxResult> resultAction;
+
         public MessageBoxEventArgs(Action<MessageBoxResult> resultAction, string messageBoxText,
             string caption = "", MessageBoxButton button = MessageBoxButton.OK,
             MessageBoxImage icon = MessageBoxImage.None, MessageBoxResult defaultResult = MessageBoxResult.None,
@@ -19,24 +28,16 @@ namespace ClimateControlSystem.ui.ViewModel
             this.options = options;
         }
 
-        Action<MessageBoxResult> resultAction;
-        string messageBoxText;
-        string caption;
-        MessageBoxButton button;
-        MessageBoxImage icon;
-        MessageBoxResult defaultResult;
-        MessageBoxOptions options;
-
         public void Show(Window owner)
         {
-            MessageBoxResult messageBoxResult =
+            var messageBoxResult =
                 MessageBox.Show(owner, messageBoxText, caption, button, icon, defaultResult, options);
             if (resultAction != null) resultAction(messageBoxResult);
         }
 
         public void Show()
         {
-            MessageBoxResult messageBoxResult =
+            var messageBoxResult =
                 MessageBox.Show(messageBoxText, caption, button, icon, defaultResult, options);
             if (resultAction != null) resultAction(messageBoxResult);
         }

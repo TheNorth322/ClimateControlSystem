@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
 using System.Windows;
-using System.Windows.Input;
 using ClimateControlSystem.Domain;
 using ClimateControlSystem.ui.ViewModel.EnterConfigurationPath;
 using ClimateControlSystemNamespace;
@@ -17,17 +8,28 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 {
     public class ConfigurationCreationViewModel : ViewModelBase, ICloseWindows
     {
-        // Validators as fields may be unnecessary
-        public ClimateControlSystemValidator ClimateControlSystemValidator { get; }
-        public RoomValidator RoomValidator { get; }
-        public ClimateControlSystemSerializer ClimateControlSystemSerializer { get; }
-        public ClimateControlSystemNamespace.ClimateControlSystem ClimateControlSystem { get; }
-        public Room Room { get; set; }
+        private RelayCommand _addRoom;
+        private RelayCommand _createConfiguration;
+
+        private string _passCode;
         private string _path;
+        private Room Room = RoomStore.getInstance().Room;
+        private readonly ClimateControlSystemNamespace.ClimateControlSystem ClimateControlSystem =
+            ClimateControlSystemStore.getInstance().ClimateControlSystem;
+
+        public ConfigurationCreationViewModel()
+        {
+            ClimateControlSystem = new ClimateControlSystemNamespace.ClimateControlSystem();
+            ClimateControlSystemSerializer = new ClimateControlSystemSerializer();
+            DeviceViewModel = new DeviceConfigurationViewModel();
+            RoomViewModel = new RoomConfigurationViewModel();
+        }
+
+        public ClimateControlSystemSerializer ClimateControlSystemSerializer { get; }
 
         public string Path
         {
-            get { return _path; }
+            get => _path;
             set
             {
                 _path = value;
@@ -35,30 +37,26 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             }
         }
 
-        private string _passCode;
-
         public string PassCode
         {
-            get { return _passCode; }
+            get => _passCode;
             set
             {
                 _passCode = value;
                 OnPropertyChange(nameof(PassCode));
             }
         }
+
         public RoomConfigurationViewModel RoomViewModel { get; }
         public DeviceConfigurationViewModel DeviceViewModel { get; }
-
-        private RelayCommand _addRoom;
-        private RelayCommand _createConfiguration;
 
         public RelayCommand AddRoomCommand
         {
             get
             {
                 return _addRoom ?? (_addRoom = new RelayCommand(
-                    _object => this.AddRoom(),
-                    _object => this.ValidateRoom()
+                    _object => AddRoom(),
+                    _object => ValidateRoom()
                 ));
             }
         }
@@ -68,11 +66,14 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             get
             {
                 return _createConfiguration ?? (_createConfiguration = new RelayCommand(
-                    _object => this.CreateConfiguration(),
-                    _object => this.ValidateClimateControlSystem()
+                    _object => CreateConfiguration(),
+                    _object => ValidateClimateControlSystem()
                 ));
             }
         }
+
+        public Action Close { get; set; }
+
 
         public bool ValidateRoom()
         {
@@ -84,22 +85,10 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                Room = new Room(
-                    RoomViewModel.Name,
-                    RoomViewModel.Area,
-                    RoomViewModel.Height,
-                    RoomViewModel.LightLevel,
-                    new Conditioner(DeviceViewModel.ConditionerStatus, DeviceViewModel.ConditionerAirFlow,
-                        DeviceViewModel.ConditionerMode, 24),
-                    new Humidifier(DeviceViewModel.HumidifierStatus, DeviceViewModel.HumidifierWaterConsumption,
-                        60),
-                    new Purificator(DeviceViewModel.PurificatorStatus, DeviceViewModel.PurificatorAirFlow, 60),
-                    new TemperatureSensor(RoomViewModel.Temperature),
-                    new HumiditySensor(RoomViewModel.Humidity),
-                    new CarbonDioxideSensor(RoomViewModel.CarbonDioxideLevel));
-
+                AddRoomData();
                 RoomValidator.Validate(Room);
                 ClimateControlSystem.Rooms.Add(Room);
+                RoomStore.getInstance().Clear();
             }
             catch (Exception e)
             {
@@ -109,18 +98,28 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 
         public bool ValidateClimateControlSystem()
         {
-            return (!String.IsNullOrWhiteSpace(Path));
+            return !string.IsNullOrWhiteSpace(Path) && !string.IsNullOrWhiteSpace(PassCode);
         }
 
+        public void AddRoomData()
+        {
+            Room.Area = RoomViewModel.Area;
+            Room.Name = RoomViewModel.Name;
+            Room.CeilingHeight = RoomViewModel.Height;
+            Room.LightLevel = RoomViewModel.LightLevel;
+            Room.TemperatureSensor.Temperature = RoomViewModel.Temperature;
+            Room.CarbonDioxideSensor.CarbonDioxide = RoomViewModel.CarbonDioxideLevel;
+            Room.HumiditySensor.Humidity = RoomViewModel.Humidity;
+        }
         public void CreateConfiguration()
         {
             try
             {
-                PasswordHash hash = new PasswordHash(PassCode);
+                var hash = new PasswordHash(PassCode);
                 ClimateControlSystem.PassCode = hash.ToArray();
                 ClimateControlSystemValidator.Validate(ClimateControlSystem);
                 ClimateControlSystemSerializer.Serialize(ClimateControlSystem, Path);
-                ConfigurationPathView view = new ConfigurationPathView
+                var view = new ConfigurationPathView
                 {
                     DataContext = new ConfigurationPathViewModel()
                 };
@@ -132,17 +131,5 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 MessageBox_Show(null, e.Message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        public ConfigurationCreationViewModel()
-        {
-            ClimateControlSystem = new ClimateControlSystemNamespace.ClimateControlSystem();
-            ClimateControlSystemSerializer = new ClimateControlSystemSerializer();
-            DeviceViewModel = new DeviceConfigurationViewModel();
-            RoomViewModel = new RoomConfigurationViewModel();
-            ClimateControlSystemValidator = new ClimateControlSystemValidator();
-            RoomValidator = new RoomValidator();
-        }
-
-        public Action Close { get; set; }
     }
 }

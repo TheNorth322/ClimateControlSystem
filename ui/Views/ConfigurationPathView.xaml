@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
-        xmlns:local="clr-namespace:ClimateControlSystemNamespace"
-        xmlns:path="clr-namespace:ClimateControlSystem.ui.ViewModel.EnterConfigurationPath"
         xmlns:components="clr-namespace:ClimateControlSystem.Components"
         xmlns:views="clr-namespace:ClimateControlSystem.ui.ViewModel.EnterConfigurationPath"
         d:DataContext="{d:DesignInstance Type=views:ConfigurationPathViewModel}"
@@ -24,15 +22,14 @@
             Style="{StaticResource HeadingLabelStyle}"
             Content="Enter configuration path"
             VerticalAlignment="Center" />
-        
+
         <components:PlaceholderTextBox
-            Style="{StaticResource PlaceholderTextBoxStyle}" 
-            Grid.Row="1" 
+            Style="{StaticResource PlaceholderTextBoxStyle}"
+            Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             MinWidth="450"
-            Text="{Binding ConfigurationPath, UpdateSourceTrigger=PropertyChanged}"
-            />
+            Text="{Binding ConfigurationPath, UpdateSourceTrigger=PropertyChanged}" />
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

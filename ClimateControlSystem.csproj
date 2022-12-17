@@ -1,277 +1,261 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{11F7BDA7-961F-4342-8724-796801782BE5}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>ClimateControlSystem</RootNamespace>
-    <AssemblyName>ClimateControlSystem</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\ARM64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>ARM64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
-    <OutputPath>bin\ARM64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>ARM64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="ui\Views\App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Components\CreateConfiguration\DeviceConfiguration.xaml.cs">
-      <DependentUpon>DeviceConfiguration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\CreateConfiguration\RoomConfiguration.xaml.cs">
-      <DependentUpon>RoomConfiguration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Details.xaml.cs">
-      <DependentUpon>Details.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Listing.xaml.cs">
-      <DependentUpon>Listing.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\PlaceholderTextBox.cs" />
-    <Compile Include="di\ClimateControlSystemStore.cs" />
-    <Compile Include="di\RadioButtonCheckedConverter.cs" />
-    <Compile Include="di\SelectedConditionerStore.cs" />
-    <Compile Include="di\SelectedHumidifierStore.cs" />
-    <Compile Include="di\SelectedPurificatorStore.cs" />
-    <Compile Include="di\SelectedRoomStore.cs" />
-    <Compile Include="Domain\ClimateControlSystemValidator.cs" />
-    <Compile Include="Domain\ConfigurationPathValidator.cs" />
-    <Compile Include="Domain\ICloseWindows.cs" />
-    <Compile Include="Domain\PassCodeVerifier.cs" />
-    <Compile Include="Domain\PasswordHash.cs" />
-    <Compile Include="Domain\RoomValidator.cs" />
-    <Compile Include="model\Devices\ClimateControlSystemDevice.cs" />
-    <Compile Include="model\Devices\Conditioner.cs" />
-    <Compile Include="model\Devices\ConditionerMode.cs" />
-    <Compile Include="model\Devices\Humidifier.cs" />
-    <Compile Include="model\Devices\Purificator.cs" />
-    <Compile Include="model\EnumExtensionMethods.cs" />
-    <Compile Include="model\Room\LightLevel.cs" />
-    <Compile Include="model\Room\Room.cs" />
-    <Compile Include="model\Sensors\CarbonDioxideSensor.cs" />
-    <Compile Include="model\Sensors\HumiditySensor.cs" />
-    <Compile Include="model\Sensors\ISensor.cs" />
-    <Compile Include="model\Sensors\TemperatureSensor.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\ClimateControlSystemViewModel.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\ConditionerDetailsViewModel.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\HumidifierDetailsViewModel.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\ListingViewModel.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\PurificatorDetailsViewModel.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\RoomDetailsViewModel.cs" />
-    <Compile Include="ui\ViewModel\ClimateControlSystem\RoomListingItemViewModel.cs" />
-    <Compile Include="ui\ViewModel\ConfigurationCreation\DeviceConfigurationViewModel.cs" />
-    <Compile Include="ui\ViewModel\ConfigurationCreation\RoomConfigurationViewModel.cs" />
-    <Compile Include="ui\ViewModel\ConfigurationCreation\ConfigurationCreationViewModel.cs" />
-    <Compile Include="ui\ViewModel\EnterConfigurationPath\ConfigurationPathViewModel.cs" />
-    <Compile Include="ui\ViewModel\LogIn\LogInViewModel.cs" />
-    <Compile Include="ui\ViewModel\MessageBoxEventArgs.cs" />
-    <Compile Include="ui\ViewModel\RelayCommand.cs" />
-    <Compile Include="ui\ViewModel\ViewModelBase.cs" />
-    <Compile Include="ui\Views\ConditionerDetailsView.xaml.cs">
-      <DependentUpon>ConditionerDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ui\Views\HumidifierDetailsView.xaml.cs">
-      <DependentUpon>HumidifierDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ui\Views\PurificatorDetailsView.xaml.cs">
-      <DependentUpon>PurificatorDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ui\Views\RoomDetailsView.xaml.cs">
-      <DependentUpon>RoomDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Components\CreateConfiguration\DeviceConfiguration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\CreateConfiguration\RoomConfiguration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\Details.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\Listing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="resources\BaseStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ui\Views\ClimateControlSystemView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ui\Views\ConditionerDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ui\Views\ConfigurationPathView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ui\Views\ConfigurationCreationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ui\Views\HumidifierDetailsView.xaml" />
-    <Page Include="ui\Views\LogInView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="ui\Views\App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="model\ClimateControlSystem.cs" />
-    <Compile Include="di\ClimateControlSystemSerializer.cs" />
-    <Compile Include="ui\Views\ClimateControlSystemView.xaml.cs">
-      <DependentUpon>ClimateControlSystemView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ui\Views\ConfigurationPathView.xaml.cs">
-      <DependentUpon>ConfigurationPathView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ui\Views\ConfigurationCreationView.xaml.cs">
-      <DependentUpon>ConfigurationCreationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="di\DataProvider.cs" />
-    <Compile Include="ui\Views\LogInView.xaml.cs">
-      <DependentUpon>LogInView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="ui\Views\PurificatorDetailsView.xaml" />
-    <Page Include="ui\Views\RoomDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="model\Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{11F7BDA7-961F-4342-8724-796801782BE5}</ProjectGuid>
+        <OutputType>WinExe</OutputType>
+        <RootNamespace>ClimateControlSystem</RootNamespace>
+        <AssemblyName>ClimateControlSystem</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <WarningLevel>4</WarningLevel>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <Deterministic>true</Deterministic>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+        <DebugSymbols>true</DebugSymbols>
+        <OutputPath>bin\x86\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <DebugType>full</DebugType>
+        <PlatformTarget>x86</PlatformTarget>
+        <LangVersion>7.3</LangVersion>
+        <ErrorReport>prompt</ErrorReport>
+        <Prefer32Bit>true</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+        <OutputPath>bin\x86\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <Optimize>true</Optimize>
+        <DebugType>pdbonly</DebugType>
+        <PlatformTarget>x86</PlatformTarget>
+        <LangVersion>7.3</LangVersion>
+        <ErrorReport>prompt</ErrorReport>
+        <Prefer32Bit>true</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+        <DebugSymbols>true</DebugSymbols>
+        <OutputPath>bin\ARM64\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <DebugType>full</DebugType>
+        <PlatformTarget>ARM64</PlatformTarget>
+        <LangVersion>7.3</LangVersion>
+        <ErrorReport>prompt</ErrorReport>
+        <Prefer32Bit>true</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+        <OutputPath>bin\ARM64\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <Optimize>true</Optimize>
+        <DebugType>pdbonly</DebugType>
+        <PlatformTarget>ARM64</PlatformTarget>
+        <LangVersion>7.3</LangVersion>
+        <ErrorReport>prompt</ErrorReport>
+        <Prefer32Bit>true</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+        <DebugSymbols>true</DebugSymbols>
+        <OutputPath>bin\x64\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <DebugType>full</DebugType>
+        <PlatformTarget>x64</PlatformTarget>
+        <LangVersion>7.3</LangVersion>
+        <ErrorReport>prompt</ErrorReport>
+        <Prefer32Bit>true</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+        <OutputPath>bin\x64\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <Optimize>true</Optimize>
+        <DebugType>pdbonly</DebugType>
+        <PlatformTarget>x64</PlatformTarget>
+        <LangVersion>7.3</LangVersion>
+        <ErrorReport>prompt</ErrorReport>
+        <Prefer32Bit>true</Prefer32Bit>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Xaml">
+            <RequiredTargetFramework>4.0</RequiredTargetFramework>
+        </Reference>
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+    </ItemGroup>
+    <ItemGroup>
+        <ApplicationDefinition Include="ui\Views\App.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </ApplicationDefinition>
+        <Compile Include="Components\CreateConfiguration\DeviceConfiguration.xaml.cs">
+            <DependentUpon>DeviceConfiguration.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Components\CreateConfiguration\RoomConfiguration.xaml.cs">
+            <DependentUpon>RoomConfiguration.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Components\Details.xaml.cs">
+            <DependentUpon>Details.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Components\Listing.xaml.cs">
+            <DependentUpon>Listing.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Components\PlaceholderTextBox.cs" />
+        <Compile Include="di\ClimateControlSystemStore.cs" />
+        <Compile Include="di\RadioButtonCheckedConverter.cs" />
+        <Compile Include="di\RoomStore.cs" />
+        <Compile Include="di\SelectedRoomStore.cs" />
+        <Compile Include="Domain\ClimateControlSystemValidator.cs" />
+        <Compile Include="Domain\ConditionerValidator.cs" />
+        <Compile Include="Domain\ConfigurationPathValidator.cs" />
+        <Compile Include="Domain\HumidifierValidator.cs" />
+        <Compile Include="Domain\ICloseWindows.cs" />
+        <Compile Include="Domain\PassCodeVerifier.cs" />
+        <Compile Include="Domain\PasswordHash.cs" />
+        <Compile Include="Domain\PurificatorValidator.cs" />
+        <Compile Include="Domain\RoomValidator.cs" />
+        <Compile Include="model\Devices\ClimateControlSystemDevice.cs" />
+        <Compile Include="model\Devices\Conditioner.cs" />
+        <Compile Include="model\Devices\ConditionerMode.cs" />
+        <Compile Include="model\Devices\DeviceMode.cs" />
+        <Compile Include="model\Devices\Humidifier.cs" />
+        <Compile Include="model\Devices\Purificator.cs" />
+        <Compile Include="model\EnumExtensionMethods.cs" />
+        <Compile Include="model\Room\LightLevel.cs" />
+        <Compile Include="model\Room\Room.cs" />
+        <Compile Include="model\Sensors\CarbonDioxideSensor.cs" />
+        <Compile Include="model\Sensors\HumiditySensor.cs" />
+        <Compile Include="model\Sensors\ISensor.cs" />
+        <Compile Include="model\Sensors\TemperatureSensor.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\ClimateControlSystemViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\ListingViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\RoomDetailsViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\RoomListingItemViewModel.cs" />
+        <Compile Include="ui\ViewModel\ConfigurationCreation\DeviceConfigurationViewModel.cs" />
+        <Compile Include="ui\ViewModel\ConfigurationCreation\RoomConfigurationViewModel.cs" />
+        <Compile Include="ui\ViewModel\ConfigurationCreation\ConfigurationCreationViewModel.cs" />
+        <Compile Include="ui\ViewModel\EnterConfigurationPath\ConfigurationPathViewModel.cs" />
+        <Compile Include="ui\ViewModel\LogIn\LogInViewModel.cs" />
+        <Compile Include="ui\ViewModel\MessageBoxEventArgs.cs" />
+        <Compile Include="ui\ViewModel\RelayCommand.cs" />
+        <Compile Include="ui\ViewModel\ViewModelBase.cs" />
+        <Compile Include="ui\Views\RoomDetailsView.xaml.cs">
+            <DependentUpon>RoomDetailsView.xaml</DependentUpon>
+        </Compile>
+        <Page Include="Components\CreateConfiguration\DeviceConfiguration.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Components\CreateConfiguration\RoomConfiguration.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Components\Details.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Components\Listing.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="resources\BaseStyles.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="ui\Views\ClimateControlSystemView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="ui\Views\ConfigurationPathView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="ui\Views\ConfigurationCreationView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="ui\Views\LogInView.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Compile Include="ui\Views\App.xaml.cs">
+            <DependentUpon>App.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Include="model\ClimateControlSystem.cs" />
+        <Compile Include="di\ClimateControlSystemSerializer.cs" />
+        <Compile Include="ui\Views\ClimateControlSystemView.xaml.cs">
+            <DependentUpon>ClimateControlSystemView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="ui\Views\ConfigurationPathView.xaml.cs">
+            <DependentUpon>ConfigurationPathView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="ui\Views\ConfigurationCreationView.xaml.cs">
+            <DependentUpon>ConfigurationCreationView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="di\DataProvider.cs" />
+        <Compile Include="ui\Views\LogInView.xaml.cs">
+            <DependentUpon>LogInView.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Page Include="ui\Views\RoomDetailsView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="model\Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Include="Properties\Resources.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <Compile Include="Properties\Settings.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        </Compile>
+        <EmbeddedResource Include="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <None Include="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="App.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
