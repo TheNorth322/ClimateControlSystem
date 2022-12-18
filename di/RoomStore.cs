@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Media;
 
 namespace ClimateControlSystemNamespace
 {
@@ -35,7 +34,7 @@ namespace ClimateControlSystemNamespace
         {
             Room = new Room();
         }
-        
+
         public event Action RoomChanged;
     }
 }

@@ -115,6 +115,7 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Commands\UpdateViewCommand.cs" />
         <Compile Include="Components\CreateConfiguration\DeviceConfiguration.xaml.cs">
             <DependentUpon>DeviceConfiguration.xaml</DependentUpon>
         </Compile>
@@ -124,14 +125,15 @@
         <Compile Include="Components\Details.xaml.cs">
             <DependentUpon>Details.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Components\Listing.xaml.cs">
-            <DependentUpon>Listing.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Components\PlaceholderTextBox.cs" />
         <Compile Include="di\ClimateControlSystemStore.cs" />
         <Compile Include="di\RadioButtonCheckedConverter.cs" />
         <Compile Include="di\RoomStore.cs" />
+        <Compile Include="di\SelectedConditionerStore.cs" />
+        <Compile Include="di\SelectedHumidifierStore.cs" />
+        <Compile Include="di\SelectedPurificatorStore.cs" />
         <Compile Include="di\SelectedRoomStore.cs" />
+        <Compile Include="di\SelectedViewModelStore.cs" />
         <Compile Include="Domain\ClimateControlSystemValidator.cs" />
         <Compile Include="Domain\ConditionerValidator.cs" />
         <Compile Include="Domain\ConfigurationPathValidator.cs" />
@@ -155,9 +157,14 @@
         <Compile Include="model\Sensors\ISensor.cs" />
         <Compile Include="model\Sensors\TemperatureSensor.cs" />
         <Compile Include="ui\ViewModel\ClimateControlSystem\ClimateControlSystemViewModel.cs" />
-        <Compile Include="ui\ViewModel\ClimateControlSystem\ListingViewModel.cs" />
-        <Compile Include="ui\ViewModel\ClimateControlSystem\RoomDetailsViewModel.cs" />
-        <Compile Include="ui\ViewModel\ClimateControlSystem\RoomListingItemViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Details\ConditionerDetailsViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Details\HumidifierDetailsViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Details\PurificatorDetailsViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Details\RoomDetailsViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Listing\ConditionerListingItemViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Listing\HumidifierListingItemViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Listing\PurificatorListingItemViewModel.cs" />
+        <Compile Include="ui\ViewModel\ClimateControlSystem\Listing\RoomListingItemViewModel.cs" />
         <Compile Include="ui\ViewModel\ConfigurationCreation\DeviceConfigurationViewModel.cs" />
         <Compile Include="ui\ViewModel\ConfigurationCreation\RoomConfigurationViewModel.cs" />
         <Compile Include="ui\ViewModel\ConfigurationCreation\ConfigurationCreationViewModel.cs" />
@@ -166,6 +173,15 @@
         <Compile Include="ui\ViewModel\MessageBoxEventArgs.cs" />
         <Compile Include="ui\ViewModel\RelayCommand.cs" />
         <Compile Include="ui\ViewModel\ViewModelBase.cs" />
+        <Compile Include="ui\Views\ConditionerDetailsView.xaml.cs">
+          <DependentUpon>ConditionerDetailsView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="ui\Views\HumidifierDetailsView.xaml.cs">
+          <DependentUpon>HumidifierDetailsView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="ui\Views\PurificatorDetailsView.xaml.cs">
+          <DependentUpon>PurificatorDetailsView.xaml</DependentUpon>
+        </Compile>
         <Compile Include="ui\Views\RoomDetailsView.xaml.cs">
             <DependentUpon>RoomDetailsView.xaml</DependentUpon>
         </Compile>
@@ -181,10 +197,6 @@
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
         </Page>
-        <Page Include="Components\Listing.xaml">
-            <SubType>Designer</SubType>
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
         <Page Include="resources\BaseStyles.xaml">
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
@@ -193,6 +205,7 @@
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
         </Page>
+        <Page Include="ui\Views\ConditionerDetailsView.xaml" />
         <Page Include="ui\Views\ConfigurationPathView.xaml">
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
@@ -201,6 +214,7 @@
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
         </Page>
+        <Page Include="ui\Views\HumidifierDetailsView.xaml" />
         <Page Include="ui\Views\LogInView.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -225,6 +239,7 @@
             <DependentUpon>LogInView.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="ui\Views\PurificatorDetailsView.xaml" />
         <Page Include="ui\Views\RoomDetailsView.xaml">
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>

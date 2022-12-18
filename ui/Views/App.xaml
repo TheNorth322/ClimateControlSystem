@@ -1,10 +1,13 @@
 ﻿<Application x:Class="ClimateControlSystemNamespace.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ClimateControlSystemNamespace">
+             xmlns:local="clr-namespace:ClimateControlSystemNamespace"
+             xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
+             xmlns:views="clr-namespace:ClimateControlSystem.ui.Views">
     <Application.Resources>
         <local:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
         <local:EnumConverter x:Key="EnumConverter" />
+        
         <Style TargetType="TextBox" x:Key="DetailsTextBoxStyle">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />

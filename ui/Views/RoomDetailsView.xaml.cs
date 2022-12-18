@@ -5,7 +5,7 @@ namespace ClimateControlSystem.ui.Views
     /// <summary>
     ///     Логика взаимодействия для RoomDetailsView.xaml
     /// </summary>
-    public partial class RoomDetailsView : Page
+    public partial class RoomDetailsView : UserControl
     {
         public RoomDetailsView()
         {

@@ -65,8 +65,9 @@
                      Content="Off"
                      IsChecked="{Binding HumidifierStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
             ConverterParameter={x:Static local:DeviceMode.Off}}" />
-        <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Content="Add humidifier" Command="{Binding AddHumidifierCommand}" />
-        
+        <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Content="Add humidifier"
+                Command="{Binding AddHumidifierCommand}" />
+
         <Label
             Grid.Row="5"
             Content="Purificator"
@@ -104,7 +105,7 @@
             ConverterParameter={x:Static local:DeviceMode.Off}}" />
 
         <Button Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Add purificator"
-                Command="{Binding AddPurificatorCommand}"  HorizontalAlignment="Right"/>
+                Command="{Binding AddPurificatorCommand}" HorizontalAlignment="Right" />
         <Label
             Grid.Row="9"
             Content="Conditioner"
@@ -154,6 +155,7 @@
                      IsChecked="{Binding ConditionerStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
             ConverterParameter={x:Static local:DeviceMode.Off}}" />
 
-        <Button Grid.Row="14" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Content="Add conditioner" Command="{Binding AddConditionerCommand}" />
+        <Button Grid.Row="14" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right"
+                Content="Add conditioner" Command="{Binding AddConditionerCommand}" />
     </Grid>
 </UserControl>

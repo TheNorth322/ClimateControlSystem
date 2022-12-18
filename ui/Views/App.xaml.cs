@@ -10,6 +10,7 @@ namespace ClimateControlSystemNamespace
         // Singleton Storages
         private readonly SelectedRoomStore _selectedRoomStore;
         private RoomStore _roomStore;
+
         public App()
         {
             _selectedRoomStore = SelectedRoomStore.getInstance();

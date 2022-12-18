@@ -8,14 +8,15 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 {
     public class ConfigurationCreationViewModel : ViewModelBase, ICloseWindows
     {
+        private readonly ClimateControlSystemNamespace.ClimateControlSystem ClimateControlSystem =
+            ClimateControlSystemStore.getInstance().ClimateControlSystem;
+
         private RelayCommand _addRoom;
         private RelayCommand _createConfiguration;
 
         private string _passCode;
         private string _path;
-        private Room Room = RoomStore.getInstance().Room;
-        private readonly ClimateControlSystemNamespace.ClimateControlSystem ClimateControlSystem =
-            ClimateControlSystemStore.getInstance().ClimateControlSystem;
+        private readonly Room Room = RoomStore.getInstance().Room;
 
         public ConfigurationCreationViewModel()
         {
@@ -111,6 +112,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             Room.CarbonDioxideSensor.CarbonDioxide = RoomViewModel.CarbonDioxideLevel;
             Room.HumiditySensor.Humidity = RoomViewModel.Humidity;
         }
+
         public void CreateConfiguration()
         {
             try

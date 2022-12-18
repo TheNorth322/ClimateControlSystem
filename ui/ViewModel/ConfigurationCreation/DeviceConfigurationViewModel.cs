@@ -18,7 +18,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         private double _humidifierWaterConsumption;
         private double _purificatorAirFlow;
         private bool _purificatorStatus;
-        private Room Room = RoomStore.getInstance().Room;
+        private readonly Room Room = RoomStore.getInstance().Room;
 
         public DeviceConfigurationViewModel()
         {
@@ -114,8 +114,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             get
             {
                 return _addConditioner ?? (_addConditioner = new RelayCommand(
-                    _object => this.AddConditioner(),
-                    _object => this.ValidateConditioner()
+                    _object => AddConditioner(),
+                    _object => ValidateConditioner()
                 ));
             }
         }
@@ -125,8 +125,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             get
             {
                 return _addHumidifier ?? (_addHumidifier = new RelayCommand(
-                    _object => this.AddHumidifier(),
-                    _object => this.ValidateHumidifier()
+                    _object => AddHumidifier(),
+                    _object => ValidateHumidifier()
                 ));
             }
         }
@@ -136,8 +136,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             get
             {
                 return _addPurificator ?? (_addPurificator = new RelayCommand(
-                    _object => this.AddPurificator(),
-                    _object => this.ValidatePurificator()
+                    _object => AddPurificator(),
+                    _object => ValidatePurificator()
                 ));
             }
         }
@@ -146,7 +146,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                Conditioner conditioner = new Conditioner(ConditionerStatus, ConditionerAirFlow, ConditionerMode,
+                var conditioner = new Conditioner(ConditionerStatus, ConditionerAirFlow, ConditionerMode,
                     ConditionerTemperature);
                 ConditionerValidator.Validate(conditioner);
                 Room.Conditioners.Add(conditioner);
@@ -161,7 +161,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                Humidifier humidifier = new Humidifier(HumidifierStatus, HumidifierWaterConsumption, 60);
+                var humidifier = new Humidifier(HumidifierStatus, HumidifierWaterConsumption, 60);
                 HumidifierValidator.Validate(humidifier);
                 Room.Humidifiers.Add(humidifier);
             }
@@ -175,7 +175,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                Purificator purificator = new Purificator(PurificatorStatus, PurificatorAirFlow, 600);
+                var purificator = new Purificator(PurificatorStatus, PurificatorAirFlow, 600);
                 PurificatorValidator.Validate(purificator);
                 Room.Purificators.Add(purificator);
             }
