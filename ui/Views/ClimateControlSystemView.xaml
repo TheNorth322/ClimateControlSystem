@@ -93,12 +93,67 @@
                                                         <Setter Property="Padding" Value="20 5" />
                                                     </Style>
                                                 </Menu.ItemContainerStyle>
-                                                <MenuItem Header="_Conditioners">
+                                                <MenuItem Header="Conditioners" FontSize="12">
                                                     <ListView BorderThickness="0"
                                                               HorizontalAlignment="Stretch"
-                                                              ItemsSource="{Binding ConditionerListingItemViewModels}"
-                                                              SelectedItem="{Binding SelectedD}"
+                                                              ItemsSource="{Binding ConditionerListingItemViewModels, Mode=OneWay}"
+                                                              SelectedItem="{Binding SelectedViewModel}"
                                                               SelectionMode="Single">
+                                                        <ListView.ItemContainerStyle>
+                                                            <Style TargetType="ListViewItem">
+                                                                <Setter Property="HorizontalContentAlignment"
+                                                                        Value="Stretch" />
+                                                            </Style>
+                                                        </ListView.ItemContainerStyle>
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border
+                                                                    Padding="10"
+                                                                    TextBlock.FontSize="12">
+                                                                    <Grid>
+                                                                        <TextBlock Grid.Column="0"
+                                                                            HorizontalAlignment="Left"
+                                                                            Text="{Binding Name}" />
+                                                                    </Grid>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </MenuItem>
+                                                <MenuItem Header="Humidifiers" FontSize="12">
+                                                    <ListView BorderThickness="0"
+                                                              HorizontalAlignment="Stretch"
+                                                              ItemsSource="{Binding HumidifierListingItemViewModels, Mode=OneWay}"
+                                                              SelectedItem="{Binding SelectedViewModel}"
+                                                              SelectionMode="Single">
+                                                        <ListView.ItemContainerStyle>
+                                                            <Style TargetType="ListViewItem">
+                                                                <Setter Property="HorizontalContentAlignment"
+                                                                        Value="Stretch" />
+                                                            </Style>
+                                                        </ListView.ItemContainerStyle>
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border
+                                                                    Padding="10"
+                                                                    TextBlock.FontSize="12">
+                                                                    <Grid>
+                                                                        <TextBlock Grid.Column="0"
+                                                                            HorizontalAlignment="Left"
+                                                                            Text="{Binding Name}" />
+                                                                    </Grid>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </MenuItem>
+                                                <MenuItem Header="Purificators" FontSize="12">
+                                                    <ListView BorderThickness="0"
+                                                              HorizontalAlignment="Stretch"
+                                                              ItemsSource="{Binding PurificatorListingItemViewModels, Mode=OneWay}"
+                                                              SelectedItem="{Binding SelectedViewModel}"
+                                                              SelectionMode="Single"
+                                                              >
                                                         <ListView.ItemContainerStyle>
                                                             <Style TargetType="ListViewItem">
                                                                 <Setter Property="HorizontalContentAlignment"
@@ -130,8 +185,16 @@
                 </Border>
             </Grid>
 
-            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="20 20 0 0">
-                <ContentControl Content="{Binding _selectedViewModel}" Margin="20" />
+            <Border 
+                Grid.Column="1" 
+                BorderBrush="Gray" 
+                BorderThickness="1" 
+                CornerRadius="5" 
+                Margin="20 20 0 0">
+                <ContentControl
+                    VerticalAlignment="Top"
+                    Content="{Binding selectedViewModel}" 
+                    Margin="20" />
             </Border>
         </Grid>
     </Grid>

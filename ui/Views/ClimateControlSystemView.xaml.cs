@@ -8,16 +8,10 @@ namespace ClimateControlSystem.ui.Views
     /// </summary>
     public partial class ClimateControlSystemView : Window
     {
-        private readonly ClimateControlSystemStore _climateControlSystemStore;
+        private ClimateControlSystemStore _climateControlSystemStore => ClimateControlSystemStore.getInstance();
 
         public ClimateControlSystemView()
         {
-            InitializeComponent();
-        }
-
-        public ClimateControlSystemView(ClimateControlSystemStore climateControlSystemStore)
-        {
-            _climateControlSystemStore = climateControlSystemStore;
             InitializeComponent();
         }
     }

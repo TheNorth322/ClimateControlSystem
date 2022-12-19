@@ -5,9 +5,10 @@ namespace ClimateControlSystem.Components
 {
     public class PlaceholderTextBox : TextBox
     {
+        private string StartText;
         public PlaceholderTextBox()
         {
-            Text = Placeholder;
+            StartText = this.Text;
         }
 
         public string Placeholder { get; set; }
@@ -21,7 +22,7 @@ namespace ClimateControlSystem.Components
         private void OnLostFocusTextBox(object sender, RoutedEventArgs e)
         {
             var textBox = sender as TextBox;
-            if (!string.IsNullOrWhiteSpace(textBox.Text)) return;
+            if (!string.IsNullOrWhiteSpace(textBox.Text) || textBox.Text != StartText) return;
             textBox.Text = Placeholder;
         }
 
@@ -36,6 +37,7 @@ namespace ClimateControlSystem.Components
         {
             base.OnApplyTemplate();
             CaretIndex = Text.Length;
+            Loaded += OnLoad;
             LostFocus += OnLostFocusTextBox;
             GotFocus += OnGotFocusTextBox;
         }

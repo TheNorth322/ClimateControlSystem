@@ -13,10 +13,9 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 
         private RelayCommand _addRoom;
         private RelayCommand _createConfiguration;
-
+        private RoomStore roomStore => RoomStore.getInstance();
         private string _passCode;
         private string _path;
-        private readonly Room Room = RoomStore.getInstance().Room;
 
         public ConfigurationCreationViewModel()
         {
@@ -24,6 +23,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             ClimateControlSystemSerializer = new ClimateControlSystemSerializer();
             DeviceViewModel = new DeviceConfigurationViewModel();
             RoomViewModel = new RoomConfigurationViewModel();
+            roomStore.RoomChanged += RoomStore_RoomChanged;
+            DeviceViewModel.RoomStore_RoomDevicesChanged += RoomStore_RoomChanged;
         }
 
         public ClimateControlSystemSerializer ClimateControlSystemSerializer { get; }
@@ -36,6 +37,13 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 _path = value;
                 OnPropertyChange(nameof(Path));
             }
+        }
+
+        protected override void Dispose()
+        {
+            roomStore.RoomChanged -= RoomStore_RoomChanged;
+            DeviceViewModel.RoomStore_RoomDevicesChanged -= RoomStore_RoomChanged;
+            base.Dispose();
         }
 
         public string PassCode
@@ -87,9 +95,9 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             try
             {
                 AddRoomData();
-                RoomValidator.Validate(Room);
-                ClimateControlSystem.Rooms.Add(Room);
-                RoomStore.getInstance().Clear();
+                RoomValidator.Validate(roomStore.Room);
+                ClimateControlSystem.Rooms.Add(roomStore.Room);
+                roomStore.Clear();
             }
             catch (Exception e)
             {
@@ -104,13 +112,18 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 
         public void AddRoomData()
         {
-            Room.Area = RoomViewModel.Area;
-            Room.Name = RoomViewModel.Name;
-            Room.CeilingHeight = RoomViewModel.Height;
-            Room.LightLevel = RoomViewModel.LightLevel;
-            Room.TemperatureSensor.Temperature = RoomViewModel.Temperature;
-            Room.CarbonDioxideSensor.CarbonDioxide = RoomViewModel.CarbonDioxideLevel;
-            Room.HumiditySensor.Humidity = RoomViewModel.Humidity;
+            roomStore.Room.Area = RoomViewModel.Area;
+            roomStore.Room.Name = RoomViewModel.Name;
+            roomStore.Room.CeilingHeight = RoomViewModel.Height;
+            roomStore.Room.LightLevel = RoomViewModel.LightLevel;
+            roomStore.Room.TemperatureSensor.Temperature = RoomViewModel.Temperature;
+            roomStore.Room.CarbonDioxideSensor.CarbonDioxide = RoomViewModel.CarbonDioxideLevel;
+            roomStore.Room.HumiditySensor.Humidity = RoomViewModel.Humidity;
+        }
+
+        private void RoomStore_RoomChanged()
+        {
+            OnPropertyChange(nameof(roomStore));
         }
 
         public void CreateConfiguration()

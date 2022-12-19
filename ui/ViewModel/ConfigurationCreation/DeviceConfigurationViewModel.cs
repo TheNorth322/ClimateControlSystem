@@ -18,7 +18,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         private double _humidifierWaterConsumption;
         private double _purificatorAirFlow;
         private bool _purificatorStatus;
-        private readonly Room Room = RoomStore.getInstance().Room;
+        private RoomStore roomStore = RoomStore.getInstance();
 
         public DeviceConfigurationViewModel()
         {
@@ -149,7 +149,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 var conditioner = new Conditioner(ConditionerStatus, ConditionerAirFlow, ConditionerMode,
                     ConditionerTemperature);
                 ConditionerValidator.Validate(conditioner);
-                Room.Conditioners.Add(conditioner);
+                roomStore.Room.Conditioners.Add(conditioner);
+                RoomStore_RoomDevicesChanged?.Invoke();
             }
             catch (Exception ex)
             {
@@ -163,7 +164,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             {
                 var humidifier = new Humidifier(HumidifierStatus, HumidifierWaterConsumption, 60);
                 HumidifierValidator.Validate(humidifier);
-                Room.Humidifiers.Add(humidifier);
+                roomStore.Room.Humidifiers.Add(humidifier);
+                RoomStore_RoomDevicesChanged?.Invoke();
             }
             catch (Exception ex)
             {
@@ -177,7 +179,8 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             {
                 var purificator = new Purificator(PurificatorStatus, PurificatorAirFlow, 600);
                 PurificatorValidator.Validate(purificator);
-                Room.Purificators.Add(purificator);
+                roomStore.Room.Purificators.Add(purificator);
+                RoomStore_RoomDevicesChanged?.Invoke();
             }
             catch (Exception ex)
             {
@@ -187,7 +190,6 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 
         private bool ValidateConditioner()
         {
-            // For change
             return true;
         }
 
@@ -200,5 +202,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             return true;
         }
+
+        public event Action RoomStore_RoomDevicesChanged;
     }
 }

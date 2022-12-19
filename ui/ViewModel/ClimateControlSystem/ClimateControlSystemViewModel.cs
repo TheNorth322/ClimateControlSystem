@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Threading;
-using ClimateControlSystem.Commands;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
@@ -11,19 +10,18 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     public class ClimateControlSystemViewModel : ViewModelBase
     {
         private readonly ObservableCollection<RoomListingItemViewModel> _roomListingItemViewModels;
-        private SelectedRoomStore _selectedRoomStore;
-        private SelectedViewModelStore _selectedViewModelStore; 
+        private SelectedRoomStore _selectedRoomStore => SelectedRoomStore.getInstance();
+        private SelectedViewModelStore _selectedViewModelStore => SelectedViewModelStore.getInstance(); 
         
         private string _currentDate;
         private string _currentTime;
 
         private RoomListingItemViewModel selectedRoomListingItemViewModel;
 
-        private ViewModelBase selectedViewModel => _selectedViewModelStore.SelectedViewModel;
+        public ViewModelBase selectedViewModel => _selectedViewModelStore.SelectedViewModel;
 
-        public ClimateControlSystemViewModel(SelectedRoomStore selectedRoomStore)
+        public ClimateControlSystemViewModel()
         {
-            _selectedRoomStore = selectedRoomStore;
             _roomListingItemViewModels = new ObservableCollection<RoomListingItemViewModel>();
             UpdateListing();
             _selectedViewModelStore.SelectedViewModelChanged += SelectedViewModelStore_SelectedViewModelChanged;            
@@ -50,8 +48,8 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             set
             {
                 selectedRoomListingItemViewModel = value;
-                _selectedViewModelStore.SelectedViewModel = new RoomDetailsViewModel();
                 _selectedRoomStore.SelectedRoom = selectedRoomListingItemViewModel.Room;
+                _selectedViewModelStore.SelectedViewModel = new RoomDetailsViewModel();
                 OnPropertyChange(nameof(SelectedRoomListingItemViewModel));
             }
         }

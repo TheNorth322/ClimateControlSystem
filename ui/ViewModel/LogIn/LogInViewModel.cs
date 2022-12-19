@@ -43,7 +43,7 @@ namespace ClimateControlSystem.ui.ViewModel.LogIn
                     PassCode);
                 var view = new ClimateControlSystemView
                 {
-                    DataContext = new ClimateControlSystemViewModel(SelectedRoomStore.getInstance())
+                    DataContext = new ClimateControlSystemViewModel()
                 };
                 view.Show();
                 Close?.Invoke();

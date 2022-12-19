@@ -115,7 +115,6 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Commands\UpdateViewCommand.cs" />
         <Compile Include="Components\CreateConfiguration\DeviceConfiguration.xaml.cs">
             <DependentUpon>DeviceConfiguration.xaml</DependentUpon>
         </Compile>
@@ -271,6 +270,9 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Commands" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
