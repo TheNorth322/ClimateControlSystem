@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="ClimateControlSystem.ui.Views.RoomDetailsEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ClimateControlSystem.ui.Views"
+             xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.DeviceEditViewModels"
+             xmlns:components="clr-namespace:ClimateControlSystem.Components"
+             d:DataContext="{d:DesignInstance Type=viewmodels:RoomDetailsEditViewModel}"
+             mc:Ignorable="d">
+    <Grid Width="400" Height="400">
+
+            <Button Content="X" VerticalAlignment="Top" Margin="20" HorizontalAlignment="Right" Padding="10 5" Command="{Binding CloseModalCommand}"></Button>
+        <StackPanel Margin="20" VerticalAlignment="Center">
+
+            <TextBlock HorizontalAlignment="Center" Text="Edit room details" FontSize="20"></TextBlock>
+            <Grid Margin="0 20 0 0 ">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Expected temperature"></TextBlock>
+                <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
+                                               Text="{Binding ExpectedTemperature}"
+                                               Placeholder="Enter expected temperature..." />
+            </Grid>
+
+            <Grid Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Expected humidity"></TextBlock>
+
+                <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
+                                               Text="{Binding ExpectedHumidity}"
+                                               Placeholder="Enter expected humidity..." />
+            </Grid>
+            <Grid Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Expected carbon dioxide"></TextBlock>
+
+                <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
+                                               Text="{Binding ExpectedCarbonDioxide}"
+                                               Placeholder="Enter expected CD..." />
+            </Grid>
+            <Grid Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Button HorizontalAlignment="Center" Content="Confirm" Padding="35 10"
+                    Command="{Binding ConfirmEditCommand}">
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

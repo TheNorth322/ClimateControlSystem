@@ -97,6 +97,7 @@
     <ItemGroup>
         <Reference Include="System" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Windows.Forms" />
         <Reference Include="System.Xml" />
         <Reference Include="Microsoft.CSharp" />
         <Reference Include="System.Core" />
@@ -126,6 +127,8 @@
         </Compile>
         <Compile Include="Components\PlaceholderTextBox.cs" />
         <Compile Include="di\ClimateControlSystemStore.cs" />
+        <Compile Include="di\ConfigurationPathStore.cs" />
+        <Compile Include="di\EditViewModelStore.cs" />
         <Compile Include="di\RadioButtonCheckedConverter.cs" />
         <Compile Include="di\RoomStore.cs" />
         <Compile Include="di\SelectedConditionerStore.cs" />
@@ -133,15 +136,23 @@
         <Compile Include="di\SelectedPurificatorStore.cs" />
         <Compile Include="di\SelectedRoomStore.cs" />
         <Compile Include="di\SelectedViewModelStore.cs" />
-        <Compile Include="Domain\ClimateControlSystemValidator.cs" />
-        <Compile Include="Domain\ConditionerValidator.cs" />
-        <Compile Include="Domain\ConfigurationPathValidator.cs" />
-        <Compile Include="Domain\HumidifierValidator.cs" />
         <Compile Include="Domain\ICloseWindows.cs" />
         <Compile Include="Domain\PassCodeVerifier.cs" />
         <Compile Include="Domain\PasswordHash.cs" />
-        <Compile Include="Domain\PurificatorValidator.cs" />
-        <Compile Include="Domain\RoomValidator.cs" />
+        <Compile Include="Domain\Validators\ClimateControlSystemValidator.cs" />
+        <Compile Include="Domain\Validators\ConditionerValidator.cs" />
+        <Compile Include="Domain\Validators\ConfigurationPathValidator.cs" />
+        <Compile Include="Domain\Validators\Edit\EditConditionerValidator.cs" />
+        <Compile Include="Domain\Validators\Edit\EditHumidifierValidator.cs" />
+        <Compile Include="Domain\Validators\Edit\EditPurificatorValidator.cs" />
+        <Compile Include="Domain\Validators\Edit\EditRoomValidator.cs" />
+        <Compile Include="Domain\Validators\HumidifierValidator.cs" />
+        <Compile Include="Domain\Validators\PurificatorValidator.cs" />
+        <Compile Include="Domain\Validators\RoomValidator.cs" />
+        <Compile Include="Domain\Validators\Updaters\EditConditionerUpdater.cs" />
+        <Compile Include="Domain\Validators\Updaters\EditHumidifierUpdater.cs" />
+        <Compile Include="Domain\Validators\Updaters\EditPurificatorUpdater.cs" />
+        <Compile Include="Domain\Validators\Updaters\EditRoomUpdater.cs" />
         <Compile Include="model\Devices\ClimateControlSystemDevice.cs" />
         <Compile Include="model\Devices\Conditioner.cs" />
         <Compile Include="model\Devices\ConditionerMode.cs" />
@@ -167,19 +178,35 @@
         <Compile Include="ui\ViewModel\ConfigurationCreation\DeviceConfigurationViewModel.cs" />
         <Compile Include="ui\ViewModel\ConfigurationCreation\RoomConfigurationViewModel.cs" />
         <Compile Include="ui\ViewModel\ConfigurationCreation\ConfigurationCreationViewModel.cs" />
+        <Compile Include="ui\ViewModel\DeviceEditViewModels\ConditionerDetailsEditViewModel.cs" />
+        <Compile Include="ui\ViewModel\DeviceEditViewModels\HumidifierDetailsEditViewModel.cs" />
+        <Compile Include="ui\ViewModel\DeviceEditViewModels\PurificatorDetailsEditViewModel.cs" />
+        <Compile Include="ui\ViewModel\DeviceEditViewModels\RoomDetailsEditViewModel.cs" />
         <Compile Include="ui\ViewModel\EnterConfigurationPath\ConfigurationPathViewModel.cs" />
         <Compile Include="ui\ViewModel\LogIn\LogInViewModel.cs" />
         <Compile Include="ui\ViewModel\MessageBoxEventArgs.cs" />
         <Compile Include="ui\ViewModel\RelayCommand.cs" />
         <Compile Include="ui\ViewModel\ViewModelBase.cs" />
+        <Compile Include="ui\Views\ConditionerDetailsEditView.xaml.cs">
+          <DependentUpon>ConditionerDetailsEditView.xaml</DependentUpon>
+        </Compile>
         <Compile Include="ui\Views\ConditionerDetailsView.xaml.cs">
           <DependentUpon>ConditionerDetailsView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="ui\Views\HumidifierDetailsEditView.xaml.cs">
+          <DependentUpon>HumidifierDetailsEditView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\HumidifierDetailsView.xaml.cs">
           <DependentUpon>HumidifierDetailsView.xaml</DependentUpon>
         </Compile>
+        <Compile Include="ui\Views\PurificatorDetailsEditView.xaml.cs">
+          <DependentUpon>PurificatorDetailsEditView.xaml</DependentUpon>
+        </Compile>
         <Compile Include="ui\Views\PurificatorDetailsView.xaml.cs">
           <DependentUpon>PurificatorDetailsView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="ui\Views\RoomDetailsEditView.xaml.cs">
+          <DependentUpon>RoomDetailsEditView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\RoomDetailsView.xaml.cs">
             <DependentUpon>RoomDetailsView.xaml</DependentUpon>
@@ -204,6 +231,7 @@
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
         </Page>
+        <Page Include="ui\Views\ConditionerDetailsEditView.xaml" />
         <Page Include="ui\Views\ConditionerDetailsView.xaml" />
         <Page Include="ui\Views\ConfigurationPathView.xaml">
             <SubType>Designer</SubType>
@@ -213,6 +241,7 @@
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
         </Page>
+        <Page Include="ui\Views\HumidifierDetailsEditView.xaml" />
         <Page Include="ui\Views\HumidifierDetailsView.xaml" />
         <Page Include="ui\Views\LogInView.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -238,7 +267,9 @@
             <DependentUpon>LogInView.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="ui\Views\PurificatorDetailsEditView.xaml" />
         <Page Include="ui\Views\PurificatorDetailsView.xaml" />
+        <Page Include="ui\Views\RoomDetailsEditView.xaml" />
         <Page Include="ui\Views\RoomDetailsView.xaml">
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
@@ -272,7 +303,10 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Commands" />
+      <ProjectReference Include="..\ModalControl\ModalControl.csproj">
+        <Project>{40414013-f495-45b3-8357-0b30d889672b}</Project>
+        <Name>ModalControl</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

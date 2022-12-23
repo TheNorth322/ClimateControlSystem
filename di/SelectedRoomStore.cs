@@ -8,6 +8,7 @@ namespace ClimateControlSystemNamespace
 
         private Room selectedRoom;
 
+        public int SelectedRoomIndex { get; set; }
         private SelectedRoomStore()
         {
         }

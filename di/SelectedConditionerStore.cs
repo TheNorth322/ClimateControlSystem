@@ -7,6 +7,7 @@ namespace ClimateControlSystemNamespace
         private static SelectedConditionerStore instance;
 
         private Conditioner selectedConditioner;
+        public int SelectedConditionerIndex { get; set; }
 
         private SelectedConditionerStore()
         {
@@ -21,7 +22,7 @@ namespace ClimateControlSystemNamespace
                 SelectedConditionerChanged?.Invoke();
             }
         }
-
+        
         public static SelectedConditionerStore getInstance()
         {
             if (instance == null)

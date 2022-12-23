@@ -37,3 +37,14 @@ C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Deb
 C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\ConditionerDetailsView.baml
 C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\HumidifierDetailsView.baml
 C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\PurificatorDetailsView.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\ModalControl.dll
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\ModalControl.pdb
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\ConditionerDetailsEditView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\HumidifierDetailsEditView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\PurificatorDetailsEditView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\RoomDetailsEditView.g.cs
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\ConditionerDetailsEditView.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\HumidifierDetailsEditView.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\PurificatorDetailsEditView.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\RoomDetailsEditView.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ClimateControlSystem.csproj.CopyComplete

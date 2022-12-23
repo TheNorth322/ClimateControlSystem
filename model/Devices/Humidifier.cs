@@ -10,16 +10,13 @@ namespace ClimateControlSystemNamespace
         }
 
         // Constructors
-        public Humidifier(bool _isOn, double _waterConsumption, double _expectedHumidityLevel)
+        public Humidifier(bool _isOn, double _waterConsumption)
             : base(_isOn)
         {
             WaterConsumption = _waterConsumption;
-            ExpectedHumidityLevel = _expectedHumidityLevel;
         }
 
         // Properties
-        public double ExpectedHumidityLevel { get; set; }
-
         public double WaterConsumption { get; set; }
 
         // Methods

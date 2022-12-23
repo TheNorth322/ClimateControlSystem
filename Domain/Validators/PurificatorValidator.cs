@@ -9,8 +9,6 @@ namespace ClimateControlSystem.Domain
         {
             if (_purificator.AirFlow <= 0)
                 throw new ArgumentException("Wrong purificator air flow value!");
-            if (_purificator.ExpectedCarbonDioxideLevel <= 0)
-                throw new ArgumentException("Wrong expected carbon dioxide level value!");
             return true;
         }
     }

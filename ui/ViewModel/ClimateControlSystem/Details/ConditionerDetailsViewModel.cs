@@ -1,4 +1,5 @@
-﻿using ClimateControlSystemNamespace;
+﻿using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
+using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 {
@@ -9,16 +10,31 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         //TODO
         public string WorkingTemperature => SelectedConditioner?.WorkingTemperature.ToString() ?? "Unknown";
         public string ConditionerAirFlow => SelectedConditioner?.AirFlow.ToString() ?? "Unknown";
-
+        public int RoomIndex { get; set; }
         public string ConditionerMode => SelectedConditioner != null
             ? EnumExtensionMethods.GetEnumDescription(SelectedConditioner.ConditionerMode)
             : "Unknown";
 
         public string ConditionerStatus => SelectedConditioner.isOn.ToString();
+        private RelayCommand _editCommand;
 
-        public ConditionerDetailsViewModel()
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return _editCommand ?? new RelayCommand(_object => OpenEditModal(),
+                    _object => true);
+            }
+        }
+
+        private void OpenEditModal()
+        {
+            EditViewModelStore.getInstance().EditViewModel = new ConditionerDetailsEditViewModel(RoomIndex);
+        }
+        public ConditionerDetailsViewModel(int _roomIndex)
         {
             _selectedConditionerStore.SelectedConditionerChanged += SelectedConditionerStore_SelectedConditionerChanged;
+            RoomIndex = _roomIndex;
         }
         protected override void Dispose()
         {

@@ -9,8 +9,6 @@ namespace ClimateControlSystem.Domain
         {
             if (_humidifier.WaterConsumption <= 0)
                 throw new ArgumentException("Wrong humidifier water consumption value!");
-            if (_humidifier.ExpectedHumidityLevel <= 0)
-                throw new ArgumentException("Wrong expected humidity level value!");
             return true;
         }
     }

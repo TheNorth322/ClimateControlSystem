@@ -32,6 +32,10 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -91,6 +95,49 @@
 
                     Style="{StaticResource DetailsTextBoxStyle}"
                     Text="{Binding LightLevel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Expected temperature" />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    IsReadOnly="True"
+                    HorizontalAlignment="Left"
+                    Margin="20 10 0 0"
+
+                    Style="{StaticResource DetailsTextBoxStyle}"
+                    Text="{Binding ExpectedTemperature, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Expected humidity" />
+                <TextBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    IsReadOnly="True"
+                    HorizontalAlignment="Left"
+                    Margin="20 10 0 0"
+
+                    Style="{StaticResource DetailsTextBoxStyle}"
+                    Text="{Binding ExpectedHumidity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Expected CD level" />
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    IsReadOnly="True"
+                    HorizontalAlignment="Left"
+                    Margin="20 10 0 0"
+
+                    Style="{StaticResource DetailsTextBoxStyle}"
+                    Text="{Binding ExpectedCarbonDioxide, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Row="7" Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Right" MinHeight="30" MinWidth="100" Content="Edit" Margin="20 10 0 0"/>
             </Grid>
         </Grid>
     </Grid>

@@ -16,7 +16,6 @@ namespace ClimateControlSystemNamespace
             _selectedRoomStore = SelectedRoomStore.getInstance();
             _roomStore = RoomStore.getInstance();
         }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new ConfigurationPathView();

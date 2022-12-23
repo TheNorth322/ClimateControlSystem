@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ClimateControlSystem.ui.Views"
+      xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
+      d:DataContext="{d:DesignInstance Type=viewmodels:ConditionerDetailsViewModel}"
       mc:Ignorable="d"
       Height="450" Width="800">
     <Grid>
@@ -26,6 +28,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -89,6 +92,7 @@
                     Margin="20 10 0 0"
                     Style="{StaticResource DetailsTextBoxStyle}"
                     Text="{Binding ConditionerStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Row="4" Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Right" MinHeight="30" MinWidth="100" Content="Edit" Margin="20 10 0 0"></Button>
             </Grid>
         </Grid>
     </Grid>

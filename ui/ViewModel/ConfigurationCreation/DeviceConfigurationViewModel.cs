@@ -162,7 +162,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                var humidifier = new Humidifier(HumidifierStatus, HumidifierWaterConsumption, 60);
+                var humidifier = new Humidifier(HumidifierStatus, HumidifierWaterConsumption);
                 HumidifierValidator.Validate(humidifier);
                 roomStore.Room.Humidifiers.Add(humidifier);
                 RoomStore_RoomDevicesChanged?.Invoke();
@@ -177,7 +177,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                var purificator = new Purificator(PurificatorStatus, PurificatorAirFlow, 600);
+                var purificator = new Purificator(PurificatorStatus, PurificatorAirFlow);
                 PurificatorValidator.Validate(purificator);
                 roomStore.Room.Purificators.Add(purificator);
                 RoomStore_RoomDevicesChanged?.Invoke();

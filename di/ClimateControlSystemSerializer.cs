@@ -9,7 +9,7 @@ namespace ClimateControlSystemNamespace
         public void Serialize(ClimateControlSystem system, string path)
         {
             var writer = new XmlSerializer(typeof(ClimateControlSystem));
-            var Path = $@"{path}{DateTime.Now.ToString("MM-dd")}.xml";
+            var Path = $@"{path}";
             var configurationFile = File.Create(Path);
 
             writer.Serialize(configurationFile, system);

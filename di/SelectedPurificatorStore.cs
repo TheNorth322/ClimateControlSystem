@@ -8,6 +8,7 @@ namespace ClimateControlSystemNamespace
 
         private Purificator selectedPurificator;
 
+        public int SelectedPurificatorIndex { get; set; }
         private SelectedPurificatorStore()
         {
         }

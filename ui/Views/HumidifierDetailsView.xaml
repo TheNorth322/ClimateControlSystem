@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ClimateControlSystem.ui.Views"
+      xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
+      d:DataContext="{d:DesignInstance Type=viewmodels:HumidifierDetailsViewModel}"
       mc:Ignorable="d"
       Height="450" Width="800">
     <Grid>
@@ -14,6 +16,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
@@ -26,6 +30,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -48,19 +53,6 @@
                     Margin="20 10 0 0" />
 
                 <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Text="Expected humidity" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    IsReadOnly="True"
-                    HorizontalAlignment="Left"
-                    Margin="20 10 0 0"
-                    Style="{StaticResource DetailsTextBoxStyle}"
-                    Text="{Binding ExpectedHumidity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock
                     Grid.Row="2"
                     Grid.Column="0"
                     VerticalAlignment="Center"
@@ -71,6 +63,8 @@
                          Margin="20 10 0 0"
                          Style="{StaticResource DetailsTextBoxStyle}"
                          Text="{Binding HumidifierStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                
+                <Button Grid.Row="3" Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Right" MinHeight="30" MinWidth="100" Content="Edit" Margin="20 10 0 0"></Button>
             </Grid>
         </Grid>
     </Grid>

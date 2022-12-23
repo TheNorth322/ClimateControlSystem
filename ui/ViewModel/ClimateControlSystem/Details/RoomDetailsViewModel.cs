@@ -1,4 +1,6 @@
-﻿using ClimateControlSystemNamespace;
+﻿using System;
+using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
+using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 {
@@ -17,11 +19,35 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         public string Humidity => SelectedRoom?.HumiditySensor.Humidity.ToString() ?? "Unknown";
         public string CarbonDioxideLevel => SelectedRoom?.CarbonDioxideSensor.CarbonDioxide.ToString() ?? "Unknown";
         public string LightLevel => SelectedRoom != null ? SelectedRoom.LightLevel.GetEnumDescription() : "Unknown";
-        
+
+        public string ExpectedTemperature =>
+            SelectedRoom?.TemperatureSensor.ExpectedTemperature.ToString() ?? "Unknown";
+
+        public string ExpectedHumidity => SelectedRoom?.HumiditySensor.ExpectedHumidity.ToString() ?? "Unknown";
+
+        public string ExpectedCarbonDioxide =>
+            SelectedRoom?.CarbonDioxideSensor.ExpectedCarbonDioxide.ToString() ?? "Unknown";
+
         protected override void Dispose()
         {
             _selectedRoomStore.SelectedRoomChanged -= SelectedRoomStore_SelectedRoomChanged;
             base.Dispose();
+        }
+
+        private RelayCommand _editCommand;
+
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return _editCommand ?? new RelayCommand(_object => OpenEditModal(),
+                    _object => true);
+            }
+        }
+
+        private void OpenEditModal()
+        {
+            EditViewModelStore.getInstance().EditViewModel = new RoomDetailsEditViewModel(_selectedRoomStore.SelectedRoomIndex);
         }
 
         private void SelectedRoomStore_SelectedRoomChanged()
@@ -31,6 +57,9 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             OnPropertyChange(nameof(Humidity));
             OnPropertyChange(nameof(CarbonDioxideLevel));
             OnPropertyChange(nameof(LightLevel));
+            OnPropertyChange(nameof(ExpectedTemperature));
+            OnPropertyChange(nameof(ExpectedHumidity));
+            OnPropertyChange(nameof(ExpectedCarbonDioxide));
         }
     }
 }

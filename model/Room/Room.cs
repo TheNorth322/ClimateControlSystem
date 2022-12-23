@@ -18,7 +18,7 @@ namespace ClimateControlSystemNamespace
         }
 
         public Room(string _name, double _area,
-            double _ceilingHeight, LightLevel _lightLevel,
+            double _ceilingHeight, LightLevel _lightLevel, 
             List<Conditioner> _conditioners, List<Humidifier> _humidifiers, List<Purificator> _purificators,
             TemperatureSensor _temperatureSensor, HumiditySensor _humiditySensor,
             CarbonDioxideSensor _carbonDioxideSensor)

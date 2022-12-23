@@ -58,6 +58,7 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
         {
             try
             {
+                ConfigurationPathStore.getInstance().Path = ConfigurationPath;
                 var serializer = new ClimateControlSystemSerializer();
                 ClimateControlSystemStore.getInstance().ClimateControlSystem =
                     serializer.Deserialize(ConfigurationPath);
