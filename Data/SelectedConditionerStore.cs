@@ -6,14 +6,13 @@ namespace ClimateControlSystemNamespace
     {
         private static SelectedConditionerStore instance;
 
-        private Conditioner selectedConditioner;
-        public int SelectedConditionerIndex { get; set; }
+        private IConditioner selectedConditioner;
 
         private SelectedConditionerStore()
         {
         }
 
-        public Conditioner SelectedConditioner
+        public IConditioner SelectedConditioner
         {
             get => selectedConditioner;
             set

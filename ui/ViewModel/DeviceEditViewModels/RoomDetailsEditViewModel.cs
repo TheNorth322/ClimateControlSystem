@@ -15,21 +15,13 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
         private EditRoomUpdater roomUpdater = new EditRoomUpdater();
 
         private RelayCommand _closeModalCommand;
-        public int RoomIndex { get; set; }
 
         public RoomDetailsEditViewModel()
         {
             roomValidator = new EditRoomValidator();
             roomUpdater = new EditRoomUpdater();
         }
-
-        public RoomDetailsEditViewModel(int _roomIndex)
-        {
-            roomValidator = new EditRoomValidator();
-            roomUpdater = new EditRoomUpdater();
-            RoomIndex = _roomIndex;
-        }
-
+        
         public double ExpectedTemperature
         {
             get { return expectedTemperature; }
@@ -90,8 +82,9 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             try
             {
                 roomValidator.Validate(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide);
-                roomUpdater.Update(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide, RoomIndex);
+                roomUpdater.Update(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide);
 
+                ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();
                 EditViewModelStore.getInstance().CloseModal();
             }
             catch (Exception e)

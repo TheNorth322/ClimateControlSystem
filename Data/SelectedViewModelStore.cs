@@ -12,7 +12,7 @@ namespace ClimateControlSystemNamespace
 
         private SelectedViewModelStore()
         {
-            selectedViewModel = new RoomDetailsViewModel();
+            selectedViewModel = new RoomDetailsViewModel(null);
         }
 
         public ViewModelBase SelectedViewModel

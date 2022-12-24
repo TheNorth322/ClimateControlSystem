@@ -28,6 +28,11 @@ namespace ClimateControlSystemNamespace
             return instance;
         }
 
+        public void ClimateControlSystemContentsChangedInvoke()
+        {
+           ClimateControlSystemContentsChanged?.Invoke(); 
+        }
+        public event Action ClimateControlSystemContentsChanged;
         public event Action ClimateControlSystemChanged;
     }
 }

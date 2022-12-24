@@ -3,7 +3,7 @@ using System;
 namespace ClimateControlSystemNamespace
 {
     [Serializable]
-    public class Conditioner : ClimateControlSystemDevice
+    public class Conditioner : ClimateControlSystemDevice, IConditioner
     {
         public Conditioner()
         {
@@ -22,7 +22,27 @@ namespace ClimateControlSystemNamespace
         public double AirFlow { get; set; }
 
         public ConditionerMode ConditionerMode { get; set; }
-
+        
         public double WorkingTemperature { get; set; }
+
+        public void TurnOnHeatingMode()
+        {
+            ConditionerMode = ConditionerMode.Heating;
+        }
+
+        public void TurnOnCoolingMode()
+        {
+            ConditionerMode = ConditionerMode.Cooling;
+        }
+        
+        public double ProvideHeat()
+        {
+            if (!IsOn)
+                return 0;
+            
+            return (ConditionerMode == ConditionerMode.Heating)
+                ? WorkingTemperature * AirFlow
+                : WorkingTemperature * AirFlow;
+        }
     }
 }

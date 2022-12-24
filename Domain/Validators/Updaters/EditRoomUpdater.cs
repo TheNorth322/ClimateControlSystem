@@ -4,14 +4,12 @@ namespace ClimateControlSystem.Domain.Updaters
 {
     public class EditRoomUpdater
     {
-        private ClimateControlSystemNamespace.ClimateControlSystem system =
-            ClimateControlSystemStore.getInstance().ClimateControlSystem;
-
-        public void Update(double expectedTemperature, double expectedHumidity, double expectedCarbonDioxide, int roomIndex)
+        private Room selectedRoom => SelectedRoomStore.getInstance().SelectedRoom;
+        public void Update(double expectedTemperature, double expectedHumidity, double expectedCarbonDioxide)
         {
-            system.Rooms[roomIndex].TemperatureSensor.ExpectedTemperature = expectedTemperature;
-            system.Rooms[roomIndex].HumiditySensor.ExpectedHumidity = expectedHumidity;
-            system.Rooms[roomIndex].CarbonDioxideSensor.ExpectedCarbonDioxide = expectedCarbonDioxide;
+            selectedRoom.TemperatureSensor.ExpectedTemperature = expectedTemperature;
+            selectedRoom.HumiditySensor.ExpectedHumidity = expectedHumidity;
+            selectedRoom.CarbonDioxideSensor.ExpectedCarbonDioxide = expectedCarbonDioxide;
         }
     }
 }

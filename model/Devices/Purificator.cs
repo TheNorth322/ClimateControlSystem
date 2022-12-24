@@ -3,7 +3,7 @@ using System;
 namespace ClimateControlSystemNamespace
 {
     [Serializable]
-    public class Purificator : ClimateControlSystemDevice
+    public class Purificator : ClimateControlSystemDevice, IPurificator
     {
         public Purificator()
         {
@@ -16,7 +16,11 @@ namespace ClimateControlSystemNamespace
             AirFlow = _airFlow;
         }
 
-
         public double AirFlow { get; set; }
+
+        public double ReceivePurification()
+        {
+            return (IsOn) ? AirFlow : 0;
+        } 
     }
 }

@@ -6,13 +6,12 @@ namespace ClimateControlSystemNamespace
     {
         private static SelectedHumidifierStore instance;
 
-        private Humidifier selectedHumidifier;
-        public int SelectedHumidifierIndex { get; set; }
+        private IHumidifier selectedHumidifier;
         private SelectedHumidifierStore()
         {
         }
 
-        public Humidifier SelectedHumidifier
+        public IHumidifier SelectedHumidifier
         {
             get => selectedHumidifier;
             set

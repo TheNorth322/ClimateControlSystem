@@ -7,10 +7,10 @@ namespace ClimateControlSystem.Domain
 {
     public class EditConditionerValidator
     {
-        public void Validate(bool status, double airFlow, ConditionerMode mode, double workingTemperature)
+        public void Validate(bool status, ConditionerMode mode, double workingTemperature)
         {
-            if (airFlow <= 0)
-                throw new ArgumentException("Wrong air flow value!");
+            if (status == null)
+                throw new NullReferenceException("Status can't be null!");
         }
     }
 }

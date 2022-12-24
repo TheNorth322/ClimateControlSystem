@@ -6,16 +6,15 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     public class ConditionerDetailsViewModel : ViewModelBase
     {
         private SelectedConditionerStore _selectedConditionerStore => SelectedConditionerStore.getInstance();
-        private Conditioner SelectedConditioner => _selectedConditionerStore.SelectedConditioner;
+        private IConditioner SelectedConditioner => _selectedConditionerStore.SelectedConditioner;
         //TODO
         public string WorkingTemperature => SelectedConditioner?.WorkingTemperature.ToString() ?? "Unknown";
         public string ConditionerAirFlow => SelectedConditioner?.AirFlow.ToString() ?? "Unknown";
-        public int RoomIndex { get; set; }
         public string ConditionerMode => SelectedConditioner != null
             ? EnumExtensionMethods.GetEnumDescription(SelectedConditioner.ConditionerMode)
             : "Unknown";
 
-        public string ConditionerStatus => SelectedConditioner.isOn.ToString();
+        public string ConditionerStatus => SelectedConditioner.IsOn.ToString();
         private RelayCommand _editCommand;
 
         public RelayCommand EditCommand
@@ -29,20 +28,22 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 
         private void OpenEditModal()
         {
-            EditViewModelStore.getInstance().EditViewModel = new ConditionerDetailsEditViewModel(RoomIndex);
+            EditViewModelStore.getInstance().EditViewModel = new ConditionerDetailsEditViewModel();
         }
-        public ConditionerDetailsViewModel(int _roomIndex)
+        public ConditionerDetailsViewModel()
         {
-            _selectedConditionerStore.SelectedConditionerChanged += SelectedConditionerStore_SelectedConditionerChanged;
-            RoomIndex = _roomIndex;
-        }
-        protected override void Dispose()
-        {
-            _selectedConditionerStore.SelectedConditionerChanged -= SelectedConditionerStore_SelectedConditionerChanged;
-            base.Dispose();
+            _selectedConditionerStore.SelectedConditionerChanged += UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
         }
 
-        private void SelectedConditionerStore_SelectedConditionerChanged()
+        protected override void Dispose()
+        {
+            _selectedConditionerStore.SelectedConditionerChanged -= UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
+            base.Dispose();
+        }
+        
+        private void UpdateContents() 
         {
             OnPropertyChange(nameof(WorkingTemperature));
             OnPropertyChange(nameof(ConditionerAirFlow));

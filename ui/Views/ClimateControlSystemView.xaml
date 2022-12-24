@@ -115,8 +115,8 @@
                                                             <Setter Property="Padding" Value="20 5" />
                                                         </Style>
                                                     </Menu.ItemContainerStyle>
-                                                    <MenuItem Name="ConditionersMenuItem" Header="Conditioners"
-                                                              FontSize="12">
+                                                    <MenuItem Name="ConditionersMenuItem" Header="Conditioners" 
+                                                              FontSize="10" Padding="10 10 ">
                                                         <ListView BorderThickness="0"
                                                                   Name="ConditionersListView"
                                                                   HorizontalAlignment="Stretch"
@@ -145,7 +145,7 @@
                                                         </ListView>
                                                     </MenuItem>
                                                     <MenuItem Name="HumidifiersMenuItem" Header="Humidifiers"
-                                                              FontSize="12">
+                                                              FontSize="10" Padding="10 10 ">
                                                         <ListView BorderThickness="0"
                                                                   Name="HumidifiersListView"
                                                                   HorizontalAlignment="Stretch"
@@ -173,8 +173,8 @@
                                                             </ListView.ItemTemplate>
                                                         </ListView>
                                                     </MenuItem>
-                                                    <MenuItem x:Name="PurificatorsMenuItem" Header="Purificators"
-                                                              FontSize="12">
+                                                    <MenuItem x:Name="PurificatorsMenuItem" Header="Purificators" 
+                                                              FontSize="10" Padding="10 10 ">
                                                         <ListView BorderThickness="0"
                                                                   x:Name="PurificatorsListView"
                                                                   HorizontalAlignment="Stretch"

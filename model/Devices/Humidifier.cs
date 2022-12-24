@@ -3,7 +3,7 @@ using System;
 namespace ClimateControlSystemNamespace
 {
     [Serializable]
-    public class Humidifier : ClimateControlSystemDevice
+    public class Humidifier : ClimateControlSystemDevice, IHumidifier
     {
         public Humidifier()
         {
@@ -19,7 +19,9 @@ namespace ClimateControlSystemNamespace
         // Properties
         public double WaterConsumption { get; set; }
 
-        // Methods
-        // return waterConsumption per minute in Room humidity is going to be recalculated 
+        public double ProvideHumidity()
+        {
+            return (IsOn) ? WaterConsumption : 0; 
+        }
     }
 }

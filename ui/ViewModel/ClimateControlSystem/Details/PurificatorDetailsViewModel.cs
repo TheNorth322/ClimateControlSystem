@@ -1,4 +1,5 @@
-﻿using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
+﻿using System.Windows.Forms.VisualStyles;
+using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
@@ -6,13 +7,12 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     public class PurificatorDetailsViewModel : ViewModelBase
     {
         private SelectedPurificatorStore _selectedPurificatorStore => SelectedPurificatorStore.getInstance();
-        private Purificator SelectedPurificator => _selectedPurificatorStore.SelectedPurificator;
+        private IPurificator SelectedPurificator => _selectedPurificatorStore.SelectedPurificator;
 
         public string PurificatorAirFlow => SelectedPurificator?.AirFlow.ToString() ?? "Unknown";
 
 
-        public string PurificatorStatus => SelectedPurificator?.isOn.ToString();
-        public int RoomIndex { get; set; }
+        public string PurificatorStatus => SelectedPurificator?.IsOn.ToString();
         private RelayCommand _editCommand;
 
         public RelayCommand EditCommand
@@ -26,21 +26,23 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 
         private void OpenEditModal()
         {
-            EditViewModelStore.getInstance().EditViewModel = new PurificatorDetailsEditViewModel(RoomIndex);
+            EditViewModelStore.getInstance().EditViewModel = new PurificatorDetailsEditViewModel();
         }
 
         public PurificatorDetailsViewModel()
         {
-            _selectedPurificatorStore.SelectedPurificatorChanged += SelectedPurificatorStore_SelectedPurificatorChanged;
+            _selectedPurificatorStore.SelectedPurificatorChanged += UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
         }
 
         protected override void Dispose()
         {
-            _selectedPurificatorStore.SelectedPurificatorChanged -= SelectedPurificatorStore_SelectedPurificatorChanged;
+            _selectedPurificatorStore.SelectedPurificatorChanged -= UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
             base.Dispose();
         }
 
-        private void SelectedPurificatorStore_SelectedPurificatorChanged()
+        private void UpdateContents()
         {
             OnPropertyChange(nameof(PurificatorAirFlow));
             OnPropertyChange(nameof(PurificatorStatus));

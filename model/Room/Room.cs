@@ -46,5 +46,24 @@ namespace ClimateControlSystemNamespace
         public List<Conditioner> Conditioners { get; set; }
         public List<Humidifier> Humidifiers { get; set; }
         public List<Purificator> Purificators { get; set; }
+
+        public void UpdateData()
+        {
+            double RoomVolume = Area * CeilingHeight;
+            double AirMass = RoomVolume * 10;
+            /* Volume ration of airflow and air mass of room multiplied on conditioner temperature
+            sums up with volume ration of left air mass of room multiplied on room temperature*/
+            foreach (IConditioner conditioner in Conditioners)
+                TemperatureSensor.Temperature = conditioner.ProvideHeat() / RoomVolume +
+                                                 (RoomVolume - conditioner.AirFlow) / RoomVolume *
+                                                 TemperatureSensor.Temperature;
+
+            foreach (IHumidifier humidifier in Humidifiers)
+                HumiditySensor.Humidity =
+                    (humidifier.ProvideHumidity() / 60 + (HumiditySensor.Humidity / 100) * AirMass) / AirMass * 100;
+
+            foreach (IPurificator purificator in Purificators)
+                CarbonDioxideSensor.CarbonDioxide -= purificator.ReceivePurification() / 60 * 8;
+        }
     }
 }

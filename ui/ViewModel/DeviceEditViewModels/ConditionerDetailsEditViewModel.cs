@@ -11,23 +11,14 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
         private bool _status;
         private ConditionerMode _mode;
         private RelayCommand _confirmEditCommand;
-        private SelectedConditionerStore _selectedConditionerStore = SelectedConditionerStore.getInstance();
         private EditConditionerValidator conditionerValidator;
         private EditConditionerUpdater conditionerUpdater;
         private RelayCommand _closeModalCommand;
-        public int RoomIndex { get; set; }
 
         public ConditionerDetailsEditViewModel()
         {
             conditionerValidator = new EditConditionerValidator();
             conditionerUpdater = new EditConditionerUpdater();
-        }
-
-        public ConditionerDetailsEditViewModel(int _roomIndex)
-        {
-            conditionerValidator = new EditConditionerValidator();
-            conditionerUpdater = new EditConditionerUpdater();
-            RoomIndex = _roomIndex;
         }
 
         public double WorkingTemperature
@@ -89,11 +80,9 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
         {
             try
             {
-                conditionerValidator.Validate(Status, _selectedConditionerStore.SelectedConditioner.AirFlow, Mode,
-                    WorkingTemperature);
-                conditionerUpdater.Update(Status, _selectedConditionerStore.SelectedConditioner.AirFlow, Mode,
-                    WorkingTemperature, _selectedConditionerStore.SelectedConditionerIndex, RoomIndex);
-
+                conditionerValidator.Validate(Status, Mode, WorkingTemperature);
+                conditionerUpdater.Update(Status, Mode, WorkingTemperature);
+                ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();
                 EditViewModelStore.getInstance().CloseModal();
             }
             catch (Exception e)

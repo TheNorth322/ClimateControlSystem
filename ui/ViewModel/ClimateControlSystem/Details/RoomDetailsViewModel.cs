@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Media;
 using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
 
@@ -7,10 +9,11 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     public class RoomDetailsViewModel : ViewModelBase
     {
         private SelectedRoomStore _selectedRoomStore => SelectedRoomStore.getInstance();
-
-        public RoomDetailsViewModel()
+        public RoomDetailsViewModel(PlotPointsStore _pointsStore)
         {
-            _selectedRoomStore.SelectedRoomChanged += SelectedRoomStore_SelectedRoomChanged;
+            PointsStore = _pointsStore;
+            _selectedRoomStore.SelectedRoomChanged += UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
         }
 
         public Room SelectedRoom => _selectedRoomStore.SelectedRoom;
@@ -28,9 +31,11 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         public string ExpectedCarbonDioxide =>
             SelectedRoom?.CarbonDioxideSensor.ExpectedCarbonDioxide.ToString() ?? "Unknown";
 
+        public PlotPointsStore PointsStore;
         protected override void Dispose()
         {
-            _selectedRoomStore.SelectedRoomChanged -= SelectedRoomStore_SelectedRoomChanged;
+            _selectedRoomStore.SelectedRoomChanged -= UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
             base.Dispose();
         }
 
@@ -41,16 +46,23 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             get
             {
                 return _editCommand ?? new RelayCommand(_object => OpenEditModal(),
-                    _object => true);
+                    _object => ValidateSelectedRoom());
             }
+        }
+
+        
+
+        private bool ValidateSelectedRoom()
+        {
+            return (SelectedRoom != null);
         }
 
         private void OpenEditModal()
         {
-            EditViewModelStore.getInstance().EditViewModel = new RoomDetailsEditViewModel(_selectedRoomStore.SelectedRoomIndex);
+            EditViewModelStore.getInstance().EditViewModel = new RoomDetailsEditViewModel();
         }
 
-        private void SelectedRoomStore_SelectedRoomChanged()
+        private void UpdateContents()
         {
             OnPropertyChange(nameof(Name));
             OnPropertyChange(nameof(Temperature));

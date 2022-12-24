@@ -6,14 +6,13 @@ namespace ClimateControlSystemNamespace
     {
         private static SelectedPurificatorStore instance;
 
-        private Purificator selectedPurificator;
+        private IPurificator selectedPurificator;
 
-        public int SelectedPurificatorIndex { get; set; }
         private SelectedPurificatorStore()
         {
         }
 
-        public Purificator SelectedPurificator
+        public IPurificator SelectedPurificator
         {
             get => selectedPurificator;
             set

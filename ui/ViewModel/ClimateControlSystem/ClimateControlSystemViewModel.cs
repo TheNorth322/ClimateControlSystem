@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Threading;
+using ClimateControlSystem.Domain.Updaters;
 using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
 
@@ -13,7 +14,9 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         private readonly ObservableCollection<RoomListingItemViewModel> _roomListingItemViewModels;
         private SelectedRoomStore _selectedRoomStore => SelectedRoomStore.getInstance();
         private EditViewModelStore _editViewModalStore => EditViewModelStore.getInstance();
-        private SelectedViewModelStore _selectedViewModelStore => SelectedViewModelStore.getInstance(); 
+        private SelectedViewModelStore _selectedViewModelStore => SelectedViewModelStore.getInstance();
+        private ClimateControlSystemUpdater climateControlSystemUpdater = new ClimateControlSystemUpdater();
+        private ClimateControlSystemRandomUpdater climateControlSystemRandomUpdater = new ClimateControlSystemRandomUpdater();
         
         private string _currentDate;
         private string _currentTime;
@@ -66,8 +69,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             {
                 selectedRoomListingItemViewModel = value;
                 _selectedRoomStore.SelectedRoom = selectedRoomListingItemViewModel.Room;
-                _selectedRoomStore.SelectedRoomIndex = selectedRoomListingItemViewModel.RoomIndex;
-                _selectedViewModelStore.SelectedViewModel = new RoomDetailsViewModel();
+                _selectedViewModelStore.SelectedViewModel = new RoomDetailsViewModel(selectedRoomListingItemViewModel.PlotPointsStore);
                 OnPropertyChange(nameof(SelectedRoomListingItemViewModel));
             }
         }
@@ -98,22 +100,25 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             int roomIndex = 0;
             foreach (var room in ClimateControlSystemStore.getInstance().ClimateControlSystem.Rooms)
             {
-                _roomListingItemViewModels.Add(new RoomListingItemViewModel(room, roomIndex));
+                _roomListingItemViewModels.Add(new RoomListingItemViewModel(room));
                 roomIndex++;
             }
         }
-
         public void SerializeClimateControlSystem()
         {
             ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
             serializer.Serialize(ClimateControlSystemStore.getInstance().ClimateControlSystem, ConfigurationPathStore.getInstance().Path);
         }
+        
         private void timer_Tick(object sender, EventArgs e)
         {
+            if (DateTime.Now.Second == 0)
+                climateControlSystemUpdater.Update();
+            if (DateTime.Now.Second == 30)
+                climateControlSystemRandomUpdater.Update();
             CurrentTime = DateTime.Now.ToString("HH:mm:ss");
             CurrentDate = DateTime.Now.ToString("MM/dd/yyyy");
         }
-
         public event Action CloseModalEvent;
         public event Action OpenModalEvent;
     }

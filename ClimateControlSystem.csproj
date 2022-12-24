@@ -126,16 +126,17 @@
             <DependentUpon>Details.xaml</DependentUpon>
         </Compile>
         <Compile Include="Components\PlaceholderTextBox.cs" />
-        <Compile Include="di\ClimateControlSystemStore.cs" />
-        <Compile Include="di\ConfigurationPathStore.cs" />
-        <Compile Include="di\EditViewModelStore.cs" />
-        <Compile Include="di\RadioButtonCheckedConverter.cs" />
-        <Compile Include="di\RoomStore.cs" />
-        <Compile Include="di\SelectedConditionerStore.cs" />
-        <Compile Include="di\SelectedHumidifierStore.cs" />
-        <Compile Include="di\SelectedPurificatorStore.cs" />
-        <Compile Include="di\SelectedRoomStore.cs" />
-        <Compile Include="di\SelectedViewModelStore.cs" />
+        <Compile Include="Data\ClimateControlSystemStore.cs" />
+        <Compile Include="Data\ConfigurationPathStore.cs" />
+        <Compile Include="Data\EditViewModelStore.cs" />
+        <Compile Include="Data\PlotPointsStore.cs" />
+        <Compile Include="Data\RadioButtonCheckedConverter.cs" />
+        <Compile Include="Data\RoomStore.cs" />
+        <Compile Include="Data\SelectedConditionerStore.cs" />
+        <Compile Include="Data\SelectedHumidifierStore.cs" />
+        <Compile Include="Data\SelectedPurificatorStore.cs" />
+        <Compile Include="Data\SelectedRoomStore.cs" />
+        <Compile Include="Data\SelectedViewModelStore.cs" />
         <Compile Include="Domain\ICloseWindows.cs" />
         <Compile Include="Domain\PassCodeVerifier.cs" />
         <Compile Include="Domain\PasswordHash.cs" />
@@ -149,6 +150,8 @@
         <Compile Include="Domain\Validators\HumidifierValidator.cs" />
         <Compile Include="Domain\Validators\PurificatorValidator.cs" />
         <Compile Include="Domain\Validators\RoomValidator.cs" />
+        <Compile Include="Domain\Validators\Updaters\ClimateControlSystemRandomUpdater.cs" />
+        <Compile Include="Domain\Validators\Updaters\ClimateControlSystemUpdater.cs" />
         <Compile Include="Domain\Validators\Updaters\EditConditionerUpdater.cs" />
         <Compile Include="Domain\Validators\Updaters\EditHumidifierUpdater.cs" />
         <Compile Include="Domain\Validators\Updaters\EditPurificatorUpdater.cs" />
@@ -158,6 +161,11 @@
         <Compile Include="model\Devices\ConditionerMode.cs" />
         <Compile Include="model\Devices\DeviceMode.cs" />
         <Compile Include="model\Devices\Humidifier.cs" />
+        <Compile Include="model\Devices\IClimateControlSystem.cs" />
+        <Compile Include="model\Devices\Interfaces\IConditioner.cs" />
+        <Compile Include="model\Devices\Interfaces\IDevice.cs" />
+        <Compile Include="model\Devices\Interfaces\IHumidifier.cs" />
+        <Compile Include="model\Devices\Interfaces\IPurificator.cs" />
         <Compile Include="model\Devices\Purificator.cs" />
         <Compile Include="model\EnumExtensionMethods.cs" />
         <Compile Include="model\Room\LightLevel.cs" />
@@ -252,7 +260,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Compile Include="model\ClimateControlSystem.cs" />
-        <Compile Include="di\ClimateControlSystemSerializer.cs" />
+        <Compile Include="Data\ClimateControlSystemSerializer.cs" />
         <Compile Include="ui\Views\ClimateControlSystemView.xaml.cs">
             <DependentUpon>ClimateControlSystemView.xaml</DependentUpon>
         </Compile>
@@ -262,7 +270,7 @@
         <Compile Include="ui\Views\ConfigurationCreationView.xaml.cs">
             <DependentUpon>ConfigurationCreationView.xaml</DependentUpon>
         </Compile>
-        <Compile Include="di\DataProvider.cs" />
+        <Compile Include="Data\DataProvider.cs" />
         <Compile Include="ui\Views\LogInView.xaml.cs">
             <DependentUpon>LogInView.xaml</DependentUpon>
             <SubType>Code</SubType>

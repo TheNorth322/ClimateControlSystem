@@ -15,19 +15,10 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
         private EditHumidifierUpdater humidifierUpdater;
         private RelayCommand _closeModalCommand;
 
-        public int RoomIndex { get; set; }
-
         public HumidifierDetailsEditViewModel()
         {
             humidifierValidator = new EditHumidifierValidator();
             humidifierUpdater = new EditHumidifierUpdater();
-        }
-
-        public HumidifierDetailsEditViewModel(int _roomIndex)
-        {
-            humidifierValidator = new EditHumidifierValidator();
-            humidifierUpdater = new EditHumidifierUpdater();
-            RoomIndex = _roomIndex;
         }
 
         public bool Status
@@ -70,9 +61,9 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             try
             {
                 humidifierValidator.Validate(Status, _selectedHumidifierStore.SelectedHumidifier.WaterConsumption);
-                humidifierUpdater.Update(Status, _selectedHumidifierStore.SelectedHumidifier.WaterConsumption,
-                    _selectedHumidifierStore.SelectedHumidifierIndex, RoomIndex);
+                humidifierUpdater.Update(Status);
 
+                ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();
                 EditViewModelStore.getInstance().CloseModal();
             }
             catch (Exception e)

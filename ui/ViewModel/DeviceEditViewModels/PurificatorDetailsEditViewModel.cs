@@ -21,15 +21,6 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             purificatorUpdater = new EditPurificatorUpdater();
         }
 
-        public PurificatorDetailsEditViewModel(int _roomIndex)
-        {
-            purificatorValidator = new EditPurificatorValidator();
-            purificatorUpdater = new EditPurificatorUpdater();
-            RoomIndex = _roomIndex;
-        }
-
-        public int RoomIndex { get; set; }
-
         public bool Status
         {
             get { return _status; }
@@ -70,9 +61,9 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             try
             {
                 purificatorValidator.Validate(Status, _selectedPurificatorStore.SelectedPurificator.AirFlow);
-                purificatorUpdater.Update(Status, _selectedPurificatorStore.SelectedPurificator.AirFlow,
-                    _selectedPurificatorStore.SelectedPurificatorIndex, RoomIndex);
+                purificatorUpdater.Update(Status, _selectedPurificatorStore.SelectedPurificator.AirFlow);
 
+                ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();
                 EditViewModelStore.getInstance().CloseModal();
             }
             catch (Exception e)

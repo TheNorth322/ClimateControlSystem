@@ -59,12 +59,10 @@
                      HorizontalAlignment="Right"
                      Margin="0 10 60 0"
                      Content="On"
-                     IsChecked="{Binding HumidifierStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
-            ConverterParameter={x:Static local:DeviceMode.On}}" />
+                     IsChecked="{Binding HumidifierStatus}"/>
         <RadioButton Grid.Row="3" GroupName="HumidifierRadioButtons" HorizontalAlignment="Right" Margin="0 10 0 0"
                      Content="Off"
-                     IsChecked="{Binding HumidifierStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
-            ConverterParameter={x:Static local:DeviceMode.Off}}" />
+                     IsChecked="{Binding HumidifierStatus, Converter={StaticResource RadioButtonCheckedConverter}}"/>
         <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Content="Add humidifier"
                 Command="{Binding AddHumidifierCommand}" />
 
@@ -93,16 +91,14 @@
             HorizontalAlignment="Right"
             Margin="0 10 60 0"
             Content="On"
-            IsChecked="{Binding PurificatorStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
-            ConverterParameter={x:Static local:DeviceMode.On}}" />
+            IsChecked="{Binding PurificatorStatus}" />
         <RadioButton
             Grid.Row="7"
             GroupName="PurificatorRadioButtons"
             HorizontalAlignment="Right"
             Margin="0 10 0 0"
             Content="Off"
-            IsChecked="{Binding PurificatorStatus, Converter={StaticResource RadioButtonCheckedConverter},
-            ConverterParameter={x:Static local:DeviceMode.Off}}" />
+            IsChecked="{Binding PurificatorStatus, Converter={StaticResource RadioButtonCheckedConverter}}" />
 
         <Button Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Add purificator"
                 Command="{Binding AddPurificatorCommand}" HorizontalAlignment="Right" />
@@ -145,15 +141,13 @@
         <Label
             Grid.Row="13"
             Content="Device Mode"
-            Style="{StaticResource DescriptionLabelStyle}" />
+            Style="{StaticResource DescriptionLabelStyle}"/>
         <RadioButton Grid.Row="13" GroupName="ConditionerRadioButtons" HorizontalAlignment="Right" Margin="0 10 60 0"
                      Content="On"
-                     IsChecked="{Binding ConditionerStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
-            ConverterParameter={x:Static local:DeviceMode.On}}" />
+                     IsChecked="{Binding ConditionerStatus}"/>
         <RadioButton Grid.Row="13" GroupName="ConditionerRadioButtons" HorizontalAlignment="Right" Margin="0 10 0 0"
                      Content="Off"
-                     IsChecked="{Binding ConditionerStatus, Converter={StaticResource RadioButtonCheckedConverter}, 
-            ConverterParameter={x:Static local:DeviceMode.Off}}" />
+                     IsChecked="{Binding ConditionerStatus, Converter={StaticResource RadioButtonCheckedConverter}}" />
 
         <Button Grid.Row="14" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right"
                 Content="Add conditioner" Command="{Binding AddConditionerCommand}" />

@@ -177,7 +177,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                var purificator = new Purificator(PurificatorStatus, PurificatorAirFlow);
+                Purificator purificator = new Purificator(PurificatorStatus, PurificatorAirFlow);
                 PurificatorValidator.Validate(purificator);
                 roomStore.Room.Purificators.Add(purificator);
                 RoomStore_RoomDevicesChanged?.Invoke();
