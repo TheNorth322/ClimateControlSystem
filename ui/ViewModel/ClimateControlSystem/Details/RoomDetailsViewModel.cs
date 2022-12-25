@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
-using System.Windows.Media;
 using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
 using LiveCharts;
@@ -10,7 +8,10 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 {
     public class RoomDetailsViewModel : ViewModelBase
     {
-        private SelectedRoomStore _selectedRoomStore => SelectedRoomStore.getInstance();
+        private RelayCommand _editCommand;
+
+        private readonly PlotPointsStore PointsStore;
+
         public RoomDetailsViewModel(PlotPointsStore _pointsStore)
         {
             PointsStore = _pointsStore;
@@ -19,11 +20,23 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
         }
 
-        public Room SelectedRoom => _selectedRoomStore.SelectedRoom;
+        private SelectedRoomStore _selectedRoomStore => SelectedRoomStore.getInstance();
+
+        private IRoom SelectedRoom => _selectedRoomStore.SelectedRoom;
         public string Name => SelectedRoom?.Name ?? "Unknown";
-        public string Temperature => SelectedRoom?.TemperatureSensor.Temperature.ToString() ?? "Unknown";
-        public string Humidity => SelectedRoom?.HumiditySensor.Humidity.ToString() ?? "Unknown";
-        public string CarbonDioxideLevel => SelectedRoom?.CarbonDioxideSensor.CarbonDioxide.ToString() ?? "Unknown";
+
+        public string Temperature => SelectedRoom == null
+            ? "Unknown"
+            : Math.Round(SelectedRoom.TemperatureSensor.Temperature, 2).ToString();
+
+        public string Humidity => SelectedRoom == null
+            ? "Unknown"
+            : Math.Round(SelectedRoom.HumiditySensor.Humidity, 2).ToString();
+
+        public string CarbonDioxideLevel => SelectedRoom == null
+            ? "Unknown"
+            : Math.Round(SelectedRoom.CarbonDioxideSensor.CarbonDioxide, 2).ToString();
+
         public string LightLevel => SelectedRoom != null ? SelectedRoom.LightLevel.GetEnumDescription() : "Unknown";
 
         public string ExpectedTemperature =>
@@ -34,18 +47,8 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         public string ExpectedCarbonDioxide =>
             SelectedRoom?.CarbonDioxideSensor.ExpectedCarbonDioxide.ToString() ?? "Unknown";
 
-        private PlotPointsStore PointsStore;
         public SeriesCollection SeriesCollection => PointsStore.SeriesCollection;
         public List<double> Axis => PointsStore.Axis;
-        protected override void Dispose()
-        {
-            _selectedRoomStore.SelectedRoomChanged -= UpdateContents;
-            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
-            PointsStore.PointsContentsChanged -= OnPointsContentsChanged;
-            base.Dispose();
-        }
-
-        private RelayCommand _editCommand;
 
         public RelayCommand EditCommand
         {
@@ -56,9 +59,17 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             }
         }
 
+        protected override void Dispose()
+        {
+            _selectedRoomStore.SelectedRoomChanged -= UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
+            PointsStore.PointsContentsChanged -= OnPointsContentsChanged;
+            base.Dispose();
+        }
+
         private bool ValidateSelectedRoom()
         {
-            return (SelectedRoom != null);
+            return SelectedRoom != null;
         }
 
         private void OpenEditModal()
@@ -68,8 +79,8 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 
         private void OnPointsContentsChanged()
         {
-            
         }
+
         private void UpdateContents()
         {
             OnPropertyChange(nameof(Name));

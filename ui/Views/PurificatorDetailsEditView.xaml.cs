@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using ClimateControlSystem.Domain;
+﻿using System.Windows.Controls;
 using ClimateControlSystem.ui.ViewModel;
 using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 

@@ -94,8 +94,8 @@
             Grid.Row="6"
             Content="{StaticResource CarbonDioxideLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
-        
-        <ComboBox Grid.Row="7" 
+
+        <ComboBox Grid.Row="7"
                   Style="{StaticResource ComboBoxStyle}"
                   SelectedValue="{Binding LightLevel, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type local:LightLevel}}"
                   ItemsSource="{Binding Source={local:EnumToItemsSource {x:Type local:LightLevel}}}" />

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:climateControlSystemNamespace="clr-namespace:ClimateControlSystemNamespace"
              xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.DeviceEditViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:HumidifierDetailsEditViewModel}"
              mc:Ignorable="d"
@@ -19,25 +18,25 @@
     <Grid Width="400" Height="400">
 
         <Button Content="X" Margin="20" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="10 5"
-                Command="{Binding CloseModalCommand}">
-        </Button>
+                Command="{Binding CloseModalCommand}" />
         <StackPanel Margin="20" VerticalAlignment="Center">
 
-            <TextBlock HorizontalAlignment="Center" Text="{StaticResource EditHumidifierDetailsHeading}" FontSize="20"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" Text="{StaticResource EditHumidifierDetailsHeading}" FontSize="20" />
 
             <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{StaticResource IsOnLabel}"></TextBlock>
+                <TextBlock Text="{StaticResource IsOnLabel}" />
                 <RadioButton Grid.Column="1"
-                    GroupName="HumidifierRadioButtons"
-                    HorizontalAlignment="Right"
-                    Margin="0 10 60 0"
-                    Content="{StaticResource OnLabel}"
-                    IsChecked="{Binding Status}"/>
-                <RadioButton Grid.Column="1" GroupName="HumidifierRadioButtons" HorizontalAlignment="Right" Margin="0 10 0 0"
+                             GroupName="HumidifierRadioButtons"
+                             HorizontalAlignment="Right"
+                             Margin="0 10 60 0"
+                             Content="{StaticResource OnLabel}"
+                             IsChecked="{Binding Status}" />
+                <RadioButton Grid.Column="1" GroupName="HumidifierRadioButtons" HorizontalAlignment="Right"
+                             Margin="0 10 0 0"
                              Content="{StaticResource OffLabel}"
                              IsChecked="{Binding Status, Converter={StaticResource RadioButtonCheckedConverter}}" />
             </Grid>
@@ -48,8 +47,7 @@
                 </Grid.ColumnDefinitions>
             </Grid>
             <Button HorizontalAlignment="Center" Content="{StaticResource ConfirmButtonLabel}" Padding="35 10"
-                    Command="{Binding ConfirmEditCommand}">
-            </Button>
+                    Command="{Binding ConfirmEditCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

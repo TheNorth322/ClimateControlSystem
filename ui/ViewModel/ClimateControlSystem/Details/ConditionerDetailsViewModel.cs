@@ -5,17 +5,27 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 {
     public class ConditionerDetailsViewModel : ViewModelBase
     {
+        private RelayCommand _editCommand;
+
+        public ConditionerDetailsViewModel()
+        {
+            _selectedConditionerStore.SelectedConditionerChanged += UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
+        }
+
         private SelectedConditionerStore _selectedConditionerStore => SelectedConditionerStore.getInstance();
+
         private IConditioner SelectedConditioner => _selectedConditionerStore.SelectedConditioner;
+
         //TODO
         public string WorkingTemperature => SelectedConditioner?.WorkingTemperature.ToString() ?? "Unknown";
         public string ConditionerAirFlow => SelectedConditioner?.AirFlow.ToString() ?? "Unknown";
+
         public string ConditionerMode => SelectedConditioner != null
-            ? EnumExtensionMethods.GetEnumDescription(SelectedConditioner.ConditionerMode)
+            ? SelectedConditioner.ConditionerMode.GetEnumDescription()
             : "Unknown";
 
         public string ConditionerStatus => SelectedConditioner.IsOn.ToString();
-        private RelayCommand _editCommand;
 
         public RelayCommand EditCommand
         {
@@ -30,11 +40,6 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         {
             EditViewModelStore.getInstance().EditViewModel = new ConditionerDetailsEditViewModel();
         }
-        public ConditionerDetailsViewModel()
-        {
-            _selectedConditionerStore.SelectedConditionerChanged += UpdateContents;
-            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
-        }
 
         protected override void Dispose()
         {
@@ -42,8 +47,8 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
             base.Dispose();
         }
-        
-        private void UpdateContents() 
+
+        private void UpdateContents()
         {
             OnPropertyChange(nameof(WorkingTemperature));
             OnPropertyChange(nameof(ConditionerAirFlow));

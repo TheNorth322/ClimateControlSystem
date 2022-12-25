@@ -10,7 +10,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:ClimateControlSystemViewModel}"
         mc:Ignorable="d"
         Title="ClimateControlSystemView" Height="700" Width="1200">
-    
+
     <Window.Resources>
         <DataTemplate DataType="{x:Type editvms:RoomDetailsEditViewModel}">
             <views:RoomDetailsEditView />
@@ -36,14 +36,13 @@
         <DataTemplate DataType="{x:Type viewmodels:PurificatorDetailsViewModel}">
             <views:PurificatorDetailsView />
         </DataTemplate>
-        
+
     </Window.Resources>
     <Grid>
         <modalControl:Modal
             x:Name="Modal"
             Panel.ZIndex="10"
-            Content="{Binding CurrentEditViewModel}">
-        </modalControl:Modal>
+            Content="{Binding CurrentEditViewModel}" />
         <Grid Margin="20 0 20 20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -124,8 +123,10 @@
                                                                   SelectionMode="Single">
                                                             <ListView.ItemContainerStyle>
                                                                 <Style TargetType="ListViewItem">
-                                                                    <Setter Property="HorizontalContentAlignment"
+                                                                    <Setter Property="HorizontalAlignment"
                                                                             Value="Stretch" />
+                                                                    <Setter Property="Background" Value="#ededed" />
+                                                                    <Setter Property="BorderBrush" Value="#ededed" />
                                                                 </Style>
                                                             </ListView.ItemContainerStyle>
                                                             <ListView.ItemTemplate>
@@ -155,6 +156,8 @@
                                                                 <Style TargetType="ListViewItem">
                                                                     <Setter Property="HorizontalContentAlignment"
                                                                             Value="Stretch" />
+                                                                    <Setter Property="Background" Value="#ededed" />
+                                                                    <Setter Property="BorderBrush" Value="#ededed" />
                                                                 </Style>
                                                             </ListView.ItemContainerStyle>
                                                             <ListView.ItemTemplate>
@@ -184,6 +187,8 @@
                                                                 <Style TargetType="ListViewItem">
                                                                     <Setter Property="HorizontalContentAlignment"
                                                                             Value="Stretch" />
+                                                                    <Setter Property="Background" Value="#ededed" />
+                                                                    <Setter Property="BorderBrush" Value="#ededed" />
                                                                 </Style>
                                                             </ListView.ItemContainerStyle>
                                                             <ListView.ItemTemplate>

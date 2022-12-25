@@ -22,7 +22,7 @@ namespace ClimateControlSystemNamespace
         public double AirFlow { get; set; }
 
         public ConditionerMode ConditionerMode { get; set; }
-        
+
         public double WorkingTemperature { get; set; }
 
         public void TurnOnHeatingMode()
@@ -34,10 +34,10 @@ namespace ClimateControlSystemNamespace
         {
             ConditionerMode = ConditionerMode.Cooling;
         }
-        
+
         public double ProvideHeat()
         {
-            return (IsOn) ? WorkingTemperature * AirFlow : 0;
+            return IsOn ? WorkingTemperature * AirFlow : 0;
         }
     }
 }

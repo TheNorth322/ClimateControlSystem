@@ -7,6 +7,7 @@ namespace ClimateControlSystemNamespace
         private static SelectedHumidifierStore instance;
 
         private IHumidifier selectedHumidifier;
+
         private SelectedHumidifierStore()
         {
         }

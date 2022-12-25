@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Media;
 using ClimateControlSystem.ui.ViewModel;
 using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
 

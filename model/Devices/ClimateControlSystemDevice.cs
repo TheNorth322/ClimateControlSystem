@@ -7,7 +7,6 @@ namespace ClimateControlSystemNamespace
     [XmlInclude(typeof(Purificator))]
     public abstract class ClimateControlSystemDevice : IDevice
     {
-        // Contructors
         public ClimateControlSystemDevice()
         {
             IsOn = true;
@@ -17,11 +16,9 @@ namespace ClimateControlSystemNamespace
         {
             IsOn = _isOn;
         }
-        // Properties
 
         public bool IsOn { get; set; }
 
-        // Methods
         public void TurnOn()
         {
             IsOn = true;

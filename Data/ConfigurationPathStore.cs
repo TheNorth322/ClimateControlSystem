@@ -12,7 +12,7 @@ namespace ClimateControlSystemNamespace
         {
         }
 
-        public string Path 
+        public string Path
         {
             get => _path;
             set

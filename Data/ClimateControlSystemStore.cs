@@ -30,8 +30,9 @@ namespace ClimateControlSystemNamespace
 
         public void ClimateControlSystemContentsChangedInvoke()
         {
-           ClimateControlSystemContentsChanged?.Invoke(); 
+            ClimateControlSystemContentsChanged?.Invoke();
         }
+
         public event Action ClimateControlSystemContentsChanged;
         public event Action ClimateControlSystemChanged;
     }

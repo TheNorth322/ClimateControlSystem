@@ -10,6 +10,9 @@ namespace ClimateControlSystemNamespace
         private RoomStore()
         {
             Room = new Room();
+            Room.TemperatureSensor.ExpectedTemperature = 24;
+            Room.HumiditySensor.ExpectedHumidity = 40;
+            Room.CarbonDioxideSensor.ExpectedCarbonDioxide = 400;
         }
 
         public Room Room

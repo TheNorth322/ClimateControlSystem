@@ -8,7 +8,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         {
             Conditioner = conditioner;
         }
-        
+
         public IConditioner Conditioner { get; }
 
         public string Name => "Conditioner";

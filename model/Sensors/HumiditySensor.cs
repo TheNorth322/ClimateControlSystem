@@ -17,6 +17,7 @@ namespace ClimateControlSystemNamespace
 
         public double Humidity { get; set; }
         public double ExpectedHumidity { get; set; }
+
         public double ProvideData()
         {
             return Humidity;

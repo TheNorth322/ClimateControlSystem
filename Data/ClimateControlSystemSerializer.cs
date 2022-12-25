@@ -21,7 +21,7 @@ namespace ClimateControlSystemNamespace
             var reader = new XmlSerializer(typeof(ClimateControlSystem));
             var configurationFile = new StreamReader(path);
 
-            ClimateControlSystem climateControlSystem = (ClimateControlSystem)reader.Deserialize(configurationFile);
+            var climateControlSystem = (ClimateControlSystem)reader.Deserialize(configurationFile);
 
             if (climateControlSystem == null)
                 throw new ApplicationException(

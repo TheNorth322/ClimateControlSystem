@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using ClimateControlSystem.Domain;
 using ClimateControlSystem.Domain.Updaters;
 using ClimateControlSystemNamespace;
@@ -8,12 +7,12 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 {
     public class HumidifierDetailsEditViewModel : ViewModelBase
     {
-        private bool _status;
-        private RelayCommand _confirmEditCommand;
-        private SelectedHumidifierStore _selectedHumidifierStore = SelectedHumidifierStore.getInstance();
-        private EditHumidifierValidator humidifierValidator;
-        private EditHumidifierUpdater humidifierUpdater;
         private RelayCommand _closeModalCommand;
+        private RelayCommand _confirmEditCommand;
+        private readonly SelectedHumidifierStore _selectedHumidifierStore = SelectedHumidifierStore.getInstance();
+        private bool _status;
+        private readonly EditHumidifierUpdater humidifierUpdater;
+        private readonly EditHumidifierValidator humidifierValidator;
 
         public HumidifierDetailsEditViewModel()
         {
@@ -23,7 +22,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 
         public bool Status
         {
-            get { return _status; }
+            get => _status;
             set
             {
                 _status = value;
@@ -68,7 +67,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             }
             catch (Exception e)
             {
-                MessageBox_Show(null, e.Message, "Error occured!", MessageBoxButton.OK);
+                MessageBox_Show(null, e.Message, "Error occured!");
             }
         }
 

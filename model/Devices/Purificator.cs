@@ -18,9 +18,9 @@ namespace ClimateControlSystemNamespace
 
         public double AirFlow { get; set; }
 
-        public double ReceivePurification()
+        public double ProvidePurification()
         {
-            return (IsOn) ? AirFlow : 0;
-        } 
+            return IsOn ? AirFlow : 0;
+        }
     }
 }

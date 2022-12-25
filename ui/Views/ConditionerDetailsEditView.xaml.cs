@@ -9,10 +9,11 @@ namespace ClimateControlSystem.ui.Views
         public ConditionerDetailsEditView()
         {
             InitializeComponent();
-            this.DataContext = new ConditionerDetailsEditViewModel();
+            DataContext = new ConditionerDetailsEditViewModel();
             (DataContext as ConditionerDetailsEditViewModel).MessageBoxRequest +=
                 ViewMessageBoxRequest;
         }
+
         private void ViewMessageBoxRequest(object sender, MessageBoxEventArgs e)
         {
             e.Show();

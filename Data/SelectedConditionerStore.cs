@@ -21,7 +21,7 @@ namespace ClimateControlSystemNamespace
                 SelectedConditionerChanged?.Invoke();
             }
         }
-        
+
         public static SelectedConditionerStore getInstance()
         {
             if (instance == null)

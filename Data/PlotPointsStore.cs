@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Wpf;
 
@@ -8,8 +7,9 @@ namespace ClimateControlSystemNamespace
 {
     public class PlotPointsStore
     {
-        private SeriesCollection seriesCollection;
         private List<double> axis;
+        private SeriesCollection seriesCollection;
+
         public PlotPointsStore()
         {
             axis = new List<double>();
@@ -35,16 +35,17 @@ namespace ClimateControlSystemNamespace
 
         public List<double> Axis
         {
-            get { return axis; }
+            get => axis;
             set
             {
                 axis = value;
-                SeriesCollectionChanged?.Invoke(); 
+                SeriesCollectionChanged?.Invoke();
             }
         }
-        public SeriesCollection SeriesCollection 
+
+        public SeriesCollection SeriesCollection
         {
-            get { return seriesCollection; }
+            get => seriesCollection;
             set
             {
                 seriesCollection = value;
@@ -56,7 +57,7 @@ namespace ClimateControlSystemNamespace
         {
             PointsContentsChanged?.Invoke();
         }
-        
+
         public event Action SeriesCollectionChanged;
         public event Action PointsContentsChanged;
     }

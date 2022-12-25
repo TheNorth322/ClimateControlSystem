@@ -1,11 +1,18 @@
-﻿using System.Windows.Forms.VisualStyles;
-using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
+﻿using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 {
     public class PurificatorDetailsViewModel : ViewModelBase
     {
+        private RelayCommand _editCommand;
+
+        public PurificatorDetailsViewModel()
+        {
+            _selectedPurificatorStore.SelectedPurificatorChanged += UpdateContents;
+            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
+        }
+
         private SelectedPurificatorStore _selectedPurificatorStore => SelectedPurificatorStore.getInstance();
         private IPurificator SelectedPurificator => _selectedPurificatorStore.SelectedPurificator;
 
@@ -13,7 +20,6 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 
 
         public string PurificatorStatus => SelectedPurificator?.IsOn.ToString();
-        private RelayCommand _editCommand;
 
         public RelayCommand EditCommand
         {
@@ -27,12 +33,6 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         private void OpenEditModal()
         {
             EditViewModelStore.getInstance().EditViewModel = new PurificatorDetailsEditViewModel();
-        }
-
-        public PurificatorDetailsViewModel()
-        {
-            _selectedPurificatorStore.SelectedPurificatorChanged += UpdateContents;
-            ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
         }
 
         protected override void Dispose()

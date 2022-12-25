@@ -13,6 +13,7 @@ namespace ClimateControlSystem.ui.Views
             (DataContext as RoomDetailsEditViewModel).MessageBoxRequest +=
                 ViewMessageBoxRequest;
         }
+
         private void ViewMessageBoxRequest(object sender, MessageBoxEventArgs e)
         {
             e.Show();

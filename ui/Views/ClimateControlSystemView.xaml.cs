@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Forms;
 using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
 using ClimateControlSystemNamespace;
-using ListView = System.Windows.Controls.ListView;
-using ListViewItem = System.Windows.Controls.ListViewItem;
-using Menu = System.Windows.Controls.Menu;
-using MenuItem = System.Windows.Controls.MenuItem;
 
 namespace ClimateControlSystem.ui.Views
 {
@@ -15,8 +10,6 @@ namespace ClimateControlSystem.ui.Views
     /// </summary>
     public partial class ClimateControlSystemView : Window
     {
-        private SelectedViewModelStore selectedViewModelStore => SelectedViewModelStore.getInstance();
-
         public ClimateControlSystemView()
         {
             InitializeComponent();
@@ -24,6 +17,8 @@ namespace ClimateControlSystem.ui.Views
             Loaded += OnLoaded;
             Closed += OnClosed;
         }
+
+        private SelectedViewModelStore selectedViewModelStore => SelectedViewModelStore.getInstance();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -34,8 +29,9 @@ namespace ClimateControlSystem.ui.Views
         private void OnClosed(object sender, EventArgs e)
         {
             (DataContext as ClimateControlSystemViewModel).SerializeClimateControlSystem();
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
+
         private void CloseModal()
         {
             Modal.IsOpen = false;

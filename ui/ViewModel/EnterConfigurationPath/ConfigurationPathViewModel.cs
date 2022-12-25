@@ -74,7 +74,7 @@ namespace ClimateControlSystem.ui.ViewModel.EnterConfigurationPath
 
         public bool ValidateConfigurationPath()
         {
-            return !string.IsNullOrEmpty(ConfigurationPath);
+            return !string.IsNullOrEmpty(ConfigurationPath) && ConfigurationPath.Contains(".xml");
         }
     }
 }

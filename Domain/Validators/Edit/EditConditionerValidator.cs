@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Forms.VisualStyles;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.Domain

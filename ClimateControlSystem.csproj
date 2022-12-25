@@ -96,10 +96,10 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-          <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+            <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
         </Reference>
         <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-          <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+            <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Data" />
@@ -167,13 +167,14 @@
         <Compile Include="model\Devices\ConditionerMode.cs" />
         <Compile Include="model\Devices\DeviceMode.cs" />
         <Compile Include="model\Devices\Humidifier.cs" />
-        <Compile Include="model\Devices\IClimateControlSystem.cs" />
         <Compile Include="model\Devices\Interfaces\IConditioner.cs" />
         <Compile Include="model\Devices\Interfaces\IDevice.cs" />
         <Compile Include="model\Devices\Interfaces\IHumidifier.cs" />
         <Compile Include="model\Devices\Interfaces\IPurificator.cs" />
         <Compile Include="model\Devices\Purificator.cs" />
         <Compile Include="model\EnumExtensionMethods.cs" />
+        <Compile Include="model\IClimateControlSystem.cs" />
+        <Compile Include="model\Room\IRoom.cs" />
         <Compile Include="model\Room\LightLevel.cs" />
         <Compile Include="model\Room\Room.cs" />
         <Compile Include="model\Sensors\CarbonDioxideSensor.cs" />
@@ -202,25 +203,25 @@
         <Compile Include="ui\ViewModel\RelayCommand.cs" />
         <Compile Include="ui\ViewModel\ViewModelBase.cs" />
         <Compile Include="ui\Views\ConditionerDetailsEditView.xaml.cs">
-          <DependentUpon>ConditionerDetailsEditView.xaml</DependentUpon>
+            <DependentUpon>ConditionerDetailsEditView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\ConditionerDetailsView.xaml.cs">
-          <DependentUpon>ConditionerDetailsView.xaml</DependentUpon>
+            <DependentUpon>ConditionerDetailsView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\HumidifierDetailsEditView.xaml.cs">
-          <DependentUpon>HumidifierDetailsEditView.xaml</DependentUpon>
+            <DependentUpon>HumidifierDetailsEditView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\HumidifierDetailsView.xaml.cs">
-          <DependentUpon>HumidifierDetailsView.xaml</DependentUpon>
+            <DependentUpon>HumidifierDetailsView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\PurificatorDetailsEditView.xaml.cs">
-          <DependentUpon>PurificatorDetailsEditView.xaml</DependentUpon>
+            <DependentUpon>PurificatorDetailsEditView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\PurificatorDetailsView.xaml.cs">
-          <DependentUpon>PurificatorDetailsView.xaml</DependentUpon>
+            <DependentUpon>PurificatorDetailsView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\RoomDetailsEditView.xaml.cs">
-          <DependentUpon>RoomDetailsEditView.xaml</DependentUpon>
+            <DependentUpon>RoomDetailsEditView.xaml</DependentUpon>
         </Compile>
         <Compile Include="ui\Views\RoomDetailsView.xaml.cs">
             <DependentUpon>RoomDetailsView.xaml</DependentUpon>
@@ -278,7 +279,6 @@
         <Compile Include="ui\Views\ConfigurationCreationView.xaml.cs">
             <DependentUpon>ConfigurationCreationView.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Data\DataProvider.cs" />
         <Compile Include="ui\Views\LogInView.xaml.cs">
             <DependentUpon>LogInView.xaml</DependentUpon>
             <SubType>Code</SubType>
@@ -320,10 +320,10 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\ModalControl\ModalControl.csproj">
-        <Project>{40414013-f495-45b3-8357-0b30d889672b}</Project>
-        <Name>ModalControl</Name>
-      </ProjectReference>
+        <ProjectReference Include="..\ModalControl\ModalControl.csproj">
+            <Project>{40414013-f495-45b3-8357-0b30d889672b}</Project>
+            <Name>ModalControl</Name>
+        </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

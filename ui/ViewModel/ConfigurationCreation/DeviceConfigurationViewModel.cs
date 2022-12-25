@@ -18,7 +18,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         private double _humidifierWaterConsumption;
         private double _purificatorAirFlow;
         private bool _purificatorStatus;
-        private RoomStore roomStore = RoomStore.getInstance();
+        private readonly RoomStore roomStore = RoomStore.getInstance();
 
         public DeviceConfigurationViewModel()
         {
@@ -115,7 +115,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             {
                 return _addConditioner ?? (_addConditioner = new RelayCommand(
                     _object => AddConditioner(),
-                    _object => ValidateConditioner()
+                    _object => true
                 ));
             }
         }
@@ -126,7 +126,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             {
                 return _addHumidifier ?? (_addHumidifier = new RelayCommand(
                     _object => AddHumidifier(),
-                    _object => ValidateHumidifier()
+                    _object => true
                 ));
             }
         }
@@ -137,7 +137,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             {
                 return _addPurificator ?? (_addPurificator = new RelayCommand(
                     _object => AddPurificator(),
-                    _object => ValidatePurificator()
+                    _object => true
                 ));
             }
         }
@@ -149,7 +149,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 var conditioner = new Conditioner(ConditionerStatus, ConditionerAirFlow, ConditionerMode,
                     ConditionerTemperature);
                 ConditionerValidator.Validate(conditioner);
-                roomStore.Room.Conditioners.Add(conditioner);
+                roomStore.Room.AddConditioner(conditioner);
                 RoomStore_RoomDevicesChanged?.Invoke();
             }
             catch (Exception ex)
@@ -164,7 +164,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             {
                 var humidifier = new Humidifier(HumidifierStatus, HumidifierWaterConsumption);
                 HumidifierValidator.Validate(humidifier);
-                roomStore.Room.Humidifiers.Add(humidifier);
+                roomStore.Room.AddHumidifier(humidifier);
                 RoomStore_RoomDevicesChanged?.Invoke();
             }
             catch (Exception ex)
@@ -177,30 +177,15 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
         {
             try
             {
-                Purificator purificator = new Purificator(PurificatorStatus, PurificatorAirFlow);
+                var purificator = new Purificator(PurificatorStatus, PurificatorAirFlow);
                 PurificatorValidator.Validate(purificator);
-                roomStore.Room.Purificators.Add(purificator);
+                roomStore.Room.AddPurificator(purificator);
                 RoomStore_RoomDevicesChanged?.Invoke();
             }
             catch (Exception ex)
             {
                 MessageBox_Show(null, ex.Message, "Error occured!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private bool ValidateConditioner()
-        {
-            return true;
-        }
-
-        private bool ValidateHumidifier()
-        {
-            return true;
-        }
-
-        private bool ValidatePurificator()
-        {
-            return true;
         }
 
         public event Action RoomStore_RoomDevicesChanged;

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ClimateControlSystem.ui.Views"
              xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.DeviceEditViewModels"
              xmlns:components="clr-namespace:ClimateControlSystem.Components"
              d:DataContext="{d:DesignInstance Type=viewmodels:RoomDetailsEditViewModel}"
@@ -18,19 +17,18 @@
     <Grid Width="400" Height="400">
 
         <Button Content="X" VerticalAlignment="Top" Margin="20" HorizontalAlignment="Right" Padding="10 5"
-                Command="{Binding CloseModalCommand}">
-        </Button>
+                Command="{Binding CloseModalCommand}" />
         <StackPanel Margin="20" VerticalAlignment="Center">
 
-            <TextBlock HorizontalAlignment="Center" 
-                       Text="{StaticResource EditRoomDetailsHeading}" 
-                       FontSize="20"/>
+            <TextBlock HorizontalAlignment="Center"
+                       Text="{StaticResource EditRoomDetailsHeading}"
+                       FontSize="20" />
             <Grid Margin="0 20 0 0 ">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{StaticResource ExpectedTemperatureLabel}"/>
+                <TextBlock Text="{StaticResource ExpectedTemperatureLabel}" />
                 <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
                                                Text="{Binding ExpectedTemperature}"
                                                Placeholder="{StaticResource EnterExpectedTemperaturePlaceholder}" />
@@ -41,7 +39,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{StaticResource ExpectedHumidityLabel}"></TextBlock>
+                <TextBlock Text="{StaticResource ExpectedHumidityLabel}" />
 
                 <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
                                                Text="{Binding ExpectedHumidity}"
@@ -52,7 +50,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{StaticResource ExpectedCarbonDioxideLabel}"></TextBlock>
+                <TextBlock Text="{StaticResource ExpectedCarbonDioxideLabel}" />
 
                 <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
                                                Text="{Binding ExpectedCarbonDioxide}"
@@ -65,8 +63,7 @@
                 </Grid.ColumnDefinitions>
             </Grid>
             <Button HorizontalAlignment="Center" Content="{StaticResource ConfirmButtonLabel}" Padding="35 10"
-                    Command="{Binding ConfirmEditCommand}">
-            </Button>
+                    Command="{Binding ConfirmEditCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

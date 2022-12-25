@@ -20,12 +20,6 @@ namespace ClimateControlSystem.Domain
             Array.Copy(hashBytes, SaltSize, _hash = new byte[HashSize], 0, HashSize);
         }
 
-        public PasswordHash(byte[] salt, byte[] hash)
-        {
-            Array.Copy(salt, 0, _salt = new byte[SaltSize], 0, SaltSize);
-            Array.Copy(hash, 0, _hash = new byte[HashSize], 0, HashSize);
-        }
-
         public byte[] Salt => (byte[])_salt.Clone();
         public byte[] Hash => (byte[])_hash.Clone();
 

@@ -7,24 +7,23 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 {
     public class RoomDetailsEditViewModel : ViewModelBase
     {
-        private double expectedTemperature;
-        private double expectedHumidity;
-        private double expectedCarbonDioxide;
-        private RelayCommand _confirmEditCommand;
-        private EditRoomValidator roomValidator = new EditRoomValidator();
-        private EditRoomUpdater roomUpdater = new EditRoomUpdater();
-
         private RelayCommand _closeModalCommand;
+        private RelayCommand _confirmEditCommand;
+        private double expectedCarbonDioxide;
+        private double expectedHumidity;
+        private double expectedTemperature;
+        private readonly EditRoomUpdater roomUpdater = new EditRoomUpdater();
+        private readonly EditRoomValidator roomValidator = new EditRoomValidator();
 
         public RoomDetailsEditViewModel()
         {
             roomValidator = new EditRoomValidator();
             roomUpdater = new EditRoomUpdater();
         }
-        
+
         public double ExpectedTemperature
         {
-            get { return expectedTemperature; }
+            get => expectedTemperature;
             set
             {
                 expectedTemperature = value;
@@ -34,7 +33,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 
         public double ExpectedHumidity
         {
-            get { return expectedHumidity; }
+            get => expectedHumidity;
             set
             {
                 expectedHumidity = value;
@@ -44,7 +43,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 
         public double ExpectedCarbonDioxide
         {
-            get { return expectedCarbonDioxide; }
+            get => expectedCarbonDioxide;
             set
             {
                 expectedCarbonDioxide = value;
@@ -81,7 +80,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
         {
             try
             {
-                roomValidator.Validate(ExpectedHumidity, ExpectedCarbonDioxide);
+                roomValidator.Validate(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide);
                 roomUpdater.Update(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide);
 
                 ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();

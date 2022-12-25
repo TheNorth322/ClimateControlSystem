@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
-        xmlns:components="clr-namespace:ClimateControlSystem.Components"
         xmlns:views="clr-namespace:ClimateControlSystem.ui.ViewModel.EnterConfigurationPath"
         d:DataContext="{d:DesignInstance Type=views:ConfigurationPathViewModel}"
         mc:Ignorable="d"

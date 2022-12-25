@@ -10,58 +10,60 @@ namespace ClimateControlSystemNamespace
         public ClimateControlSystem()
         {
             Rooms = new List<Room>();
-            ExpectedTemperature = 24;
-            ExpectedCarbonDioxideLevel = 600;
-            ExpectedHumidityLevel = 60;
         }
 
-        public ClimateControlSystem(List<Room> _rooms, double _expectedTemperature,
-            double _expectedCarbonDioxideLevel, double _expectedHumidityLevel)
+        public ClimateControlSystem(List<Room> _rooms)
         {
-            Rooms = _rooms;
-            ExpectedTemperature = _expectedTemperature;
-            ExpectedHumidityLevel = _expectedHumidityLevel;
-            ExpectedCarbonDioxideLevel = _expectedCarbonDioxideLevel;
+            Rooms = _rooms ?? throw new NullReferenceException("Rooms can't be null!");
         }
 
         // Properties 
         public List<Room> Rooms { get; }
         public byte[] PassCode { get; set; }
-        public double ExpectedTemperature { get; set; }
-        public double ExpectedCarbonDioxideLevel { get; set; }
-        public double ExpectedHumidityLevel { get; set; }
 
         public void UpdateRoomsData()
         {
             CompareExpectedToCurrent();
-            ChangeConditionersWorkingTemperature();  
+            ChangeConditionersWorkingTemperature();
             ChangeConditionersMode();
-            foreach (Room room in Rooms)
+            foreach (IRoom room in Rooms)
                 room.UpdateData();
+        }
+
+        public void AddRoom(Room _room)
+        {
+            if (_room != null)
+            {
+                Rooms.Add(_room);
+                return;
+            }
+
+            throw new NullReferenceException("Room can't be null!");
         }
 
         private void ChangeConditionersMode()
         {
-            foreach (Room room in Rooms)
+            foreach (IRoom room in Rooms)
             {
                 if (room.TemperatureSensor.Temperature > room.TemperatureSensor.ExpectedTemperature)
                 {
-                    foreach (Conditioner conditioner in room.Conditioners)
+                    foreach (IConditioner conditioner in room.Conditioners)
                         conditioner.TurnOnCoolingMode();
                     return;
                 }
 
-                foreach (Conditioner conditioner in room.Conditioners)
+                foreach (IConditioner conditioner in room.Conditioners)
                     conditioner.TurnOnHeatingMode();
             }
         }
 
         private void ChangeConditionersWorkingTemperature()
         {
-            foreach (Room room in Rooms)
-                foreach (Conditioner conditioner in room.Conditioners)
-                    conditioner.WorkingTemperature = ExpectedTemperature;
+            foreach (IRoom room in Rooms)
+            foreach (IConditioner conditioner in room.Conditioners)
+                conditioner.WorkingTemperature = room.TemperatureSensor.ExpectedTemperature;
         }
+
         private void TurnOff<T>(List<T> _list)
         {
             foreach (var item in _list)
@@ -90,7 +92,7 @@ namespace ClimateControlSystemNamespace
 
         private void CompareExpectedToCurrent()
         {
-            foreach (Room room in Rooms)
+            foreach (IRoom room in Rooms)
             {
                 if (Math.Abs(room.TemperatureSensor.Temperature - room.TemperatureSensor.ExpectedTemperature) <= 0.5)
                     TurnOff(room.Conditioners);
@@ -98,14 +100,14 @@ namespace ClimateControlSystemNamespace
                     TurnOn(room.Conditioners);
 
                 if (room.HumiditySensor.Humidity >= room.HumiditySensor.ExpectedHumidity)
-                   TurnOff(room.Humidifiers); 
+                    TurnOff(room.Humidifiers);
                 else
-                   TurnOn(room.Humidifiers); 
+                    TurnOn(room.Humidifiers);
 
                 if (room.CarbonDioxideSensor.CarbonDioxide <= room.CarbonDioxideSensor.ExpectedCarbonDioxide)
-                   TurnOff<Purificator>(room.Purificators); 
+                    TurnOff(room.Purificators);
                 else
-                   TurnOn<Purificator>(room.Purificators); 
+                    TurnOn(room.Purificators);
             }
         }
     }

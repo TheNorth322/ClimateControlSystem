@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Windows.Threading;
 using ClimateControlSystem.Domain.Updaters;
-using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
@@ -12,55 +10,36 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     public class ClimateControlSystemViewModel : ViewModelBase
     {
         private readonly ObservableCollection<RoomListingItemViewModel> _roomListingItemViewModels;
+
+        private readonly ClimateControlSystemRandomUpdater climateControlSystemRandomUpdater =
+            new ClimateControlSystemRandomUpdater();
+
+        private readonly ClimateControlSystemUpdater climateControlSystemUpdater = new ClimateControlSystemUpdater();
+
+        private RoomListingItemViewModel selectedRoomListingItemViewModel;
         private SelectedRoomStore _selectedRoomStore => SelectedRoomStore.getInstance();
         private EditViewModelStore _editViewModalStore => EditViewModelStore.getInstance();
         private SelectedViewModelStore _selectedViewModelStore => SelectedViewModelStore.getInstance();
-        private ClimateControlSystemUpdater climateControlSystemUpdater = new ClimateControlSystemUpdater();
-        private ClimateControlSystemRandomUpdater climateControlSystemRandomUpdater = new ClimateControlSystemRandomUpdater();
+        public ViewModelBase CurrentEditViewModel => _editViewModalStore.EditViewModel;
+        public ViewModelBase selectedViewModel => _selectedViewModelStore.SelectedViewModel;
+        public IEnumerable<RoomListingItemViewModel> RoomListingItemViewModels => _roomListingItemViewModels;
         
         private string _currentDate;
         private string _currentTime;
-
-        private RoomListingItemViewModel selectedRoomListingItemViewModel;
-        public ViewModelBase CurrentEditViewModel => _editViewModalStore.EditViewModel;
-        public ViewModelBase selectedViewModel => _selectedViewModelStore.SelectedViewModel;
-
-        private void OnCloseModalEvent()
-        {
-           CloseModalEvent?.Invoke(); 
-        }
         public ClimateControlSystemViewModel()
         {
             _roomListingItemViewModels = new ObservableCollection<RoomListingItemViewModel>();
             UpdateListing();
             _selectedViewModelStore.SelectedViewModelChanged += SelectedViewModelStore_SelectedViewModelChanged;
             _editViewModalStore.EditViewModelChanged += EditViewModelStore_EditViewModelChanged;
-            _editViewModalStore.CloseModalEvent += OnCloseModalEvent; 
+            _editViewModalStore.CloseModalEvent += OnCloseModalEvent;
             //SubscribeOnCloseModalEvent();
             var LiveTime = new DispatcherTimer();
             LiveTime.Interval = TimeSpan.FromSeconds(1);
-            LiveTime.Tick += timer_Tick;
+            LiveTime.Tick += TimerTick;
             LiveTime.Start();
         }
 
-        private void EditViewModelStore_EditViewModelChanged()
-        {
-           OnPropertyChange(nameof(CurrentEditViewModel));
-           OpenModalEvent?.Invoke();
-        }
-        protected override void Dispose()
-        {
-            _selectedViewModelStore.SelectedViewModelChanged -= SelectedViewModelStore_SelectedViewModelChanged;
-            _editViewModalStore.EditViewModelChanged -= EditViewModelStore_EditViewModelChanged;
-            _editViewModalStore.CloseModalEvent -= OnCloseModalEvent; 
-            base.Dispose();
-        } 
-        private void SelectedViewModelStore_SelectedViewModelChanged()
-        {
-            OnPropertyChange(nameof(selectedViewModel));
-        }
-        public IEnumerable<RoomListingItemViewModel> RoomListingItemViewModels => _roomListingItemViewModels;
-            
         public RoomListingItemViewModel SelectedRoomListingItemViewModel
         {
             get => selectedRoomListingItemViewModel;
@@ -68,7 +47,8 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             {
                 selectedRoomListingItemViewModel = value;
                 _selectedRoomStore.SelectedRoom = selectedRoomListingItemViewModel.Room;
-                _selectedViewModelStore.SelectedViewModel = new RoomDetailsViewModel(selectedRoomListingItemViewModel.PlotPointsStore);
+                _selectedViewModelStore.SelectedViewModel =
+                    new RoomDetailsViewModel(selectedRoomListingItemViewModel.PlotPointsStore);
                 OnPropertyChange(nameof(SelectedRoomListingItemViewModel));
             }
         }
@@ -93,23 +73,45 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             }
         }
 
+        private void OnCloseModalEvent()
+        {
+            CloseModalEvent?.Invoke();
+        }
+
+        private void EditViewModelStore_EditViewModelChanged()
+        {
+            OnPropertyChange(nameof(CurrentEditViewModel));
+            OpenModalEvent?.Invoke();
+        }
+
+        protected override void Dispose()
+        {
+            _selectedViewModelStore.SelectedViewModelChanged -= SelectedViewModelStore_SelectedViewModelChanged;
+            _editViewModalStore.EditViewModelChanged -= EditViewModelStore_EditViewModelChanged;
+            _editViewModalStore.CloseModalEvent -= OnCloseModalEvent;
+            base.Dispose();
+        }
+
+        private void SelectedViewModelStore_SelectedViewModelChanged()
+        {
+            OnPropertyChange(nameof(selectedViewModel));
+        }
+
         private void UpdateListing()
         {
             _roomListingItemViewModels.Clear();
-            int roomIndex = 0;
             foreach (var room in ClimateControlSystemStore.getInstance().ClimateControlSystem.Rooms)
-            {
                 _roomListingItemViewModels.Add(new RoomListingItemViewModel(room));
-                roomIndex++;
-            }
         }
+
         public void SerializeClimateControlSystem()
         {
-            ClimateControlSystemSerializer serializer = new ClimateControlSystemSerializer();
-            serializer.Serialize(ClimateControlSystemStore.getInstance().ClimateControlSystem, ConfigurationPathStore.getInstance().Path);
+            var serializer = new ClimateControlSystemSerializer();
+            serializer.Serialize(ClimateControlSystemStore.getInstance().ClimateControlSystem,
+                ConfigurationPathStore.getInstance().Path);
         }
-        
-        private void timer_Tick(object sender, EventArgs e)
+
+        private void TimerTick(object sender, EventArgs e)
         {
             switch (DateTime.Now.Second)
             {
@@ -120,6 +122,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
                     climateControlSystemRandomUpdater.Update();
                     break;
             }
+
             switch (DateTime.Now.Hour)
             {
                 case 1:
@@ -139,6 +142,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             CurrentTime = DateTime.Now.ToString("HH:mm:ss");
             CurrentDate = DateTime.Now.ToString("MM/dd/yyyy");
         }
+
         public event Action CloseModalEvent;
         public event Action OpenModalEvent;
     }

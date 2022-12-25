@@ -21,7 +21,7 @@ namespace ClimateControlSystemNamespace
 
         public double ProvideHumidity()
         {
-            return (IsOn) ? WaterConsumption : 0; 
+            return IsOn ? WaterConsumption : 0;
         }
     }
 }

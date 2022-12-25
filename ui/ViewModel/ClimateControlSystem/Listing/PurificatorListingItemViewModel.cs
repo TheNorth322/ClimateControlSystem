@@ -8,6 +8,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         {
             Purificator = purificator;
         }
+
         public IPurificator Purificator { get; }
 
         public string Name => "Purificator";

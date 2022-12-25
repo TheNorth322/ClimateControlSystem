@@ -8,8 +8,9 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         {
             Humidifier = humidifier;
         }
-        public IHumidifier Humidifier{ get; }
-        
+
+        public IHumidifier Humidifier { get; }
+
         public string Name => "Humidifier";
     }
 }

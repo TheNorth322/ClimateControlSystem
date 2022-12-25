@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using ClimateControlSystemNamespace;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
@@ -13,17 +9,30 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
     {
         private readonly ObservableCollection<ConditionerListingItemViewModel> _conditionerListingItemViewModels;
 
+        private readonly ObservableCollection<HumidifierListingItemViewModel> _humidifierListingItemViewModels;
+
+        private readonly ObservableCollection<PurificatorListingItemViewModel> _purificatorListingItemViewModels;
+
+        private ViewModelBase _selectedViewModel;
+
+        public PlotPointsStore PlotPointsStore;
+
+        public RoomListingItemViewModel(Room room)
+        {
+            Room = room;
+            _conditionerListingItemViewModels = new ObservableCollection<ConditionerListingItemViewModel>();
+            _humidifierListingItemViewModels = new ObservableCollection<HumidifierListingItemViewModel>();
+            _purificatorListingItemViewModels = new ObservableCollection<PurificatorListingItemViewModel>();
+            _climateControlSystemStore.ClimateControlSystemContentsChanged += OnClimateControlSystemContentsChanged;
+            PlotPointsStore = new PlotPointsStore();
+            UpdateListing();
+        }
+
         public IEnumerable<ConditionerListingItemViewModel> ConditionerListingItemViewModels =>
             _conditionerListingItemViewModels;
 
-        public PlotPointsStore PlotPointsStore;
-        
-        private readonly ObservableCollection<HumidifierListingItemViewModel> _humidifierListingItemViewModels;
-
         public IEnumerable<HumidifierListingItemViewModel> HumidifierListingItemViewModels =>
             _humidifierListingItemViewModels;
-
-        private readonly ObservableCollection<PurificatorListingItemViewModel> _purificatorListingItemViewModels;
 
         public IEnumerable<PurificatorListingItemViewModel> PurificatorListingItemViewModels =>
             _purificatorListingItemViewModels;
@@ -33,17 +42,15 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         private SelectedPurificatorStore _selectedPurificatorStore => SelectedPurificatorStore.getInstance();
         private SelectedViewModelStore _selectedViewModelStore => SelectedViewModelStore.getInstance();
         private ClimateControlSystemStore _climateControlSystemStore => ClimateControlSystemStore.getInstance();
-        
-        private ViewModelBase _selectedViewModel;
 
         public ViewModelBase SelectedViewModel
         {
-            get { return _selectedViewModel; }
+            get => _selectedViewModel;
 
             set
             {
                 _selectedViewModel = value;
-                Type t = _selectedViewModel.GetType();
+                var t = _selectedViewModel.GetType();
                 if (t == typeof(ConditionerListingItemViewModel))
                 {
                     _selectedConditionerStore.SelectedConditioner =
@@ -69,30 +76,25 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             }
         }
 
-        public RoomListingItemViewModel(Room room)
-        {
-            Room = room;
-            _conditionerListingItemViewModels = new ObservableCollection<ConditionerListingItemViewModel>();
-            _humidifierListingItemViewModels = new ObservableCollection<HumidifierListingItemViewModel>();
-            _purificatorListingItemViewModels = new ObservableCollection<PurificatorListingItemViewModel>();
-            _climateControlSystemStore.ClimateControlSystemContentsChanged += OnClimateControlSystemContentsChanged; 
-            PlotPointsStore = new PlotPointsStore();            
-            UpdateListing();
-        }
+
+        public Room Room { get; }
+
+        public string Name => Room.Name;
 
         private void OnClimateControlSystemContentsChanged()
         {
             PlotPointsStore.SeriesCollection[0].Values.Add(Room.TemperatureSensor.Temperature);
-            PlotPointsStore.SeriesCollection[1].Values.Add(Room.HumiditySensor.Humidity);  
+            PlotPointsStore.SeriesCollection[1].Values.Add(Room.HumiditySensor.Humidity);
             PlotPointsStore.SeriesCollection[2].Values.Add(Room.CarbonDioxideSensor.CarbonDioxide);
-            
+
             if (PlotPointsStore.Axis.Count == 0)
-                PlotPointsStore.Axis.Add(0); 
-            else 
+                PlotPointsStore.Axis.Add(0);
+            else
                 PlotPointsStore.Axis.Add(PlotPointsStore.Axis.Last() + 1);
-            
+
             PlotPointsStore.PointsContentsChangedInvoke();
         }
+
         private void UpdateListing()
         {
             _conditionerListingItemViewModels.Clear();
@@ -107,10 +109,5 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
                 _purificatorListingItemViewModels.Add(
                     new PurificatorListingItemViewModel(_purificator));
         }
-
-
-        public Room Room { get; }
-
-        public string Name => Room.Name;
     }
 }

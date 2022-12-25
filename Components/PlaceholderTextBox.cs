@@ -5,10 +5,11 @@ namespace ClimateControlSystem.Components
 {
     public class PlaceholderTextBox : TextBox
     {
-        private string StartText;
+        private readonly string StartText;
+
         public PlaceholderTextBox()
         {
-            StartText = this.Text;
+            StartText = Text;
         }
 
         public string Placeholder { get; set; }

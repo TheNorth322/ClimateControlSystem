@@ -17,6 +17,7 @@ namespace ClimateControlSystemNamespace
 
         public double Temperature { get; set; }
         public double ExpectedTemperature { get; set; }
+
         public double ProvideData()
         {
             return Temperature;

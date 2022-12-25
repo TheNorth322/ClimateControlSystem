@@ -53,7 +53,7 @@
                 Style="{StaticResource PlaceholderTextBoxStyle}" />
 
             <Label Grid.Column="0"
-                   Content="{StaticResource PathLabel}"
+                   Content="{StaticResource PassCodeLabel}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom" />
             <components:PlaceholderTextBox

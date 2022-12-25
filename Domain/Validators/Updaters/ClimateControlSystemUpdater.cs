@@ -9,13 +9,14 @@ namespace ClimateControlSystem.Domain.Updaters
 
         public void UpdateLightLevels(LightLevel _lightLevel)
         {
-            foreach (Room room in climateControlSystemStore.ClimateControlSystem.Rooms)
+            foreach (var room in climateControlSystemStore.ClimateControlSystem.Rooms)
                 room.UpdateLightLevel(_lightLevel);
         }
+
         public void Update()
         {
-           climateControlSystemStore.ClimateControlSystem.UpdateRoomsData();
-           climateControlSystemStore.ClimateControlSystemContentsChangedInvoke();
-        } 
+            climateControlSystemStore.ClimateControlSystem.UpdateRoomsData();
+            climateControlSystemStore.ClimateControlSystemContentsChangedInvoke();
+        }
     }
 }

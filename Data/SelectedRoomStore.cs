@@ -6,13 +6,13 @@ namespace ClimateControlSystemNamespace
     {
         private static SelectedRoomStore instance;
 
-        private Room selectedRoom;
+        private IRoom selectedRoom;
 
         private SelectedRoomStore()
         {
         }
 
-        public Room SelectedRoom
+        public IRoom SelectedRoom
         {
             get => selectedRoom;
             set

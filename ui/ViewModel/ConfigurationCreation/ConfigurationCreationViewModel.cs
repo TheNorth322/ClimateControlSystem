@@ -13,7 +13,6 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 
         private RelayCommand _addRoom;
         private RelayCommand _createConfiguration;
-        private RoomStore roomStore => RoomStore.getInstance();
         private string _passCode;
         private string _path;
 
@@ -27,7 +26,9 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             DeviceViewModel.RoomStore_RoomDevicesChanged += RoomStore_RoomChanged;
         }
 
-        public ClimateControlSystemSerializer ClimateControlSystemSerializer { get; }
+        private RoomStore roomStore => RoomStore.getInstance();
+
+        private ClimateControlSystemSerializer ClimateControlSystemSerializer { get; }
 
         public string Path
         {
@@ -37,13 +38,6 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
                 _path = value;
                 OnPropertyChange(nameof(Path));
             }
-        }
-
-        protected override void Dispose()
-        {
-            roomStore.RoomChanged -= RoomStore_RoomChanged;
-            DeviceViewModel.RoomStore_RoomDevicesChanged -= RoomStore_RoomChanged;
-            base.Dispose();
         }
 
         public string PassCode
@@ -83,20 +77,27 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
 
         public Action Close { get; set; }
 
+        protected override void Dispose()
+        {
+            roomStore.RoomChanged -= RoomStore_RoomChanged;
+            DeviceViewModel.RoomStore_RoomDevicesChanged -= RoomStore_RoomChanged;
+            base.Dispose();
+        }
 
-        public bool ValidateRoom()
+
+        private bool ValidateRoom()
         {
             // TODO
             return true;
         }
 
-        public void AddRoom()
+        private void AddRoom()
         {
             try
             {
                 AddRoomData();
                 RoomValidator.Validate(roomStore.Room);
-                ClimateControlSystem.Rooms.Add(roomStore.Room);
+                ClimateControlSystem.AddRoom(roomStore.Room);
                 roomStore.Clear();
             }
             catch (Exception e)
@@ -105,12 +106,14 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             }
         }
 
-        public bool ValidateClimateControlSystem()
+        private bool ValidateClimateControlSystem()
         {
-            return !string.IsNullOrWhiteSpace(Path) && !string.IsNullOrWhiteSpace(PassCode);
+            return !string.IsNullOrWhiteSpace(Path)
+                   && !string.IsNullOrWhiteSpace(PassCode)
+                   && ClimateControlSystem.Rooms.Count != 0;
         }
 
-        public void AddRoomData()
+        private void AddRoomData()
         {
             roomStore.Room.Area = RoomViewModel.Area;
             roomStore.Room.Name = RoomViewModel.Name;
@@ -126,7 +129,7 @@ namespace ClimateControlSystem.ui.ViewModel.ConfigurationCreation
             OnPropertyChange(nameof(roomStore));
         }
 
-        public void CreateConfiguration()
+        private void CreateConfiguration()
         {
             try
             {

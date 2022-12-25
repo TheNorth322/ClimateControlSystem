@@ -4,6 +4,6 @@
     {
         double AirFlow { get; set; }
 
-        double ReceivePurification();
+        double ProvidePurification();
     }
 }

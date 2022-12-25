@@ -7,13 +7,13 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 {
     public class ConditionerDetailsEditViewModel : ViewModelBase
     {
-        private double _workingTemperature;
-        private bool _status;
-        private ConditionerMode _mode;
-        private RelayCommand _confirmEditCommand;
-        private EditConditionerValidator conditionerValidator;
-        private EditConditionerUpdater conditionerUpdater;
         private RelayCommand _closeModalCommand;
+        private RelayCommand _confirmEditCommand;
+        private ConditionerMode _mode;
+        private bool _status;
+        private double _workingTemperature;
+        private readonly EditConditionerUpdater conditionerUpdater;
+        private readonly EditConditionerValidator conditionerValidator;
 
         public ConditionerDetailsEditViewModel()
         {
@@ -23,7 +23,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 
         public double WorkingTemperature
         {
-            get { return _workingTemperature; }
+            get => _workingTemperature;
             set
             {
                 _workingTemperature = value;
@@ -33,7 +33,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 
         public bool Status
         {
-            get { return _status; }
+            get => _status;
             set
             {
                 _status = value;
@@ -43,7 +43,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
 
         public ConditionerMode Mode
         {
-            get { return _mode; }
+            get => _mode;
             set
             {
                 _mode = value;
@@ -61,11 +61,6 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             }
         }
 
-        private void CloseModal()
-        {
-            EditViewModelStore.getInstance().CloseModal();
-        }
-
         public RelayCommand ConfirmEditCommand
         {
             get
@@ -74,6 +69,11 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
                     _object => ConfirmEdit(),
                     _object => ValidateData());
             }
+        }
+
+        private void CloseModal()
+        {
+            EditViewModelStore.getInstance().CloseModal();
         }
 
         private void ConfirmEdit()

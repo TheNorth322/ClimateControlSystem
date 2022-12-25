@@ -1,6 +1,5 @@
 ﻿using System;
 using ClimateControlSystem.ui.ViewModel;
-using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
 using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 
 namespace ClimateControlSystemNamespace
@@ -35,8 +34,9 @@ namespace ClimateControlSystemNamespace
 
         public void CloseModal()
         {
-           CloseModalEvent?.Invoke(); 
+            CloseModalEvent?.Invoke();
         }
+
         public event Action CloseModalEvent;
         public event Action EditViewModelChanged;
     }

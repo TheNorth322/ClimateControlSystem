@@ -13,6 +13,7 @@ namespace ClimateControlSystem.ui.Views
             (DataContext as HumidifierDetailsEditViewModel).MessageBoxRequest +=
                 ViewMessageBoxRequest;
         }
+
         private void ViewMessageBoxRequest(object sender, MessageBoxEventArgs e)
         {
             e.Show();
