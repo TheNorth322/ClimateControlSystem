@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Media;
 using ClimateControlSystem.ui.ViewModel.DeviceEditViewModels;
 using ClimateControlSystemNamespace;
+using LiveCharts;
 
 namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 {
@@ -13,6 +15,7 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         {
             PointsStore = _pointsStore;
             _selectedRoomStore.SelectedRoomChanged += UpdateContents;
+            PointsStore.PointsContentsChanged += OnPointsContentsChanged;
             ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged += UpdateContents;
         }
 
@@ -31,11 +34,14 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         public string ExpectedCarbonDioxide =>
             SelectedRoom?.CarbonDioxideSensor.ExpectedCarbonDioxide.ToString() ?? "Unknown";
 
-        public PlotPointsStore PointsStore;
+        private PlotPointsStore PointsStore;
+        public SeriesCollection SeriesCollection => PointsStore.SeriesCollection;
+        public List<double> Axis => PointsStore.Axis;
         protected override void Dispose()
         {
             _selectedRoomStore.SelectedRoomChanged -= UpdateContents;
             ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChanged -= UpdateContents;
+            PointsStore.PointsContentsChanged -= OnPointsContentsChanged;
             base.Dispose();
         }
 
@@ -50,8 +56,6 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             }
         }
 
-        
-
         private bool ValidateSelectedRoom()
         {
             return (SelectedRoom != null);
@@ -62,6 +66,10 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
             EditViewModelStore.getInstance().EditViewModel = new RoomDetailsEditViewModel();
         }
 
+        private void OnPointsContentsChanged()
+        {
+            
+        }
         private void UpdateContents()
         {
             OnPropertyChange(nameof(Name));

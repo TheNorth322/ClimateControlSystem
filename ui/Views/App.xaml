@@ -5,9 +5,10 @@
              xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
              xmlns:views="clr-namespace:ClimateControlSystem.ui.Views">
     <Application.Resources>
+        
         <local:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
         <local:EnumConverter x:Key="EnumConverter" />
-        
+
         <Style TargetType="TextBox" x:Key="DetailsTextBoxStyle">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />

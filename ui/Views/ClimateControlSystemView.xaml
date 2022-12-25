@@ -10,6 +10,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:ClimateControlSystemViewModel}"
         mc:Ignorable="d"
         Title="ClimateControlSystemView" Height="700" Width="1200">
+    
     <Window.Resources>
         <DataTemplate DataType="{x:Type editvms:RoomDetailsEditViewModel}">
             <views:RoomDetailsEditView />
@@ -35,12 +36,13 @@
         <DataTemplate DataType="{x:Type viewmodels:PurificatorDetailsViewModel}">
             <views:PurificatorDetailsView />
         </DataTemplate>
+        
     </Window.Resources>
     <Grid>
         <modalControl:Modal
             x:Name="Modal"
             Panel.ZIndex="10"
-            Content="{Binding CurrentEditViewModel}" >
+            Content="{Binding CurrentEditViewModel}">
         </modalControl:Modal>
         <Grid Margin="20 0 20 20">
             <Grid.RowDefinitions>
@@ -57,13 +59,11 @@
 
                 <TextBlock
                     Grid.Column="0"
-                    x:Name="ClimateControlSystemTextBlock"
                     Text="ClimateControlSystem"
                     FontSize="32" />
                 <TextBox
                     Grid.Column="1"
                     Margin="0 0 20 0"
-                    x:Name="DateTextBox"
                     Text="{Binding CurrentTime}"
                     Style="{StaticResource DateTimeTextBoxStyle}" />
                 <TextBox
@@ -85,7 +85,6 @@
                         CornerRadius="5">
                         <Grid>
                             <ListView BorderThickness="0"
-                                      Name="RoomsListView"
                                       HorizontalAlignment="Stretch"
                                       ItemsSource="{Binding RoomListingItemViewModels}"
                                       SelectedItem="{Binding SelectedRoomListingItemViewModel, Mode=TwoWay}"
@@ -115,7 +114,7 @@
                                                             <Setter Property="Padding" Value="20 5" />
                                                         </Style>
                                                     </Menu.ItemContainerStyle>
-                                                    <MenuItem Name="ConditionersMenuItem" Header="Conditioners" 
+                                                    <MenuItem Name="ConditionersMenuItem" Header="Conditioners"
                                                               FontSize="10" Padding="10 10 ">
                                                         <ListView BorderThickness="0"
                                                                   Name="ConditionersListView"
@@ -173,7 +172,7 @@
                                                             </ListView.ItemTemplate>
                                                         </ListView>
                                                     </MenuItem>
-                                                    <MenuItem x:Name="PurificatorsMenuItem" Header="Purificators" 
+                                                    <MenuItem x:Name="PurificatorsMenuItem" Header="Purificators"
                                                               FontSize="10" Padding="10 10 ">
                                                         <ListView BorderThickness="0"
                                                                   x:Name="PurificatorsListView"

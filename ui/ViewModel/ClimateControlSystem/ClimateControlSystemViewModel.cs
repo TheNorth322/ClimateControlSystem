@@ -24,7 +24,6 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         private RoomListingItemViewModel selectedRoomListingItemViewModel;
         public ViewModelBase CurrentEditViewModel => _editViewModalStore.EditViewModel;
         public ViewModelBase selectedViewModel => _selectedViewModelStore.SelectedViewModel;
-        public int SelectedRoomIndex { get; set; }
 
         private void OnCloseModalEvent()
         {
@@ -112,10 +111,31 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
         
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (DateTime.Now.Second == 0)
-                climateControlSystemUpdater.Update();
-            if (DateTime.Now.Second == 30)
-                climateControlSystemRandomUpdater.Update();
+            switch (DateTime.Now.Second)
+            {
+                case 0:
+                    climateControlSystemUpdater.Update();
+                    break;
+                case 30:
+                    climateControlSystemRandomUpdater.Update();
+                    break;
+            }
+            switch (DateTime.Now.Hour)
+            {
+                case 1:
+                    climateControlSystemUpdater.UpdateLightLevels(LightLevel.LowIllumination);
+                    break;
+                case 10:
+                    climateControlSystemUpdater.UpdateLightLevels(LightLevel.AverageIllumination);
+                    break;
+                case 14:
+                    climateControlSystemUpdater.UpdateLightLevels(LightLevel.HighIllumination);
+                    break;
+                case 19:
+                    climateControlSystemUpdater.UpdateLightLevels(LightLevel.LowIllumination);
+                    break;
+            }
+
             CurrentTime = DateTime.Now.ToString("HH:mm:ss");
             CurrentDate = DateTime.Now.ToString("MM/dd/yyyy");
         }

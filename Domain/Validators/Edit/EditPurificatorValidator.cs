@@ -6,7 +6,7 @@ namespace ClimateControlSystem.Domain
     {
         public void Validate(bool status, double airFlow)
         {
-            if (airFlow <= 0)
+            if (airFlow <= 0 || airFlow >= 100)
                 throw new ArgumentException("Wrong air flow value!");
         }
     }

@@ -1,48 +1,54 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace ClimateControlSystemNamespace
 {
     public class PlotPointsStore
     {
-        private PointCollection _temperaturePoints;
-        private PointCollection _humidityPoints;
-        private PointCollection _carbonDioxidePoints;
-
+        private SeriesCollection seriesCollection;
+        private List<double> axis;
         public PlotPointsStore()
         {
-            _temperaturePoints = new PointCollection();
-            _humidityPoints = new PointCollection();
-            _carbonDioxidePoints = new PointCollection();
+            axis = new List<double>();
+            seriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Temperature",
+                    Values = new ChartValues<double>()
+                },
+                new LineSeries
+                {
+                    Title = "Humidity",
+                    Values = new ChartValues<double>()
+                },
+                new LineSeries
+                {
+                    Title = "CarbonDioxide",
+                    Values = new ChartValues<double>()
+                }
+            };
         }
 
-        public PointCollection TemperaturePoints
+        public List<double> Axis
         {
-            get { return _temperaturePoints; }
+            get { return axis; }
             set
             {
-                _temperaturePoints = value;
-                PointsChanged?.Invoke();
+                axis = value;
+                SeriesCollectionChanged?.Invoke(); 
             }
         }
-
-        public PointCollection HumidityPoints
+        public SeriesCollection SeriesCollection 
         {
-            get { return _humidityPoints; }
+            get { return seriesCollection; }
             set
             {
-                _humidityPoints = value;
-                PointsChanged?.Invoke();
-            }
-        }
-
-        public PointCollection CarbonDioxidePoints
-        {
-            get { return _carbonDioxidePoints; }
-            set
-            {
-                _carbonDioxidePoints = value;
-                PointsChanged?.Invoke();
+                seriesCollection = value;
+                SeriesCollectionChanged?.Invoke();
             }
         }
 
@@ -51,7 +57,7 @@ namespace ClimateControlSystemNamespace
             PointsContentsChanged?.Invoke();
         }
         
-        public event Action PointsChanged;
+        public event Action SeriesCollectionChanged;
         public event Action PointsContentsChanged;
     }
 }

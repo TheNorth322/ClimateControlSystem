@@ -8,6 +8,13 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:PurificatorDetailsViewModel}"
              mc:Ignorable="d"
              Height="450" Width="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -19,7 +26,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" FontSize="32" Text="Purificator" />
+        <TextBlock Grid.Row="0" FontSize="32" Text="{StaticResource PurificatorLabel}" />
 
         <Grid Grid.Row="1" Margin="0 10 0 0 ">
             <Grid>
@@ -38,7 +45,7 @@
                     Grid.Column="0"
                     Grid.Row="0"
                     VerticalAlignment="Center"
-                    Text="Air flow" />
+                    Text="{StaticResource AirFlowLabel}" />
 
                 <TextBox
                     Grid.Row="0"
@@ -54,7 +61,7 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    Text="Is on?" />
+                    Text="{StaticResource IsOnLabel}" />
                 <TextBox Grid.Row="2" Grid.Column="1"
                          IsReadOnly="True"
                          HorizontalAlignment="Left"
@@ -63,7 +70,7 @@
                          Text="{Binding PurificatorStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button Grid.Row="3" Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Right"
-                        MinHeight="30" MinWidth="100" Content="Edit" Margin="20 10 0 0" />
+                        MinHeight="30" MinWidth="100" Content="{StaticResource EditButtonLabel}" Margin="20 10 0 0" />
             </Grid>
         </Grid>
     </Grid>

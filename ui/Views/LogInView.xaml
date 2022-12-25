@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.LogIn"
+        xmlns:components="clr-namespace:ClimateControlSystem.Components"
         d:DataContext="{d:DesignInstance Type=viewmodels:LogInViewModel}"
         mc:Ignorable="d"
         Title="User verification" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -15,15 +23,14 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0"
-               x:Name="PasscodeLabel"
                Style="{StaticResource HeadingLabelStyle}"
-               Content="Enter Passcode"
+               Content="{StaticResource EnterPassCodeHeading}"
                FontSize="26px"
                VerticalAlignment="Center" />
 
-        <TextBox
+        <components:PlaceholderTextBox
+            Placeholder="{StaticResource EnterPassCodePlaceholder}"
             Grid.Row="1"
-            x:Name="PasscodeTextBox"
             MinWidth="500"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Text="{Binding PassCode, UpdateSourceTrigger=PropertyChanged}"
@@ -32,10 +39,8 @@
 
         <Button
             Grid.Row="2"
-            x:Name="LogInButton"
             Style="{StaticResource ButtonStyle}"
             Command="{Binding LogInCommand}"
-            Content="Log in" />
-
+            Content="{StaticResource LogInButtonLabel}" />
     </Grid>
 </Window>

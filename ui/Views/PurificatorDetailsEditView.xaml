@@ -9,18 +9,25 @@
              mc:Ignorable="d"
              d:DesignWidth="400"
              FontSize="14">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Width="400" Height="400">
         
             <Button Content="X" VerticalAlignment="Top" Margin="20" HorizontalAlignment="Right" Padding="10 5" Command="{Binding CloseModalCommand}"></Button>
         <StackPanel Margin="20" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" Text="Edit purificator details" FontSize="20"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" Text="{StaticResource EditPurificatorDetailsHeading}" FontSize="20"></TextBlock>
             
             <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Purificator Status"></TextBlock>
+                <TextBlock Text="{StaticResource IsOnLabel}"></TextBlock>
                 <RadioButton Grid.Column="1"
                     GroupName="PurificatorRadioButtons"
                     HorizontalAlignment="Right"
@@ -28,7 +35,7 @@
                     Content="On"
                     IsChecked="{Binding Status}"/>
                 <RadioButton Grid.Column="1" GroupName="PurificatorRadioButtons" HorizontalAlignment="Right" Margin="0 10 0 0"
-                             Content="Off"
+                             Content="{StaticResource OffLabel}"
                              IsChecked="{Binding Status, Converter={StaticResource RadioButtonCheckedConverter}}" />
             </Grid>
             <Grid Margin="0 20 0 0">
@@ -37,7 +44,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Button HorizontalAlignment="Center" Content="Confirm" Padding="35 10" Command="{Binding ConfirmEditCommand}"></Button>
+            <Button HorizontalAlignment="Center" Content="{StaticResource ConfirmButtonLabel}" Padding="35 10" Command="{Binding ConfirmEditCommand}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

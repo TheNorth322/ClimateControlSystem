@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 using ClimateControlSystem.ui.ViewModel;
 using ClimateControlSystem.ui.ViewModel.ClimateControlSystem;
 
@@ -12,7 +13,7 @@ namespace ClimateControlSystemNamespace
 
         private SelectedViewModelStore()
         {
-            selectedViewModel = new RoomDetailsViewModel(null);
+            selectedViewModel = new RoomDetailsViewModel(new PlotPointsStore());
         }
 
         public ViewModelBase SelectedViewModel

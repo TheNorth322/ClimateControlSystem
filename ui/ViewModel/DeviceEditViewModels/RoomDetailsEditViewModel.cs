@@ -81,7 +81,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
         {
             try
             {
-                roomValidator.Validate(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide);
+                roomValidator.Validate(ExpectedHumidity, ExpectedCarbonDioxide);
                 roomUpdater.Update(ExpectedTemperature, ExpectedHumidity, ExpectedCarbonDioxide);
 
                 ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();

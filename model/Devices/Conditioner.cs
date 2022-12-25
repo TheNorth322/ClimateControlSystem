@@ -37,12 +37,7 @@ namespace ClimateControlSystemNamespace
         
         public double ProvideHeat()
         {
-            if (!IsOn)
-                return 0;
-            
-            return (ConditionerMode == ConditionerMode.Heating)
-                ? WorkingTemperature * AirFlow
-                : WorkingTemperature * AirFlow;
+            return (IsOn) ? WorkingTemperature * AirFlow : 0;
         }
     }
 }

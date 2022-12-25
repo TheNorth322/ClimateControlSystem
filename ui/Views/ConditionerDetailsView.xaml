@@ -1,13 +1,20 @@
 ﻿<UserControl x:Class="ClimateControlSystem.ui.Views.ConditionerDetailsView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:ClimateControlSystem.ui.Views"
-      xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
-      d:DataContext="{d:DesignInstance Type=viewmodels:ConditionerDetailsViewModel}"
-      mc:Ignorable="d"
-      Height="450" Width="800">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ClimateControlSystem.ui.Views"
+             xmlns:viewmodels="clr-namespace:ClimateControlSystem.ui.ViewModel.ClimateControlSystem"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ConditionerDetailsViewModel}"
+             mc:Ignorable="d"
+             Height="450" Width="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -19,7 +26,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" FontSize="32" Text="Conditioner" />
+        <TextBlock Grid.Row="0" FontSize="32" Text="{StaticResource ConditionerLabel}" />
 
         <Grid Grid.Row="1" Margin="0 10 0 0 ">
             <Grid Width="Auto">
@@ -39,7 +46,7 @@
                     Grid.Column="0"
                     Grid.Row="0"
                     VerticalAlignment="Center"
-                    Text="Working temperature" />
+                    Text="{StaticResource WorkingTemperatureLabel}" />
 
                 <TextBox
                     Grid.Row="0"
@@ -55,7 +62,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    Text="Air flow" />
+                    Text="{StaticResource AirFlowLabel}" />
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
@@ -68,9 +75,9 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    Text="Conditioner mode" />
+                    Text="{StaticResource ConditionerModelLabel}" />
 
-                <TextBox Grid.Row="2" Grid.Column="1" x:Name="ConditionerModeComboBox"
+                <TextBox Grid.Row="2" Grid.Column="1" 
                          Style="{StaticResource DetailsTextBoxStyle}"
                          Padding="15 5"
                          IsReadOnly="True"
@@ -83,7 +90,7 @@
                     Grid.Row="3"
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    Text="Is on?" />
+                    Text="{StaticResource IsOnLabel}" />
                 <TextBox
                     Grid.Row="3"
                     Grid.Column="1"
@@ -92,7 +99,9 @@
                     Margin="20 10 0 0"
                     Style="{StaticResource DetailsTextBoxStyle}"
                     Text="{Binding ConditionerStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Grid.Row="4" Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Right" MinHeight="30" MinWidth="100" Content="Edit" Margin="20 10 0 0"></Button>
+                <Button Grid.Row="4" Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Right"
+                        MinHeight="30" MinWidth="100" Content="{StaticResource EditButtonLabel}" Margin="20 10 0 0">
+                </Button>
             </Grid>
         </Grid>
     </Grid>

@@ -8,21 +8,32 @@
              xmlns:components="clr-namespace:ClimateControlSystem.Components"
              d:DataContext="{d:DesignInstance Type=viewmodels:RoomDetailsEditViewModel}"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Width="400" Height="400">
 
-            <Button Content="X" VerticalAlignment="Top" Margin="20" HorizontalAlignment="Right" Padding="10 5" Command="{Binding CloseModalCommand}"></Button>
+        <Button Content="X" VerticalAlignment="Top" Margin="20" HorizontalAlignment="Right" Padding="10 5"
+                Command="{Binding CloseModalCommand}">
+        </Button>
         <StackPanel Margin="20" VerticalAlignment="Center">
 
-            <TextBlock HorizontalAlignment="Center" Text="Edit room details" FontSize="20"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" 
+                       Text="{StaticResource EditRoomDetailsHeading}" 
+                       FontSize="20"/>
             <Grid Margin="0 20 0 0 ">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Expected temperature"></TextBlock>
+                <TextBlock Text="{StaticResource ExpectedTemperatureLabel}"/>
                 <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
                                                Text="{Binding ExpectedTemperature}"
-                                               Placeholder="Enter expected temperature..." />
+                                               Placeholder="{StaticResource EnterExpectedTemperaturePlaceholder}" />
             </Grid>
 
             <Grid Margin="0 20 0 0">
@@ -30,22 +41,22 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Expected humidity"></TextBlock>
+                <TextBlock Text="{StaticResource ExpectedHumidityLabel}"></TextBlock>
 
                 <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
                                                Text="{Binding ExpectedHumidity}"
-                                               Placeholder="Enter expected humidity..." />
+                                               Placeholder="{StaticResource EnterExpectedHumidityPlaceholder}" />
             </Grid>
             <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Expected carbon dioxide"></TextBlock>
+                <TextBlock Text="{StaticResource ExpectedCarbonDioxideLabel}"></TextBlock>
 
                 <components:PlaceholderTextBox Grid.Column="1" Padding="5" HorizontalContentAlignment="Center"
                                                Text="{Binding ExpectedCarbonDioxide}"
-                                               Placeholder="Enter expected CD..." />
+                                               Placeholder="{StaticResource EnterExpectedCarbonDioxidePlaceholder}" />
             </Grid>
             <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
@@ -53,7 +64,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Button HorizontalAlignment="Center" Content="Confirm" Padding="35 10"
+            <Button HorizontalAlignment="Center" Content="{StaticResource ConfirmButtonLabel}" Padding="35 10"
                     Command="{Binding ConfirmEditCommand}">
             </Button>
         </StackPanel>

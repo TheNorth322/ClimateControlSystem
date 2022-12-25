@@ -48,3 +48,11 @@ C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Deb
 C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\PurificatorDetailsEditView.baml
 C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ui\Views\RoomDetailsEditView.baml
 C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\ClimateControlSystem.csproj.CopyComplete
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\LiveCharts.dll
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\LiveCharts.pdb
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\LiveCharts.xml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\resources\EnglishLocalization.baml
+C:\Users\TheNorth\source\repos\ClimateControlSystem\ClimateControlSystem\obj\Debug\resources\RussianLocalization.baml

@@ -61,7 +61,7 @@ namespace ClimateControlSystem.ui.ViewModel.DeviceEditViewModels
             try
             {
                 purificatorValidator.Validate(Status, _selectedPurificatorStore.SelectedPurificator.AirFlow);
-                purificatorUpdater.Update(Status, _selectedPurificatorStore.SelectedPurificator.AirFlow);
+                purificatorUpdater.Update(Status);
 
                 ClimateControlSystemStore.getInstance().ClimateControlSystemContentsChangedInvoke();
                 EditViewModelStore.getInstance().CloseModal();

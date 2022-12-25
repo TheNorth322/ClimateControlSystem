@@ -9,7 +9,13 @@
         mc:Ignorable="d"
         FontSize="14"
         Title="CreateConfiguration" MinHeight="900" MinWidth="1200">
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="8*" />
@@ -35,38 +41,38 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0"
-                   Content="Path"
+                   Content="{StaticResource PathLabel}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top" />
             <components:PlaceholderTextBox
                 Grid.Column="0"
                 MinWidth="500"
-                Placeholder="Enter path for configuration..."
+                Placeholder="{StaticResource ConfigurationPathHeading}"
                 Margin="80 0 0 0"
                 Text="{Binding Path}"
                 Style="{StaticResource PlaceholderTextBoxStyle}" />
 
             <Label Grid.Column="0"
-                   Content="PassCode"
+                   Content="{StaticResource PathLabel}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom" />
             <components:PlaceholderTextBox
                 Grid.Column="0"
                 MinWidth="500"
-                Placeholder="Enter path for configuration..."
+                Placeholder="{StaticResource EnterPassCodePlaceholder}"
                 Text="{Binding PassCode}"
                 VerticalAlignment="Bottom"
                 Style="{StaticResource PlaceholderTextBoxStyle}" />
 
             <Button
                 Grid.Column="1"
-                Content="Add room"
+                Content="{StaticResource AddRoomButtonLabel}"
                 Style="{StaticResource ButtonStyle}"
                 Command="{Binding AddRoomCommand}" />
             <Button
                 Grid.Column="1"
                 HorizontalAlignment="Right"
-                Content="Create"
+                Content="{StaticResource CreateConfigurationButtonLabel}"
                 Style="{StaticResource ButtonStyle}"
                 Command="{Binding CreateConfigurationCommand}" />
         </Grid>

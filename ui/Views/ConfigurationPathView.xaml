@@ -9,6 +9,13 @@
         d:DataContext="{d:DesignInstance Type=views:ConfigurationPathViewModel}"
         mc:Ignorable="d"
         Title="ConfigurationPath" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -18,12 +25,11 @@
 
         <Label
             Grid.Row="0"
-            x:Name="ConfigurationLabel"
             Style="{StaticResource HeadingLabelStyle}"
-            Content="Enter configuration path"
+            Content="{StaticResource ConfigurationPathHeading}"
             VerticalAlignment="Center" />
 
-        <components:PlaceholderTextBox
+        <TextBox
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Grid.Row="1"
             HorizontalAlignment="Center"
@@ -38,14 +44,12 @@
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
-                x:Name="OpenConfigurationButton"
-                Content="Load Configuration"
+                Content="{StaticResource LoadConfigurationLabel}"
                 Style="{StaticResource ButtonStyle}"
                 Command="{Binding LoadConfigurationCommand}" />
             <Button
                 Grid.Column="1"
-                x:Name="CreateConfigurationButton"
-                Content="Create Configuration"
+                Content="{StaticResource CreateConfigurationLabel}"
                 Style="{StaticResource ButtonStyle}"
                 Command="{Binding CreateConfigurationCommand}" />
         </Grid>

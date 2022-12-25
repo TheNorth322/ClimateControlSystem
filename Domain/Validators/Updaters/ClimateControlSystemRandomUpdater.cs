@@ -13,13 +13,13 @@ namespace ClimateControlSystem.Domain.Updaters
             foreach (Room room in climateControlSystemStore.ClimateControlSystem.Rooms)
             {
                 // Random double in range (-0.3,0.3)
-                room.TemperatureSensor.Temperature += Math.Round(random.NextDouble(), 2) * 0.3 - 0.15;
+                room.TemperatureSensor.Temperature += random.NextDouble() * (0.15 - (-0.15)) + (-0.15);
                 
                 // Random double in range(-0.5, 0.5)
-                room.HumiditySensor.Humidity += Math.Round(random.NextDouble(), 2) - 0.5;
+                room.HumiditySensor.Humidity += random.NextDouble() - 0.5;
                 
-                // Random double in range (3,5)
-                room.CarbonDioxideSensor.CarbonDioxide += random.NextDouble() * 2 + 3;
+                // Random double in range (2,5)
+                room.CarbonDioxideSensor.CarbonDioxide += random.NextDouble() + 2;
             }
                 
             climateControlSystemStore.ClimateControlSystemContentsChangedInvoke();

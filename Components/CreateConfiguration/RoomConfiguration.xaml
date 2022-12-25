@@ -9,6 +9,13 @@
              d:DataContext="{d:DesignInstance Type=viewmodel:RoomConfigurationViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../resources/EnglishLocalization.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid
         Margin="40 20 40 10">
         <Grid.RowDefinitions>
@@ -24,89 +31,77 @@
 
         <Label Grid.Row="0"
                Grid.Column="0"
-               Content="Room Characteristics"
+               Content="{StaticResource RoomCharacteristicsHeading}"
                Style="{StaticResource HeadingLabelStyle}" />
         <Label
             Grid.Row="1"
-            Content="Name"
+            Content="{StaticResource NameLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
         <components:PlaceholderTextBox
             Grid.Row="1"
-            x:Name="NameTextBox"
             Style="{StaticResource PlaceholderTextBoxStyle}"
-            Placeholder="Enter room name..."
+            Placeholder="{StaticResource RoomNamePlaceholder}"
             Text="{Binding Name}" />
 
         <components:PlaceholderTextBox
             Grid.Row="2"
-            x:Name="AreaTextBox"
             Style="{StaticResource PlaceholderTextBoxStyle}"
-            Placeholder="Enter some number..."
+            Placeholder="{StaticResource NumberPlaceholder}"
             Text="{Binding Area}" />
 
         <Label
             Grid.Row="2"
-            x:Name="AreaLabel"
-            Content="Area"
+            Content="{StaticResource AreaLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
 
         <components:PlaceholderTextBox
             Grid.Row="3"
-            x:Name="HeightTextBox"
-            Placeholder="Enter some number..."
+            Placeholder="{StaticResource NumberPlaceholder}"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Text="{Binding Height}" />
         <Label
             Grid.Row="3"
-            x:Name="HeightLabel"
-            Content="Height"
+            Content="{StaticResource HeightLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
 
         <components:PlaceholderTextBox
             Grid.Row="4"
-            Placeholder="Enter some number..."
-            x:Name="HumidityTextBox"
+            Placeholder="{StaticResource NumberPlaceholder}"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Text="{Binding Humidity}" />
 
         <Label
             Grid.Row="4"
-            x:Name="HumidityLabel"
-            Content="Humidity"
+            Content="{StaticResource HumidityLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
 
         <components:PlaceholderTextBox
             Grid.Row="5"
-            x:Name="TemperatureTextBox"
-            Placeholder="Enter some number..."
+            Placeholder="{StaticResource NumberPlaceholder}"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Text="{Binding Temperature}" />
         <Label
             Grid.Row="5"
-            x:Name="TemperatureLabel"
-            Content="Temperature"
+            Content="{StaticResource TemperatureLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
 
         <components:PlaceholderTextBox
             Grid.Row="6"
-            Placeholder="Enter some number..."
-            x:Name="CarbonDioxideTextBox"
+            Placeholder="{StaticResource NumberPlaceholder}"
             Style="{StaticResource PlaceholderTextBoxStyle}"
             Text="{Binding CarbonDioxideLevel}" />
         <Label
             Grid.Row="6"
-            x:Name="CarbonDioxideLabel"
-            Content="CarbonDioxide Level"
+            Content="{StaticResource CarbonDioxideLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
-        <!--Maybe change SelectedValuePath to SelectedValue-->
-        <ComboBox Grid.Row="7" x:Name="LightLevelComboBox"
+        
+        <ComboBox Grid.Row="7" 
                   Style="{StaticResource ComboBoxStyle}"
                   SelectedValue="{Binding LightLevel, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type local:LightLevel}}"
                   ItemsSource="{Binding Source={local:EnumToItemsSource {x:Type local:LightLevel}}}" />
         <Label
             Grid.Row="7"
-            x:Name="LightLevelLabel"
-            Content="Light level"
+            Content="{StaticResource LightLevelLabel}"
             Style="{StaticResource DescriptionLabelStyle}" />
     </Grid>
 </UserControl>

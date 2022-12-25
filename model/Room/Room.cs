@@ -50,13 +50,13 @@ namespace ClimateControlSystemNamespace
         public void UpdateData()
         {
             double RoomVolume = Area * CeilingHeight;
-            double AirMass = RoomVolume * 10;
+            double AirMass = RoomVolume * 5;
             /* Volume ration of airflow and air mass of room multiplied on conditioner temperature
             sums up with volume ration of left air mass of room multiplied on room temperature*/
             foreach (IConditioner conditioner in Conditioners)
                 TemperatureSensor.Temperature = conditioner.ProvideHeat() / RoomVolume +
                                                  (RoomVolume - conditioner.AirFlow) / RoomVolume *
-                                                 TemperatureSensor.Temperature;
+                                                 TemperatureSensor.Temperature + (int) LightLevel * 0.04;
 
             foreach (IHumidifier humidifier in Humidifiers)
                 HumiditySensor.Humidity =
@@ -64,6 +64,11 @@ namespace ClimateControlSystemNamespace
 
             foreach (IPurificator purificator in Purificators)
                 CarbonDioxideSensor.CarbonDioxide -= purificator.ReceivePurification() / 60 * 8;
+        }
+
+        public void UpdateLightLevel(LightLevel _lightLevel)
+        {
+            LightLevel = _lightLevel;
         }
     }
 }

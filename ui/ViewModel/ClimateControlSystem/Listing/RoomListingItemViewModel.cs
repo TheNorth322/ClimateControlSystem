@@ -82,9 +82,16 @@ namespace ClimateControlSystem.ui.ViewModel.ClimateControlSystem
 
         private void OnClimateControlSystemContentsChanged()
         {
-            PlotPointsStore.TemperaturePoints.Add(new Point((PlotPointsStore.TemperaturePoints.Last() == null) ? 0 : PlotPointsStore.TemperaturePoints.Last().X + 1 ,Room.TemperatureSensor.Temperature));
-            PlotPointsStore.HumidityPoints.Add(new Point( (PlotPointsStore.HumidityPoints.Last() == null) ? 0 : PlotPointsStore.HumidityPoints.Last().X + 1, Room.HumiditySensor.Humidity));
-            PlotPointsStore.CarbonDioxidePoints.Add(new Point( (PlotPointsStore.CarbonDioxidePoints.Last() == null) ? 0 : PlotPointsStore.CarbonDioxidePoints.Last().X + 1, Room.CarbonDioxideSensor.CarbonDioxide));
+            PlotPointsStore.SeriesCollection[0].Values.Add(Room.TemperatureSensor.Temperature);
+            PlotPointsStore.SeriesCollection[1].Values.Add(Room.HumiditySensor.Humidity);  
+            PlotPointsStore.SeriesCollection[2].Values.Add(Room.CarbonDioxideSensor.CarbonDioxide);
+            
+            if (PlotPointsStore.Axis.Count == 0)
+                PlotPointsStore.Axis.Add(0); 
+            else 
+                PlotPointsStore.Axis.Add(PlotPointsStore.Axis.Last() + 1);
+            
+            PlotPointsStore.PointsContentsChangedInvoke();
         }
         private void UpdateListing()
         {
